@@ -1,0 +1,1037 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Meteo Station Course</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: a bench notebook. Sticky step list on the left like a parts tray,
+   one step at a time on the right; silkscreen-style labels, soldermask green, copper for mentor checks. */
+:root {
+  --bg: #edf0eb;
+  --surface: #fafbf8;
+  --sunk: #e2e7e0;
+  --ink: #17211c;
+  --muted: #55645c;
+  --line: #ccd6cf;
+  --mask: #1c6845;
+  --mask-ink: #ffffff;
+  --mask-soft: #d8e9df;
+  --copper: #9c5a1f;
+  --copper-soft: #f4e4d3;
+  --code-bg: #e5ebe4;
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1411; --surface: #131d18; --sunk: #0a0f0c; --ink: #e1e9e3; --muted: #93a49a;
+    --line: #24322a; --mask: #5cc28d; --mask-ink: #05110a; --mask-soft: #173326;
+    --copper: #e3a468; --copper-soft: #2c2118; --code-bg: #0f1814; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1411; --surface: #131d18; --sunk: #0a0f0c; --ink: #e1e9e3; --muted: #93a49a;
+  --line: #24322a; --mask: #5cc28d; --mask-ink: #05110a; --mask-soft: #173326;
+  --copper: #e3a468; --copper-soft: #2c2118; --code-bg: #0f1814; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+a { color: var(--mask); }
+code, kbd, pre { font-family: var(--mono); font-size: 0.88em; }
+code { background: var(--code-bg); padding: 0.08em 0.35em; border-radius: 3px; overflow-wrap: anywhere; }
+kbd { border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 0.35em; background: var(--surface); }
+pre { background: var(--code-bg); padding: 12px 14px; border-radius: 6px; overflow-x: auto; line-height: 1.5; margin: 0; }
+pre code { background: none; padding: 0; }
+:focus-visible { outline: 2px solid var(--mask); outline-offset: 2px; }
+
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 10px;
+}
+.topbar-inner { max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
+.brand { font-family: var(--display); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.02em; text-transform: uppercase; }
+.brand span { color: var(--mask); }
+.overall { flex: 1 1 260px; display: flex; align-items: center; gap: 12px; min-width: 0; }
+.trace { flex: 1; height: 8px; background: var(--sunk); border-radius: 4px; position: relative; overflow: hidden; }
+.trace i { position: absolute; inset: 0 auto 0 0; background: var(--copper); border-radius: 4px; transition: width .3s; }
+.overall-num { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sync { font-size: 0.82rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.sync::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.sync[data-s="shared"]::before { background: var(--mask); }
+.sync[data-s="local"]::before { background: var(--copper); }
+
+.wrap {
+  max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 32px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 64px;
+}
+.tray { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 72px); align-self: start; max-height: calc(100vh - 96px); overflow-y: auto; padding-right: 4px; }
+.phase-name { font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.8rem; color: var(--muted); margin: 18px 0 6px; }
+.phase-name:first-child { margin-top: 0; }
+.tray ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.tray a {
+  display: grid; grid-template-columns: 2.2em minmax(0, 1fr) auto; align-items: baseline; gap: 6px;
+  padding: 6px 8px; border-radius: 6px; color: var(--ink); text-decoration: none; font-size: 0.92rem; line-height: 1.35;
+}
+.tray a:hover { background: var(--sunk); }
+.tray a[aria-current="page"] { background: var(--mask); color: var(--mask-ink); }
+.tray .n { font-family: var(--mono); font-size: 0.8rem; opacity: 0.75; }
+.tray .c { font-family: var(--mono); font-size: 0.75rem; opacity: 0.75; font-variant-numeric: tabular-nums; }
+.tray a.full .c::after { content: " ✓"; }
+.tray .gate-dot { color: var(--copper); }
+.tray a[aria-current="page"] .gate-dot { color: inherit; }
+.picker { display: none; }
+
+article { min-width: 0; max-width: 760px; }
+.eyebrow { font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.9rem; color: var(--mask); }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.05; margin: 4px 0 10px; text-wrap: balance; }
+h2 { font-family: var(--display); font-weight: 600; font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.06em; margin: 36px 0 10px; }
+h3 { font-size: 1rem; margin: 20px 0 6px; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 16px; color: var(--muted); font-size: 0.9rem; }
+.badge { font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; padding: 1px 8px; border-radius: 4px; background: var(--copper-soft); color: var(--copper); }
+.goal { margin-top: 18px; padding: 14px 16px; background: var(--mask-soft); border-radius: 8px; }
+.goal b { font-family: var(--display); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; display: block; color: var(--mask); }
+.gate { margin-top: 14px; padding: 12px 16px; border: 1px solid var(--copper); border-radius: 8px; background: var(--copper-soft); }
+.gate b { color: var(--copper); }
+.prose p, .prose li { max-width: 68ch; }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose li + li { margin-top: 6px; }
+.tasks { counter-reset: t; list-style: none; padding: 0; display: grid; gap: 14px; }
+.tasks > li { counter-increment: t; display: grid; grid-template-columns: 2em minmax(0, 1fr); gap: 4px 10px; }
+.tasks > li::before { content: counter(t); font-family: var(--mono); font-weight: 500; color: var(--mask); border: 1.5px solid var(--mask); border-radius: 50%; width: 1.7em; height: 1.7em; display: grid; place-items: center; font-size: 0.85rem; margin-top: 0.1em; }
+.tasks > li > * { grid-column: 2; }
+.tasks > li > :first-child { grid-column: 2; grid-row: 1; margin-top: 0; }
+.tasks p { margin: 0 0 6px; }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--display); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; font-size: 0.85rem; color: var(--muted); }
+td code { white-space: nowrap; }
+
+details { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+details + details { margin-top: 8px; }
+summary { cursor: pointer; padding: 10px 14px; font-weight: 500; list-style: none; display: flex; gap: 8px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+"; font-family: var(--mono); color: var(--mask); width: 1em; }
+details[open] summary::before { content: "−"; }
+details > div { padding: 0 16px 14px; }
+details.answers summary { color: var(--copper); }
+details.answers summary::before { color: var(--copper); }
+
+.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.checks label { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; align-items: start; padding: 8px 10px; border-radius: 6px; cursor: pointer; }
+.checks label:hover { background: var(--sunk); }
+.checks input { appearance: none; width: 20px; height: 20px; margin: 2px 0 0; border: 2px solid var(--copper); border-radius: 3px; background: var(--surface); display: grid; place-items: center; cursor: pointer; }
+.checks input:checked { background: var(--copper); }
+.checks input:checked::after { content: ""; width: 6px; height: 11px; border: solid var(--surface); border-width: 0 2.5px 2.5px 0; transform: translateY(-1px) rotate(45deg); }
+.checks input:disabled { cursor: not-allowed; opacity: 0.6; }
+.checks input:checked + span { color: var(--muted); }
+
+.notes textarea { width: 100%; min-height: 140px; resize: vertical; font: inherit; font-size: 0.95rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.small { font-size: 0.85rem; color: var(--muted); }
+.commit { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.commit pre { flex: 1 1 300px; }
+button { font: inherit; cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 7px 14px; }
+button:hover { border-color: var(--mask); }
+button.primary { background: var(--mask); border-color: var(--mask); color: var(--mask-ink); font-weight: 500; }
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 40px; flex-wrap: wrap; }
+.pager button { max-width: 100%; text-align: left; }
+
+@media (max-width: 860px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-block: 16px 48px; }
+  .tray { display: none; }
+  .picker { display: block; }
+  .picker select { width: 100%; font: inherit; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+}
+@media (prefers-reduced-motion: reduce) { .trace i { transition: none; } }
+</style>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">Meteo <span>Station</span> Course</div>
+    <div class="overall" aria-label="Overall progress">
+      <div class="trace"><i id="overall-bar" style="width:0%"></i></div>
+      <span class="overall-num" id="overall-num">0 / 0 checks</span>
+    </div>
+    <div class="sync" id="sync" data-s="local">Your checklist stays in this browser. Your mentor accepts steps on GitHub.</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="tray" id="tray" aria-label="Course steps"></nav>
+  <article id="step" aria-live="polite">
+    <div class="picker"><label class="small" for="picker">Jump to step</label><select id="picker"></select></div>
+    <div id="step-body"></div>
+  </article>
+</div>
+
+<script>
+/* ---------------------------------------------------------------------------
+   Course content. Each step: phase, title, time, goal, why (HTML), tasks (HTML list items),
+   hints (HTML strings, opened one by one), answers (optional HTML), done (checklist), commit.
+   Paths are relative to the repository root (projectmeteo/).
+--------------------------------------------------------------------------- */
+const STEPS = [
+{
+  id: "s0", phase: "Start", title: "How this course works", time: "15 min",
+  goal: "Know how to use this course and where your project lives.",
+  why: `<p>You designed this weather station. Now you will turn it into a product that a factory builds for you: a real circuit board with the parts already soldered on (this is called <b>PCBA</b>, printed circuit board assembly). At the end you will have prototype boards in your hands, and later a small series you can sell.</p>
+  <p>Every step has the same parts:</p>
+  <ul>
+    <li><b>Goal</b>: what you will have at the end of the step.</li>
+    <li><b>Why it matters</b>: the idea behind the step.</li>
+    <li><b>Tasks</b>: what to do, in order.</li>
+    <li><b>Hints</b>: open them one at a time, only when you are stuck. Try for 15–20 minutes first.</li>
+    <li><b>Check your answers</b>: compare after you have your own answer, not before.</li>
+    <li><b>Accepted when</b>: what your mentor checks before accepting the step. Tick the boxes for yourself as you go.</li>
+    <li><b>Submit for review</b>: every step ends with a file you fill in, <code>course/submissions/step-NN.md</code>, and a <b>pull request</b> on GitHub. Your mentor reads it and either accepts the step or sends it back with comments. Then you fix it and push again. This is how engineers work in real companies.</li>
+    <li><b>Still stuck after the hints?</b> Ask your mentor in your Telegram chat. Say which step, what you tried, and add a screenshot.</li>
+  </ul>
+  <p>Steps marked <span class="badge">Mentor check</span> involve money, safety or a big decision. Discuss them with your mentor in the pull request, or in Telegram, before you go on.</p>
+  <p>One step at a time: start the next step only after your mentor has accepted the last one.</p>`,
+  tasks: [
+    `<p>Read this page, then open the step list and look at all the steps. It is a long road, but every step is small.</p>`,
+    `<p>Find the project folder on your computer. It has this structure:</p>
+<pre><code>projectmeteo/
+├── meteo-v1/          the first version (already built)
+│   ├── pcb/           KiCad project
+│   └── firmware/      Arduino code
+├── meteo-v2/          the version you will finish now
+│   ├── pcb/           KiCad project: last-version.kicad_pro
+│   └── firmware/      projectcpcs_v2/projectcpcs_v2.ino
+└── course/
+    ├── index.html     this course (works offline)
+    ├── submissions/   one file per step that you fill in
+    └── practice/      your practice board (step {{prac}})</code></pre>`,
+    `<p>Open <code>course/submissions/step-00.md</code> and write what you want to learn most from this project. You send it to your mentor in step {{s2}}.</p>`
+  ],
+  hints: [
+    `If you can't find the folder, ask your mentor. In step {{s2}} you will download your own copy with git anyway.`
+  ],
+  done: ["I read how the course works", "I know where meteo-v2/pcb and meteo-v2/firmware are", "I wrote what I want to learn in step-00.md"],
+  commit: null
+},
+{
+  id: "s1", phase: "Start", title: "Check your tools", time: "20 min",
+  goal: "Your KiCad is version 10 and the v2 project opens without errors.",
+  why: `<p>You already have KiCad and VS Code. One thing to check: the v2 project is saved with <b>KiCad 10</b>. Older KiCad versions can't open files from newer ones, so your KiCad must be version 10 or newer.</p>
+  <p>The project also uses two custom libraries (the ESP-12F module and the battery holder). They live inside the project folder, so KiCad finds them only when you open the project file (<code>.kicad_pro</code>), not the schematic file on its own.</p>`,
+  tasks: [
+    `<p>In KiCad, open <b>Help → About KiCad</b> and check the version. If it is lower than 10, update it from <a href="https://www.kicad.org/download/" target="_blank" rel="noopener">kicad.org/download</a>.</p>`,
+    `<p>Open <code>meteo-v2/pcb/last-version.kicad_pro</code> with KiCad (double-click it, or File → Open Project).</p>`,
+    `<p>Open the <b>Schematic Editor</b> and the <b>PCB Editor</b>. In the PCB Editor, press <kbd>Alt</kbd>+<kbd>3</kbd> for the 3D viewer and look at both sides of the board.</p>`,
+    `<p>In VS Code, open the whole <code>projectmeteo</code> folder (<b>File → Open Folder</b>). You will use it for the firmware and for git.</p>`
+  ],
+  hints: [
+    `If KiCad says a symbol or footprint is missing, you probably opened the <code>.kicad_sch</code> file directly. Close it and open the <code>.kicad_pro</code> file instead.`,
+    `If KiCad says the file was made with a newer version, your KiCad is too old: update it.`,
+    `In the 3D viewer, some parts may show without a 3D model. That is normal for now; it does not change the board.`
+  ],
+  done: ["My KiCad is version 10 or newer", "The v2 project opens without missing-library errors", "The projectmeteo folder is open in VS Code"],
+  commit: null
+},
+{
+  id: "s2", phase: "Start", title: "Git and GitHub: your first pull request", time: "2 h",
+  goal: "You can do a step on its own branch, push it to GitHub, and open a pull request for your mentor to review.",
+  why: `<p><b>Git</b> remembers every saved version of your files. If you break something, you can go back. When you order boards, you can mark the exact version you sent to the factory.</p>
+  <p>The project lives in <b>your own repository</b> on GitHub: <code>MK-M17/projectmeteo</code>. Until now you uploaded files on the GitHub website. From now on you work with git on your computer, like professional developers do.</p>
+  <p>Words you need:</p>
+  <ul>
+    <li><b>Repository (repo)</b>: the project folder plus its whole history.</li>
+    <li><b>Commit</b>: one saved version, with a short message about what changed.</li>
+    <li><b>Branch</b>: a separate line of work. <code>main</code> holds everything your mentor has accepted. Each step gets its own branch, like <code>step-04</code>.</li>
+    <li><b>Remote</b>: the copy on GitHub. <b>Push</b> sends your commits there, <b>pull</b> gets new ones.</li>
+    <li><b>Pull request (PR)</b>: on GitHub you ask "please check my branch and add it to <code>main</code>". Your mentor reviews it, comments, and then <b>merges</b> it (accepted) or <b>requests changes</b> (more work).</li>
+  </ul>
+  <p>Every step from now on works like this:</p>
+<pre><code>main ──●─────────────────────●──   accepted work
+        \                   /
+step-04  ●── commit ── commit     your branch → pull request → review → merge</code></pre>`,
+  tasks: [
+    `<p>Check that git is installed: <code>git --version</code>. If not, install it from <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git-scm.com</a>. Then tell git who you are (use your own name and email):</p>
+<pre><code>git config --global user.name "Your Name"
+git config --global user.email "you@example.com"</code></pre>`,
+    `<p>Download (clone) your repository:</p>
+<pre><code>git clone https://github.com/MK-M17/projectmeteo.git
+cd projectmeteo</code></pre>
+<p>If you already have the folder from before, go into it and run <code>git switch main</code> and <code>git pull</code> instead.</p>`,
+    `<p>Invite your mentor to your repository so they can review your pull requests: on GitHub, open the repo, then <b>Settings → Collaborators → Add people</b>.</p>`,
+    `<p>Start this step on its own branch:</p>
+<pre><code>git switch -c step-02</code></pre>`,
+    `<p>KiCad creates files that should not be in git: lock files, backups, caches. The v1 project already has a <code>.gitignore</code> file that tells git to ignore them. Copy it to v2:</p>
+<pre><code>cp meteo-v1/pcb/.gitignore meteo-v2/pcb/.gitignore</code></pre>
+<p>Open the new file and add one more line at the end: <code>.history/</code> (VS Code creates that folder).</p>`,
+    `<p>One cache file (<code>fp-info-cache</code>) is already in git by mistake. Remove it from git, but keep it on disk:</p>
+<pre><code>git rm --cached meteo-v2/pcb/fp-info-cache</code></pre>`,
+    `<p>Fill in the submission files for steps {{s0}}, {{s1}} and {{s2}}: <code>course/submissions/step-00.md</code>, <code>step-01.md</code> and <code>step-02.md</code>. Put screenshots into <code>course/submissions/img/</code>.</p>`,
+    `<p>Commit, push, and open your first pull request (the commands are in <b>Submit for review</b> below). On GitHub, click <b>Compare &amp; pull request</b>. Check that <b>base</b> is <code>main</code> and <b>compare</b> is <code>step-02</code>, give it the title "Steps 00–02: start", and click <b>Create pull request</b>.</p>`,
+    `<p>Wait for the review. If your mentor requests changes: fix them, commit, and push again on the same branch. The pull request updates by itself. When it is merged, go back to <code>main</code>:</p>
+<pre><code>git switch main
+git pull
+git branch -d step-02</code></pre>`
+  ],
+  hints: [
+    `In VS Code, the <b>Source Control</b> panel (the branch icon on the left) does the same as these commands with buttons. The <b>GitHub Pull Requests</b> extension even lets you open pull requests from VS Code. Fine to use, but learn the commands too.`,
+    `When git asks you to sign in to GitHub, your normal password won't work there. Sign in through VS Code (it opens the browser for you), or create a personal access token on GitHub and use it as the password.`,
+    `A good commit message says <i>what</i> changed in a few words, like "Move OneWire to GPIO2". Not "update" or "fix".`,
+    `<code>git log --oneline --graph --all</code> draws your branches. Try it before and after you create <code>step-02</code>.`,
+    `If you forgot to create the branch and already changed files on <code>main</code>: just run <code>git switch -c step-02</code> now. Your changes come with you.`
+  ],
+  answers: `<p><code>git status</code> lists changed files (red = not added yet, green = added). After <code>git rm --cached</code>, the cache file shows as "deleted" in git but stays on your disk, and the <code>.gitignore</code> keeps it out from now on.</p>`,
+  done: ["meteo-v2/pcb/.gitignore is added and fp-info-cache is removed from git", "step-00.md, step-01.md and step-02.md are filled", "My mentor is a collaborator on my repo", "The pull request from step-02 into main is open", "I can explain branch, pull request and merge in my own words"],
+  commit: null
+},
+{
+  id: "s3", phase: "Understand the design", title: "Read your own schematic", time: "2 h",
+  goal: "You can explain what every part on the board does.",
+  why: `<p>A factory, a buyer or your mentor will ask questions about your design. And you can only fix what you understand. Here you go through the schematic block by block.</p>`,
+  tasks: [
+    `<p>Open the schematic. For each block below, write one line per part in your submission file: what does it do?</p>
+<div class="tbl"><table>
+<tr><th>Block</th><th>Parts</th></tr>
+<tr><td>Battery and protection</td><td><code>BT2</code>, <code>Q1</code> + <code>R56</code>, <code>U7</code> (DW01) + <code>U6</code> (FS8205), <code>R33</code> + <code>C30</code>, <code>R27</code>, <code>SW4</code></td></tr>
+<tr><td>Power</td><td><code>SW5</code>, <code>U9</code> (HT7333), <code>C8</code>, <code>C11</code>, <code>C1</code></td></tr>
+<tr><td>ESP and boot</td><td><code>U2</code>, <code>R3</code>, <code>R1</code> + <code>SW1</code>, <code>R2</code> + <code>SW2</code>, <code>R4</code>, <code>R14</code></td></tr>
+<tr><td>Sensors</td><td><code>U3</code> + <code>R5</code> + <code>J4</code>, <code>J2</code> + <code>J5</code> + <code>R8</code> + <code>R9</code></td></tr>
+<tr><td>User and debug</td><td><code>D1</code>, <code>D2</code> + <code>R6</code>, <code>R10</code>, <code>SW3</code> + <code>R12</code>, <code>J3</code></td></tr>
+</table></div>`,
+    `<p>Answer these questions in your submission file:</p>
+<ol>
+<li>What does <code>Q1</code> protect against?</li>
+<li>What happens if you hold <code>SW2</code> while you press and release <code>SW1</code>?</li>
+<li><code>R6</code> is 10 kΩ. An LED drops about 2.0 V. How much current flows through the LED? Is that bright?</li>
+<li>Why does GPIO15 need a pull-down resistor (<code>R4</code>)?</li>
+<li>Which three ESP pins decide how it starts (boots)?</li>
+<li>Follow the two pins of <code>SW4</code>. What happens when it is closed?</li>
+</ol>`,
+    `<p>Find one thing you would change or don't understand. Write it down for your mentor.</p>`
+  ],
+  hints: [
+    `Datasheets explain each chip. Search for "DW01 datasheet" and "ESP8266 datasheet". The first pages usually say what the chip is for.`,
+    `<code>Q1</code> is an N-channel MOSFET in the battery's minus wire. Its gate gets voltage through <code>R56</code> only when the battery is connected the right way round.`,
+    `The DW01 watches the battery. It switches off the FS8205 (two MOSFETs) when the battery is too full, too empty, or shorted.`,
+    `Ohm's law: current = voltage ÷ resistance. The voltage across the resistor is 3.3 V minus the LED's 2.0 V.`,
+    `ESP8266 boot modes depend on GPIO0, GPIO2 and GPIO15 at the moment it starts. Search "ESP8266 boot mode strapping pins".`
+  ],
+  answers: `<ol>
+<li>Reverse polarity: if the battery is put in the wrong way round, <code>Q1</code> stays off and no current flows.</li>
+<li>GPIO0 is low at boot, so the ESP starts in <b>flashing mode</b> and waits for new firmware over the UART.</li>
+<li>(3.3 − 2.0) V ÷ 10 000 Ω ≈ 0.13 mA. Most LEDs are made for 2–20 mA, so this is very dim. That can be fine for saving battery, but check it on the prototype.</li>
+<li>GPIO15 must be low at boot, otherwise the ESP tries to boot from an SD card and your program does not start.</li>
+<li>GPIO0 (high = run, low = flash), GPIO2 (must be high), GPIO15 (must be low).</li>
+<li><code>SW4</code> connects the protected minus side straight to GND, so it bridges (bypasses) the FS8205 protection switch. Ask your mentor when it should be used, because with it closed the battery is not protected.</li>
+</ol>`,
+  done: ["I wrote what every part does", "I answered all 6 questions", "I wrote down one thing I would change or don't understand"],
+  commit: null
+},
+{
+  id: "s4", phase: "Understand the design", title: "How deep sleep works", time: "45 min",
+  goal: "You can explain how the board sleeps and wakes up, and how long the battery lasts.",
+  why: `<p>The station measures once every 10 minutes. Between measurements the ESP sleeps and uses almost nothing. A timer inside the ESP wakes it up: the timer pulls <b>GPIO16</b> low, and GPIO16 is connected to <b>RESET</b>, so the chip restarts.</p>
+<pre><code>3V3 ── R1 10k ──┬── RESET (ESP pin 1)
+                ├── SW1 (Reset button) ── GND
+                └── R14 1k ── GPIO16 (ESP pin 4)</code></pre>
+  <p>The ESP sees RESET as "low" when it is below about 0.25 × 3.3 V ≈ 0.83 V.</p>`,
+  tasks: [
+    `<p>When GPIO16 pulls low, R1 and R14 form a <b>voltage divider</b>. Calculate the RESET voltage with R14 = 1 kΩ. Does the ESP reset?</p>`,
+    `<p>Now calculate it with R14 = 10 kΩ. Does the ESP still reset?</p>`,
+    `<p>Why not connect GPIO16 straight to RESET with a wire? Think about what happens when you press <code>SW1</code> while GPIO16 is driven high.</p>`,
+    `<p>Battery life: the station is awake for 8 s at 80 mA, then sleeps for 592 s at 0.03 mA (30 µA). Calculate the <b>average current</b>, and how many days a 2500 mAh battery lasts.</p>`,
+    `<p>Which part of the cycle uses more energy: awake or asleep? What would you change to make the battery last longer?</p>`
+  ],
+  hints: [
+    `Voltage divider: V = 3.3 V × R14 ÷ (R1 + R14).`,
+    `Charge per cycle = current × time. Add the awake part and the sleep part, then divide by the cycle time (600 s).`,
+    `mA × s ÷ s = mA. Battery hours = 2500 mAh ÷ average mA. Divide by 24 for days.`
+  ],
+  answers: `<ul>
+<li>R14 = 1 kΩ: 3.3 × 1 ÷ 11 = <b>0.30 V</b>, well below 0.83 V, so it resets.</li>
+<li>R14 = 10 kΩ: 3.3 × 10 ÷ 20 = <b>1.65 V</b>, too high, so it does not reset and the station never wakes up.</li>
+<li>With a direct wire, the Reset button would short GPIO16 to GND while GPIO16 is driven high. R14 limits that current to about 3.3 mA.</li>
+<li>Awake: 80 × 8 = 640 mA·s. Asleep: 0.03 × 592 ≈ 17.8 mA·s. Total ≈ 658 mA·s per 600 s, so about <b>1.1 mA</b> on average. 2500 ÷ 1.1 ≈ 2270 h ≈ <b>95 days</b>.</li>
+<li>Awake uses about 97 % of the energy. Shorter awake time (faster Wi-Fi connect, fewer delays) helps much more than lower sleep current.</li>
+</ul>`,
+  done: ["I calculated the RESET voltage for 1 kΩ and 10 kΩ", "I calculated the battery life", "I can explain why R14 is there in 2–3 sentences"],
+  commit: null
+},
+{
+  id: "s5", phase: "PCB skills", title: "First steps in the PCB editor", time: "2 h",
+  goal: "You can move around the PCB editor, read what you see, and run the design rules check (DRC).",
+  why: `<p>The PCB is the real object the factory makes. Words you need:</p>
+  <ul>
+    <li><b>Footprint</b>: the copper pads where one part is soldered.</li>
+    <li><b>Track (trace)</b>: a copper line that connects pads.</li>
+    <li><b>Layer</b>: this board has two copper layers, <code>F.Cu</code> (front/top) and <code>B.Cu</code> (back/bottom).</li>
+    <li><b>Via</b>: a small plated hole that connects a track on the top to a track on the bottom.</li>
+    <li><b>Zone (copper pour)</b>: a big copper area, often GND.</li>
+    <li><b>Ratsnest</b>: thin straight lines that show connections that are not routed yet.</li>
+    <li><b>Edge.Cuts</b>: the board outline. <b>Silkscreen</b>: the white text and drawings.</li>
+    <li><b>DRC</b>: KiCad checks the board for problems (too close, not connected, shorts).</li>
+  </ul>`,
+  tasks: [
+    `<p>Open the PCB editor. In the <b>Appearance</b> panel on the right, switch layers on and off. Look at the top layer alone, then the bottom layer alone.</p>`,
+    `<p>Find the ESP module: press <kbd>Ctrl</kbd>+<kbd>F</kbd> and search for <code>U2</code>.</p>`,
+    `<p>Click a pad of U2 and press the <kbd>\`</kbd> key (backtick, left of <kbd>1</kbd>). This highlights the whole net. Try it on the GND pad and on a SDA pad. Press <kbd>\`</kbd> again to clear.</p>`,
+    `<p>Measure the board: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd>, click two corners. Write width × height in your submission file.</p>`,
+    `<p>Run DRC: <b>Inspect → Design Rules Checker</b>. Tick <b>Test for parity between PCB and schematic</b>, then <b>Run DRC</b>. Write in your submission file how many errors, warnings and unconnected items it finds.</p>`
+  ],
+  hints: [
+    `<kbd>Ctrl</kbd>+<kbd>F1</kbd> shows all keyboard shortcuts in KiCad.`,
+    `In the DRC window, click an error and KiCad zooms to it on the board.`,
+    `Many warnings like "footprint doesn't match library" are about library versions. They are not dangerous. Errors are what matter first.`
+  ],
+  done: ["I can switch layers and highlight a net", "I measured the board size", "I ran DRC and wrote down the numbers", "I can explain track, via and zone"],
+  commit: null
+},
+{
+  id: "prac", phase: "PCB skills", title: "Practice board: a PCB from zero", time: "3–4 h",
+  goal: "You make a tiny practice board, from an empty project to a clean DRC, so you know the tools before you touch the real board.",
+  why: `<p>Routing the real board first would be like a first driving lesson on a highway. First you practise in an empty car park. Here you make a very small board: a connector, a resistor and an LED. Nothing gets ordered, so mistakes cost nothing.</p>
+  <p>You go the whole way a real board goes:</p>
+  <ol>
+    <li><b>Schematic</b>: place symbols and connect them.</li>
+    <li><b>Footprints</b>: choose the real package for each symbol.</li>
+    <li><b>PCB</b>: draw the outline, place the parts, route the tracks.</li>
+    <li><b>Copper pour</b>: fill the bottom layer with GND.</li>
+    <li><b>Check</b>: DRC and the 3D view.</li>
+  </ol>`,
+  tasks: [
+    `<p>Create a new project: in KiCad, <b>File → New Project</b>, and save it in your repo as <code>course/practice/practice.kicad_pro</code>.</p>`,
+    `<p><b>Schematic.</b> Add symbols with <kbd>A</kbd>: a connector <code>Conn_01x02</code>, a resistor <code>R</code> (value 1k) and an <code>LED</code>. Connect them with wires (<kbd>W</kbd>): connector pin 1 → resistor → LED anode (A), LED cathode (K) → connector pin 2. Add power symbols with <kbd>P</kbd>: <code>+3V3</code> on pin 1 and <code>GND</code> on pin 2.</p>`,
+    `<p>Give the parts names: <b>Tools → Annotate Schematic</b> (they become J1, R1, D1). Run ERC (<b>Inspect → Electrical Rules Checker</b>) and fix every error.</p>`,
+    `<p><b>Footprints.</b> <b>Tools → Assign Footprints</b>, then choose:</p>
+<ul>
+<li>R1: <code>Resistor_SMD:R_0805_2012Metric</code></li>
+<li>D1: <code>LED_SMD:LED_0805_2012Metric</code></li>
+<li>J1: <code>Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical</code></li>
+</ul>`,
+    `<p><b>Outline.</b> Open the PCB Editor. Choose the <code>Edge.Cuts</code> layer, take the rectangle tool, and draw a board of about 30 × 20 mm. Then <b>Tools → Update PCB from Schematic</b> (<kbd>F8</kbd>). The parts appear, with ratsnest lines.</p>`,
+    `<p><b>Track widths.</b> <b>File → Board Setup → Design Rules → Net Classes</b>. Set the Default class to 0.25 mm track and 0.2 mm clearance. Add a class called <code>Power</code> with 0.5 mm track, and assign the <code>+3V3</code> and <code>GND</code> nets to it (Netclass assignments, at the bottom).</p>`,
+    `<p><b>Place.</b> Move parts with <kbd>M</kbd> and rotate with <kbd>R</kbd>. Put them so the ratsnest lines are short and don't cross.</p>`,
+    `<p><b>Route.</b> Route every connection on the top layer: <kbd>X</kbd>, click a pad, click to set corners, double-click to finish. Then make one connection go through the bottom on purpose: delete one track and route it again, pressing <kbd>V</kbd> halfway to drop a via.</p>`,
+    `<p><b>Copper pour.</b> <b>Place → Add Filled Zone</b> (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>), click the board, choose layer <code>B.Cu</code> and net <code>GND</code>, then draw a rectangle around the whole board. Press <kbd>B</kbd> to fill it.</p>`,
+    `<p><b>Check.</b> Run DRC: 0 errors, 0 unconnected. Save the report. Look at the board in the 3D view (<kbd>Alt</kbd>+<kbd>3</kbd>) and take a screenshot.</p>`
+  ],
+  hints: [
+    `ERC says "Input Power pin not driven"? KiCad wants to know where power comes from. Add a <code>PWR_FLAG</code> symbol (<kbd>P</kbd>, search PWR_FLAG) on the +3V3 wire and one on the GND wire.`,
+    `The LED's pins: in KiCad's LED symbol, pin 1 is K (cathode, the side with the bar) and pin 2 is A (anode).`,
+    `Can't find a footprint? In the Assign Footprints window, type part of the name in the filter box, like <code>R_0805</code>.`,
+    `A track and a pad with different nets must never touch. If the router refuses to go somewhere, it is protecting you from that.`,
+    `Undo is <kbd>Ctrl</kbd>+<kbd>Z</kbd>. This board is for practice: delete everything and start again if you want.`
+  ],
+  done: ["The practice project is in course/practice and opens without errors", "ERC shows no errors", "The outline is drawn and every part is placed inside it", "Every connection is routed, with at least one via", "A GND zone fills the bottom layer", "DRC: 0 errors, 0 unconnected"],
+  commit: null
+},
+{
+  id: "s6", phase: "PCB skills", title: "Detective work: find the short", time: "1 h",
+  goal: "You find a real bug on the board and explain why it would break the station.",
+  why: `<p>The DRC in step {{s5}} found an error called <b>"Items shorting two nets"</b>. A short means two signals that must stay separate are touching. On a manufactured board this is a real fault. This is the most important bug to find before ordering.</p>`,
+  tasks: [
+    `<p>In the DRC window, find the "shorting" errors and click one. Which <b>two nets</b> touch? Which <b>pad</b> is it?</p>`,
+    `<p>Use what you learned in step {{s4}}: what happens to the ESP every time the temperature sensor sends data?</p>`,
+    `<p>Write your answers in your submission file. <b>Don't fix it yet</b>: in steps {{s7}} and {{s8}} you move this signal anyway, and the fix comes with it.</p>`
+  ],
+  hints: [
+    `It is on the top layer, next to the ESP module.`,
+    `One of the two nets is <code>OneWire</code> (the DS18B20 temperature sensor).`,
+    `The track runs straight over a pad of U2. Look at the pad's number and its net name.`
+  ],
+  answers: `<p>The <code>OneWire</code> track crosses <b>U2 pad 4 (GPIO16)</b>. GPIO16 goes to RESET through R14. Every time the DS18B20 pulls OneWire low, it also pulls RESET low, so the ESP resets in the middle of the reading. And while the ESP sleeps, GPIO16 drives the OneWire line. The station would never work.</p>`,
+  done: ["I found the short and the two nets", "I explained in my submission file why it would break the station"],
+  commit: null
+},
+{
+  id: "s7", phase: "Design changes", title: "Move OneWire to GPIO2", time: "1 h",
+  goal: "The temperature sensor is on a safe pin (GPIO2) in the schematic.",
+  why: `<p>Right now the DS18B20 is on <b>GPIO10</b>. Inside the ESP-12F module, GPIO10 is also wired to the flash memory chip. On some modules it works, on others the ESP crashes. When you sell many boards, <b>every</b> board must work, so "works on mine" is not enough.</p>
+  <p><b>GPIO2</b> is free. It must be <b>high</b> when the ESP boots (step {{s3}}), and <code>R5</code> already pulls the OneWire line up to 3V3. So it fits.</p>`,
+  tasks: [
+    `<p>In the schematic, move the <code>OneWire</code> connection from <b>IO10 (pin 12)</b> to <b>IO2 (pin 17)</b>.</p>`,
+    `<p>Pin 12 is now unused: put a no-connect flag (<kbd>Q</kbd>) on it. Remove the no-connect flag from pin 17.</p>`,
+    `<p>Run ERC (<b>Inspect → Electrical Rules Checker</b>). There should be no new errors compared with before.</p>`,
+    `<p>Save.</p>`
+  ],
+  hints: [
+    `Select the label or wire end and press <kbd>G</kbd> (grab) to move it while keeping it connected, or <kbd>M</kbd> to move it freely.`,
+    `To delete a no-connect flag, click it and press <kbd>Delete</kbd>.`,
+    `After the change, hover over pin 17 and check that it shows the OneWire net.`
+  ],
+  done: ["OneWire is on IO2 (pin 17) in the schematic", "Pin 12 has a no-connect flag", "ERC shows no new errors"],
+  commit: `git commit -am "Move OneWire to GPIO2"`
+},
+{
+  id: "s8", phase: "Design changes", title: "Your first routing", time: "2–3 h",
+  goal: "The PCB matches the schematic again, the short is gone, and DRC shows 0 errors.",
+  why: `<p>The schematic and the PCB are two files. After a schematic change you send it to the PCB with <b>Update PCB from Schematic</b>. Then you draw (route) the new connections yourself.</p>
+  <p>There is also a second small job waiting: the reset area was redrawn in the schematic, so the two pins of <code>R14</code> are now swapped compared with the PCB. After the update, its tracks no longer match its pads.</p>`,
+  tasks: [
+    `<p>In the PCB editor: <b>Tools → Update PCB from Schematic</b> (<kbd>F8</kbd>) → <b>Update PCB</b>. Read the list of changes before you close it.</p>`,
+    `<p>Delete the old OneWire tracks that now go nowhere: click a segment, press <kbd>U</kbd> to select the whole connected track, then <kbd>Delete</kbd>.</p>`,
+    `<p>Route the new OneWire connection to U2 pad 17: press <kbd>X</kbd>, click the pad, follow the ratsnest line, click to place corners, double-click to finish. Use 0.25 mm width.</p>`,
+    `<p>Fix R14: delete its two short tracks and route them again so its pads connect to the right nets.</p>`,
+    `<p>Press <kbd>B</kbd> to refill the copper zones. Run DRC with the parity test: <b>0 errors, 0 unconnected</b>, and the short from step {{s6}} is gone. Check in the 3D view.</p>`,
+    `<p>Save.</p>`
+  ],
+  hints: [
+    `You did all of this on the practice board in step {{prac}}. Look at your practice project if you forgot a tool. The <b>Common problems</b> table below explains DRC errors.`,
+    `While routing, press <kbd>V</kbd> to drop a via and continue on the other layer. Useful when the way is blocked.`,
+    `Keep tracks short, use 45° corners, and never route between the pads of another part.`,
+    `<b>No copper under the ESP antenna</b> (the end of the module with the wavy line), on both layers. Copper there makes Wi-Fi weak.`,
+    `If a ratsnest line stays after routing, the track ends next to the pad instead of on it. Drag the end onto the pad's centre.`,
+    `Undo is <kbd>Ctrl</kbd>+<kbd>Z</kbd>. You can't break anything that git can't bring back.`
+  ],
+  done: ["PCB updated from schematic", "OneWire routed to pad 17, old tracks removed", "R14 tracks fixed", "DRC: 0 errors, 0 unconnected, parity OK"],
+  commit: `git commit -am "Route OneWire to GPIO2, fix R14 after schematic update"`
+},
+{
+  id: "s9", phase: "Design changes", title: "Measure the battery", time: "2 h",
+  goal: "The ESP can read the battery voltage, so the station can warn when it is low.",
+  why: `<p>v2 can't see how full its battery is anymore (the INA219 was removed). The ESP has one analog input: the <b>ADC pin</b> (U2 pin 2). On the ESP-12F it reads <b>0 to 1.0 V</b>. A Li-ion battery is 3.0–4.2 V, so you need a <b>voltage divider</b>: two resistors that turn 4.2 V into less than 1.0 V.</p>
+  <p>But a divider always lets a little current flow, also while the station sleeps. So the resistors must be large.</p>`,
+  tasks: [
+    `<p>Choose two resistors, R<sub>top</sub> (from the battery) and R<sub>bottom</sub> (to GND), with these rules:</p>
+<ul>
+<li>At 4.3 V battery, the ADC voltage is 1.0 V or less.</li>
+<li>The current through the divider is 10 µA or less.</li>
+<li>Use standard values (E12 or E24 series), so the factory has them.</li>
+</ul>`,
+    `<p>Decide where the top resistor connects: <code>B+</code> (straight from the battery) or <code>VBAT</code> (after the power switch <code>SW5</code>)? Write why.</p>`,
+    `<p>Add the two resistors and a <b>100 nF capacitor</b> from the ADC pin to GND (it keeps the reading stable). Use the same 0805 footprints as the other parts. Remove the no-connect flag from the ADC pin.</p>`,
+    `<p>ERC, update the PCB (<kbd>F8</kbd>), place the parts close to U2 pin 2, route, DRC.</p>`
+  ],
+  hints: [
+    `V<sub>ADC</sub> = V<sub>bat</sub> × R<sub>bottom</sub> ÷ (R<sub>top</sub> + R<sub>bottom</sub>). Current = V<sub>bat</sub> ÷ (R<sub>top</sub> + R<sub>bottom</sub>).`,
+    `Start with R<sub>bottom</sub> = 100 kΩ and find R<sub>top</sub>.`,
+    `When the power switch is off, should the divider still drain the battery?`
+  ],
+  answers: `<p>One good answer: R<sub>top</sub> = 390 kΩ, R<sub>bottom</sub> = 100 kΩ. At 4.2 V: 4.2 × 100 ÷ 490 ≈ 0.86 V. Highest voltage it can measure: 1.0 × 490 ÷ 100 = 4.9 V. Current: 4.2 ÷ 490 kΩ ≈ 8.6 µA. Other values are fine if they follow the rules.</p>
+<p>Connect to <code>VBAT</code>: then the power switch also disconnects the divider, and a switched-off station uses nothing.</p>`,
+  done: ["My resistor values and calculation are in my submission file", "Divider and capacitor are in the schematic", "Placed and routed, DRC clean"],
+  commit: `git commit -am "Add battery voltage divider on ADC"`
+},
+{
+  id: "s10", phase: "Design changes", title: "Is the regulator strong enough?", time: "1.5 h",
+  goal: "You choose the voltage regulator with real numbers from datasheets.",
+  why: `<p>The regulator <code>U9</code> (HT7333) turns the battery voltage into a steady 3.3 V. It is rated for <b>250 mA</b>. When the ESP sends Wi-Fi data, it takes short current peaks that can go above that. With a weak battery, the voltage can drop and the ESP resets. On one board you may never see it. On 50 boards, some will do it.</p>
+  <p>What matters for a battery device:</p>
+  <ul>
+    <li><b>Maximum output current</b>: enough for Wi-Fi peaks.</li>
+    <li><b>Quiescent current (I<sub>q</sub>)</b>: what the regulator itself uses all the time, also during sleep.</li>
+    <li><b>Dropout voltage</b>: how much higher the input must be than the output. A battery at 3.4 V can't give 3.3 V through a regulator with 0.3 V dropout.</li>
+    <li><b>Pin order</b>: the same package (SOT-89) does <b>not</b> mean the same pins.</li>
+  </ul>`,
+  tasks: [
+    `<p>Download the HT7333 datasheet. Make a table in your submission file: max current, I<sub>q</sub>, dropout, pin order (which pin is IN, OUT, GND).</p>`,
+    `<p>Find one alternative with at least 500 mA and I<sub>q</sub> under 10 µA. Fill the same table for it.</p>`,
+    `<p>Check that JLCPCB has it in stock: search at <a href="https://jlcpcb.com/parts" target="_blank" rel="noopener">jlcpcb.com/parts</a>.</p>`,
+    `<p>Decide: keep or change? Write why. If you change it and the pin order is different, the schematic symbol must match the new pins. Ask in your Telegram chat before you edit symbol pins.</p>`
+  ],
+  hints: [
+    `Holtek, the maker of the HT73xx series, also makes an HT78xx series. Look at the HT7833.`,
+    `The pin order is in the datasheet, in a drawing called "Pin Assignment" or "Pin Configuration".`,
+    `Compare the I<sub>q</sub> with the ESP's deep-sleep current (about 20 µA). A regulator with 50 µA I<sub>q</sub> would more than double the sleep current.`
+  ],
+  done: ["Datasheet table for HT7333 and one alternative", "Decision and reason written", "If changed: schematic and PCB updated, ERC and DRC clean"],
+  commit: `git commit -am "Change regulator to <part>"`
+},
+{
+  id: "s11", phase: "Design changes", title: "How will the battery charge?", time: "1–2 h", gate: true,
+  goal: "You and your mentor decide how the battery is charged, and the board has what it needs for it.",
+  why: `<p>v2 has <b>no charging input</b> at the moment: the solar connector was removed together with the INA219. A station that can't charge stops after a few months.</p>
+  <p><b>Safety:</b> a Li-ion battery must be charged by a proper charger chip that stops at 4.2 V. Never connect a solar panel or a USB 5 V supply straight to the battery.</p>`,
+  tasks: [
+    `<p>Write pros and cons in your submission file for each option (cost, number of parts, board space, enclosure, what the buyer has to do):</p>
+<ul>
+<li><b>A.</b> A separate solar charger board. The weather station board gets a 2-pin connector to <code>B+</code> and <code>GND</code>.</li>
+<li><b>B.</b> A USB charger chip on the board (for example TP4056) and a USB connector.</li>
+<li><b>C.</b> A solar charger chip on the board (for example CN3065, made for small solar panels).</li>
+</ul>`,
+    `<p>Talk with your mentor and decide. Write the decision and the reason in your submission file.</p>`,
+    `<p>Add what the decision needs to the schematic and PCB. ERC, DRC.</p>`
+  ],
+  hints: [
+    `Where is the station going to be? Outside on a pole, a solar panel makes sense. On a balcony, maybe USB charging every few months is enough.`,
+    `A charger connected to <code>B+</code> and <code>GND</code> charges the battery through the DW01/FS8205 protection, so the protection still works while charging.`,
+    `Option A is the least work on this board. Options B and C make a nicer product but add parts you need to learn.`
+  ],
+  done: ["Pros and cons for A, B and C are in my submission file", "My mentor agreed with the decision", "Schematic and PCB updated, ERC and DRC clean"],
+  commit: `git commit -am "Add battery charging input"`
+},
+{
+  id: "enc", phase: "Product", title: "Choose the enclosure", time: "3–4 h", gate: true,
+  goal: "You have chosen an enclosure, and the board's outline and mounting holes fit it.",
+  why: `<p>The station lives outside. Its box has to keep rain out, but let the sensors feel the real air, and let Wi-Fi through. The board must fit the box exactly: the outline, the mounting holes and the connectors all depend on it. That's why you choose the box <b>now</b>, before you order boards. Changing a box is easy; changing a manufactured board is not.</p>
+  <p>What to think about:</p>
+  <ul>
+    <li><b>Size</b>: the board plus its tallest part (the 18650 battery holder is about 21 mm high), connectors and cables, with a few mm to spare.</li>
+    <li><b>Water</b>: the IP rating says how well a box is sealed. <b>IP65</b> means dust-tight and safe against rain from any direction.</li>
+    <li><b>Material</b>: plastic, never metal (metal blocks Wi-Fi). Outdoors it must resist sunlight (UV): ABS with UV protection, ASA or polycarbonate.</li>
+    <li><b>Mounting</b>: screw bosses inside for the board, and a way to fix the box to a wall or pole.</li>
+    <li><b>Openings</b>: cable glands for the temperature probe and the charging cable (from step {{s11}}), access to the power switch and Mode jumper.</li>
+    <li><b>Air and condensation</b>: the BMP280 measures air pressure, so the box must not be airtight. A small breathable vent plug lets air (and pressure) in, but not water.</li>
+    <li><b>Price</b> at 1 piece and at your series quantity.</li>
+  </ul>`,
+  tasks: [
+    `<p>Write your requirements in your submission file: inside size (use the board size from step {{s5}} and the tallest part), IP rating, material, openings, budget per unit.</p>`,
+    `<p>Check heights in the 3D viewer: which part is tallest, and how tall? You can also export a 3D model of the board (<b>File → Export → STEP</b>) if you want to try it in a 3D design program.</p>`,
+    `<p>Find <b>2–3 candidate boxes</b> and compare them in a table: inside dimensions, positions of the mounting bosses, IP rating, material, price, where to buy. Typical choices:</p>
+<ul>
+<li><b>A.</b> A ready-made IP65 junction box: cheap, strong, available everywhere.</li>
+<li><b>B.</b> A 3D-printed case (PETG or ASA): any shape, but slower to make per unit and harder to seal.</li>
+<li><b>C.</b> A small box inside a weather-station radiation shield (see the hints).</li>
+</ul>`,
+    `<p>Choose with your mentor and buy <b>one sample</b> box.</p>`,
+    `<p>Make the board outline fit the box. Change the outline on the <code>Edge.Cuts</code> layer so the board fits inside with 1–2 mm to spare on every side. Plan where cables come in: the connectors go at that edge (you choose the connector types in step {{con}}).</p>`,
+    `<p><b>Place the mounting holes on the box's screw bosses.</b> The holes <code>H1</code>–<code>H4</code> must sit exactly on the bosses, or the screws won't go in.</p>
+<ul>
+<li>Get the boss positions from the box's datasheet drawing, or measure the sample box with a caliper (centre of each boss, from one corner).</li>
+<li>Use the same corner as the board's origin: <b>Place → Grid Origin</b>, then select each hole, press <kbd>E</kbd> and type its exact X and Y.</li>
+<li>Match the hole size to the screw: for M3 screws use a 3.2 mm hole; for the self-tapping screws that come with many boxes, check the box datasheet.</li>
+<li>Keep space around each hole: no tracks, copper pour or parts under the screw head (about 6–7 mm across for M3).</li>
+</ul>`,
+    `<p>Check the fit on paper. Print the PCB at 1:1 scale (PCB Editor → <b>File → Plot</b> as PDF, scale 1, with the <code>Edge.Cuts</code> layer), cut it out and put it in the sample box. Every hole must be over a boss. Measure the printout with a ruler first: some printers scale the page.</p>`,
+    `<p>Plan where the sensors go: the DS18B20 probe outside the box in the shade, through a cable gland (connector <code>J4</code>); the BMP280 inside, with a vent plug in the box. Write the plan in your submission file. DRC.</p>`
+  ],
+  hints: [
+    `Box datasheets have a drawing with the inside dimensions and the boss positions. Measure twice: a 1 mm error on a hole is enough to stop a screw.`,
+    `If moving a hole makes it hit a track or a part, move the track or part, not the hole. The box decides where the holes go.`,
+    `Watch out: shops often list the <b>outside</b> size. The inside is several mm smaller, and the bosses take space too.`,
+    `Keep the ESP antenna end of the board away from the box walls' screws and any metal, and don't put it right next to the battery.`,
+    `A temperature sensor in the sun can read 10 °C too high. Weather stations keep the thermometer in a white, shaded, ventilated shield. Search for "radiation shield" or "Stevenson screen".`,
+    `Changing <code>Edge.Cuts</code>: delete the old outline lines and draw new ones on the Edge.Cuts layer, or edit the existing lines' end points with <kbd>E</kbd>. The outline must be one closed shape. DRC tells you if it isn't.`
+  ],
+  done: ["Requirements written in my submission file", "2–3 boxes compared in a table", "My mentor agreed and we bought a sample box", "Board outline fits the box with space on every side", "Mounting holes H1–H4 sit exactly on the box's bosses (paper test done)", "DRC clean", "Sensor placement plan in my submission file"],
+  commit: `git commit -am "Fit board outline and mounting holes to the enclosure"`
+},
+{
+  id: "con", phase: "Product", title: "Choose the connectors", time: "2–3 h",
+  goal: "Every cable that goes on or off the board has a connector you chose on purpose, and nothing can be plugged in the wrong way.",
+  why: `<p>Right now most connections are simple pin headers. They are fine on a prototype on your desk, but a product needs more: a buyer will plug in the charging cable in the dark, and wind will pull on the probe cable. A bad connector choice can reverse the battery polarity or let a cable fall out.</p>
+  <p>Connections on the board now:</p>
+  <div class="tbl"><table>
+  <tr><th>Ref</th><th>What</th><th>Now</th></tr>
+  <tr><td><code>J2</code></td><td>Pressure sensor (BMP280 module)</td><td>4-pin socket, 2.54 mm</td></tr>
+  <tr><td><code>J5</code></td><td>Extra I2C port</td><td>4-pin socket, 2.54 mm</td></tr>
+  <tr><td><code>J4</code></td><td>Temperature probe (DS18B20 on a cable)</td><td>3-pin header, 2.54 mm</td></tr>
+  <tr><td><code>J3</code></td><td>UART for flashing</td><td>JST PH 3-pin, 2.0 mm</td></tr>
+  <tr><td><code>D1</code>, <code>D2</code></td><td>LEDs (off the board, e.g. in the box lid)</td><td>2-pin headers</td></tr>
+  <tr><td><code>SW3</code>, <code>SW4</code>, <code>SW5</code></td><td>Mode jumper, Protection jumper, power switch</td><td>2-pin headers</td></tr>
+  <tr><td>(step {{s11}})</td><td>Charging input</td><td>your choice</td></tr>
+  </table></div>
+  <p>What makes a connector right for a job:</p>
+  <ul>
+    <li><b>Keyed</b>: it only fits one way round. A must for anything with power.</li>
+    <li><b>Locking</b>: it doesn't fall out when the cable is pulled or shakes.</li>
+    <li><b>Can't be confused</b>: two connections should not use the same connector if swapping them could damage something.</li>
+    <li><b>Current</b>: the charging connector must carry the charging current.</li>
+    <li><b>Mating part</b>: every connector needs a plug on the other side, with crimp contacts (needs a crimping tool) or as a ready-made cable.</li>
+    <li><b>Factory</b>: is it in stock at JLCPCB? Can it be assembled, or must you solder it by hand? SMD connectors need mounting tabs to be strong.</li>
+  </ul>
+  <p>Common families: <b>JST PH</b> (2.0 mm, keyed, small), <b>JST XH</b> (2.5 mm, keyed, often used for batteries), <b>JST SH</b> (1.0 mm, used by Qwiic / STEMMA QT sensor modules), <b>screw terminals</b> (no crimping, good for wires connected outdoors), and <b>pin headers</b> (cheap, not keyed: OK for jumpers and debugging).</p>`,
+  tasks: [
+    `<p>Make a table in your submission file with one row per connection: what it is, number of wires, current, inside or outside the box, how often it is plugged, and <b>who</b> plugs it (you at assembly, or the buyer).</p>`,
+    `<p>For each row, choose: connector family and pin count, keyed or not, through-hole or SMD, vertical or horizontal (horizontal for cables along the board edge), and the mating part. Write one sentence why.</p>`,
+    `<p>Check the danger cases: which connections could be plugged into each other by mistake? Make them different (other pin count or other family).</p>`,
+    `<p>Check that each connector and its mating part exist at <a href="https://jlcpcb.com/parts" target="_blank" rel="noopener">jlcpcb.com/parts</a> (or another shop for the cables), and that KiCad has a footprint for it (libraries <code>Connector_JST</code>, <code>TerminalBlock</code>, ...).</p>`,
+    `<p>Change the symbols' footprints in the schematic, update the PCB (<kbd>F8</kbd>) and place the connectors where the cables enter the box from step {{enc}}. In the 3D view, check there is room for the plug and for the cable to bend. ERC, DRC.</p>`,
+    `<p>Write a list of mating parts (plugs, crimps or ready-made cables) for each unit. They belong in the product's parts list and its cost.</p>`
+  ],
+  hints: [
+    `The v1 board used JST PH horizontal SMD connectors with mounting tabs (<code>S2B-PH-SM4-TB</code>, <code>S3B-PH-SM4-TB</code>). Their 3D models are still in the project folder. They are strong and JLCPCB can assemble them.`,
+    `Look at your BMP280 module: if it has a small 4-pin JST SH socket (Qwiic / STEMMA QT), you can use ready-made cables for it.`,
+    `Only you use the UART and the Protection jumper. They can stay simple and cheap. The buyer touches the charging input and maybe the probe: those need the best connectors.`,
+    `Pre-crimped JST cables are easy to buy. Crimping your own needs a special tool and practice.`,
+    `Check pin 1 on the connector against the cable colours: red should be +. Write the pinout on the silkscreen next to each connector.`
+  ],
+  answers: `<p>One possible set, not the only right one:</p>
+<ul>
+<li>Charging input: JST PH 2-pin horizontal SMD (keyed, like v1).</li>
+<li>Temperature probe: JST PH 3-pin, so it can't go into the 2-pin charging socket.</li>
+<li>BMP280: JST SH 4-pin (Qwiic) if the module has it, otherwise JST PH 4-pin.</li>
+<li>UART: keep JST PH 3-pin, or a 3-pin header (only you use it).</li>
+<li>LEDs: one 4-pin connector for both LEDs, so it can't be confused with the 2-pin charging socket.</li>
+<li>Mode and Protection jumpers: keep pin headers with jumper caps.</li>
+</ul>`,
+  done: ["My connection table is in my submission file", "Every connection has a chosen connector and a reason", "No two connections can be swapped by mistake", "Connectors and mating parts are in stock", "Schematic and PCB updated, ERC and DRC clean", "Mating parts list written"],
+  commit: `git commit -am "Choose connectors"`
+},
+{
+  id: "s12", phase: "Firmware", title: "Update the firmware", time: "2 h",
+  goal: "The firmware matches the new board and compiles without errors.",
+  why: `<p>The firmware is the program on the ESP. It must use the same pins as the board. You moved OneWire and added a battery reading, so the code needs to follow. You will flash it onto the real board in step {{s16}}; here you prepare it.</p>`,
+  tasks: [
+    `<p>Install <b>Arduino IDE 2</b> from <a href="https://www.arduino.cc/en/software" target="_blank" rel="noopener">arduino.cc/en/software</a>. In <b>File → Preferences → Additional boards manager URLs</b>, add:</p>
+<pre><code>https://arduino.esp8266.com/stable/package_esp8266com_index.json</code></pre>
+<p>Then in <b>Boards Manager</b>, install <b>esp8266</b>. In <b>Library Manager</b>, install <b>Adafruit BMP280 Library</b>, <b>OneWire</b> and <b>DallasTemperature</b>.</p>`,
+    `<p>Open <code>meteo-v2/firmware/projectcpcs_v2/projectcpcs_v2.ino</code>. Choose <b>Tools → Board → esp8266 → Generic ESP8266 Module</b>, Flash Size <b>4MB</b>.</p>`,
+    `<p>Change <code>ONE_WIRE_BUS</code> from <code>10</code> to <code>2</code>, and update the comment at the top of the file (the note about Flash Mode and GPIO10 is not needed anymore).</p>`,
+    `<p>Add the battery reading: read the ADC with <code>analogRead(A0)</code> (0–1023 for 0–1.0 V), turn it into the battery voltage with your divider values from step {{s9}}, and add it to the data sent to the server and to the Telegram message.</p>`,
+    `<p>For testing, make the sleep time 30 seconds instead of 10 minutes (remember to change it back later!). Press <b>Verify</b> (✓). Fix errors until it compiles.</p>`
+  ],
+  hints: [
+    `V<sub>bat</sub> = raw ÷ 1023.0 × 1.0 × (R<sub>top</sub> + R<sub>bottom</sub>) ÷ R<sub>bottom</sub>.`,
+    `Look at how <code>temp_dallas</code> is added to <code>jsonPayload</code>, and add a <code>"voltage"</code> field the same way. The old v1 server already knew a <code>voltage</code> field.`,
+    `Compiler errors: read the <b>first</b> error. The others are often caused by it.`
+  ],
+  done: ["Arduino IDE with the esp8266 core and libraries is installed", "ONE_WIRE_BUS is 2", "Battery voltage is read and sent", "It compiles without errors"],
+  commit: `git commit -am "Firmware: OneWire on GPIO2, battery voltage"`
+},
+{
+  id: "s13", phase: "Manufacturing", title: "Pick real parts for JLCPCB", time: "3 h",
+  goal: "Every part the factory solders has an exact part number that is in stock.",
+  why: `<p>For PCBA, JLCPCB solders parts from its own warehouse (LCSC). In the schematic, "10k" is not enough: the factory needs the exact part number.</p>
+  <ul>
+    <li><b>Basic parts</b> are always loaded in the machines: no extra fee.</li>
+    <li><b>Extended parts</b> must be loaded for your order: a small extra fee for each different one. Check the current price on the JLCPCB site.</li>
+    <li>The part's package must match the footprint (an 0805 resistor for an 0805 footprint).</li>
+    <li>Through-hole parts (pin headers, the TO-92 DS18B20, maybe the battery holder) cost more to assemble. You can also solder them by hand.</li>
+  </ul>`,
+  tasks: [
+    `<p>Make a list of all parts (Schematic Editor → <b>Tools → Generate Bill of Materials</b>, or the Symbol Fields Table). For each part, decide: <b>factory</b> or <b>hand-solder</b>.</p>`,
+    `<p>For each factory part, find the LCSC part number at <a href="https://jlcpcb.com/parts" target="_blank" rel="noopener">jlcpcb.com/parts</a>. Prefer Basic parts. Check stock and price.</p>`,
+    `<p>Add a field named <code>LCSC</code> to every factory part with its number: <b>Tools → Edit Symbol Fields</b> (Symbol Fields Table) lets you do many parts at once.</p>`,
+    `<p>Check the ESP-12F: is it in stock at JLCPCB? If not, plan to solder it by hand.</p>`,
+    `<p>In your submission file, write the parts cost for one board.</p>`
+  ],
+  hints: [
+    `Search like the factory thinks: "0805 10kΩ 1%". Then filter by "Basic".`,
+    `All 10 kΩ 0805 resistors can use the same LCSC number. Fewer different parts = cheaper.`,
+    `Capacitors: the voltage rating must be higher than the voltage they see. The battery is at most 4.2 V, so 10 V or more is fine.`,
+    `For hand-soldered parts, leave the LCSC field empty. The plugin in step {{s14}} can leave them out of the assembly files.`
+  ],
+  done: ["Every part is marked factory or hand-solder", "Every factory part has an LCSC number that is in stock", "Parts cost per board is in my submission file"],
+  commit: `git commit -am "Add LCSC part numbers"`
+},
+{
+  id: "s14", phase: "Manufacturing", title: "Make the factory files and get a quote", time: "2 h",
+  goal: "You have the files the factory needs, and JLCPCB shows a correct preview and a price.",
+  why: `<p>The factory doesn't use KiCad files. It needs:</p>
+  <ul>
+    <li><b>Gerber files</b> and a <b>drill file</b>: the drawing of each copper, mask and silkscreen layer, and where to drill holes.</li>
+    <li><b>BOM</b> (bill of materials): which part goes where.</li>
+    <li><b>CPL</b> (component placement list): the exact position and rotation of each part.</li>
+  </ul>`,
+  tasks: [
+    `<p>Set safe design rules: <b>File → Board Setup → Design Rules → Constraints</b>. Use minimum track width and clearance 0.2 mm, via drill 0.3 mm, via diameter 0.6 mm. These are safely inside what JLCPCB can make. Run DRC again.</p>`,
+    `<p>Install the <b>Fabrication Toolkit</b> plugin with <b>Tools → Plugin and Content Manager</b>. Run it from the PCB editor. It creates the Gerbers, drill file, BOM and CPL for JLCPCB in one folder. Read its documentation about the LCSC field name and rotation offsets.</p>`,
+    `<p>Open the Gerbers in KiCad's <b>Gerber Viewer</b>. Do the layers look like your board?</p>`,
+    `<p>At <a href="https://jlcpcb.com" target="_blank" rel="noopener">jlcpcb.com</a>, upload the Gerber ZIP. The order form has many settings. Typical choices for this board (names on the website may differ a little):</p>
+<div class="tbl"><table>
+<tr><th>Setting</th><th>Choose</th><th>Why</th></tr>
+<tr><td>Base material</td><td>FR-4</td><td>The standard board material.</td></tr>
+<tr><td>Layers</td><td>2</td><td>Your board has F.Cu and B.Cu.</td></tr>
+<tr><td>PCB quantity</td><td>5</td><td>The usual minimum.</td></tr>
+<tr><td>PCB thickness</td><td>1.6 mm</td><td>The standard. Connectors and holes expect it.</td></tr>
+<tr><td>PCB colour</td><td>Green</td><td>Usually the cheapest and fastest.</td></tr>
+<tr><td>Surface finish</td><td>HASL lead-free</td><td>Fine for prototypes. ENIG is flatter and costs more.</td></tr>
+<tr><td>Outer copper weight</td><td>1 oz</td><td>The standard thickness of copper.</td></tr>
+<tr><td>Order number on the board</td><td>Look at the options</td><td>JLCPCB prints a small number on the board unless you choose where it goes or remove it (removing may cost extra).</td></tr>
+<tr><td>PCB Assembly</td><td>On</td><td>The factory solders the parts.</td></tr>
+<tr><td>PCBA type</td><td>Economic</td><td>Cheaper. Check that all your parts are allowed.</td></tr>
+<tr><td>Assembly side</td><td>Top</td><td>All your SMD parts are on the top.</td></tr>
+<tr><td>PCBA quantity</td><td>2 or 5</td><td>Assembling only some of the boards saves money on a first prototype.</td></tr>
+</table></div>
+<p>If a setting is not in this table, keep the default and ask about it in your pull request. Then upload the BOM and CPL.</p>`,
+    `<p>In the placement preview, check <b>every</b> part: right place, right rotation, pin 1 in the right corner. Fix wrong rotations and generate again.</p>`,
+    `<p>Take a screenshot of the price. <b>Don't pay</b>: that happens in step {{s15}} with your mentor. The production files go into your pull request.</p>`
+  ],
+  hints: [
+    `Wrong rotation is the most common PCBA mistake. Look carefully at the transistors (SOT-23), the regulator (SOT-89) and the chips (SOT-23-6).`,
+    `Pin 1 is marked with a dot or a bevel on the part, and a dot or line on the silkscreen. They must be on the same side.`,
+    `If the BOM upload says a part is "not found", its LCSC number is wrong or missing.`
+  ],
+  done: ["Design rules set and DRC clean", "Gerbers checked in the Gerber Viewer", "JLCPCB accepted Gerbers, BOM and CPL", "Every part placed and rotated correctly in the preview", "Price screenshot in my submission file"],
+  commit: `git commit -am "Add v2 production files"`
+},
+{
+  id: "s15", phase: "Manufacturing", title: "Final review and order", time: "1 h", gate: true,
+  goal: "The design passes a final check, your mentor agrees, and 5 prototype boards are ordered.",
+  why: `<p>A mistake found now costs nothing. A mistake found after manufacturing costs money and weeks of waiting. Order a small batch of prototypes first: almost nobody gets the first board perfect.</p>`,
+  tasks: [
+    `<p>Go through the checklist below. Fix anything that fails, then check again.</p>
+<ul>
+<li>ERC: no new errors. DRC: 0 errors, 0 unconnected, parity OK.</li>
+<li>No copper under the ESP antenna, on both layers.</li>
+<li>Battery holder polarity: the + mark on the silkscreen matches the holder.</li>
+<li>Every connector is keyed or can't be confused with another, and its pinout is on the silkscreen.</li>
+<li>Silkscreen has the name, "v2" and the date, so you can tell boards apart later.</li>
+<li>Board outline, mounting holes and connectors fit the sample enclosure from step {{enc}} (paper test).</li>
+<li>All BOM parts are in stock. The placement preview is correct.</li>
+<li>The firmware compiles.</li>
+<li>You know the total price.</li>
+</ul>`,
+    `<p>Show the design and the quote to your mentor. They may also ask Claude to review the files.</p>`,
+    `<p>After your mentor merges this step's pull request, mark the exact version you are ordering with a git <b>tag</b>:</p>
+<pre><code>git switch main
+git pull
+git tag v2-proto-1
+git push --tags</code></pre>`,
+    `<p>Your mentor pays and places the order. Write the order number and date in your submission file.</p>`
+  ],
+  hints: [
+    `A tag is a name for one commit. If you find a problem on the boards later, <code>git switch --detach v2-proto-1</code> shows you exactly what was ordered.`,
+    `Print nothing: take screenshots of the 3D view, top and bottom, and put them in your submission file for the review.`
+  ],
+  done: ["Every item on the checklist passes", "My mentor reviewed and agreed", "Tag v2-proto-1 is pushed", "Order placed (number in my submission file)"],
+  commit: `git tag v2-proto-1 && git push --tags`
+},
+{
+  id: "s16", phase: "Prototype", title: "Bring the prototype to life", time: "3–4 h",
+  goal: "Every function of the prototype is tested, and every problem is written down.",
+  why: `<p>The first power-on is exciting, and also the moment things can burn. Test step by step, from "no power" to "everything on". Write down every problem: that list becomes v3.</p>
+  <p><b>Safety:</b> Li-ion batteries can get very hot when shorted. Don't leave a board with a battery unattended while testing. Ask your mentor to be there for the first power-on.</p>`,
+  tasks: [
+    `<p><b>Look first.</b> With a magnifier: solder bridges between pins, missing parts, parts turned the wrong way.</p>`,
+    `<p><b>Measure before power.</b> With a multimeter on resistance (Ω): between 3V3 and GND, and between B+ and GND. Close to 0 Ω means a short. Don't connect power until you find it.</p>`,
+    `<p><b>First power.</b> If you have a lab power supply: 3.7 V with the current limit at 200 mA, instead of a battery. Measure 3V3: it should be 3.2–3.4 V.</p>`,
+    `<p>Solder the hand-solder parts.</p>`,
+    `<p><b>Flash the firmware</b> with a USB-UART adapter set to <b>3.3 V</b>: adapter GND → J3 pin 1, adapter TX → J3 pin 2, adapter RX → J3 pin 3. Hold <b>Flash</b>, tap <b>Reset</b>, release <b>Flash</b>, then Upload in Arduino IDE.</p>`,
+    `<p><b>Test each function</b> with the Serial Monitor at 115200 baud: config portal with the Mode jumper, Wi-Fi connect, temperature, pressure, battery voltage (compare with the multimeter), data on the server, Telegram message, wake-up after 30 s.</p>`,
+    `<p><b>Measure the sleep current</b> (see hints). Write it in your submission file and compare with step {{s4}}.</p>`,
+    `<p>Set the sleep time back to 10 minutes. Write every problem into <code>meteo-v2/ISSUES.md</code> (what, how to see it, photo).</p>`
+  ],
+  hints: [
+    `Sleep current: put the multimeter in series with the battery, on the mA range. When the board sleeps, switch to the µA range. If you start on µA, the meter's resistance can make the ESP reset when it wakes and needs 80 mA.`,
+    `If uploading fails: check that TX and RX are crossed correctly, that the adapter is at 3.3 V, and that you entered flash mode (Flash held during reset).`,
+    `If the ESP keeps restarting, look at the Serial Monitor at 74880 baud: the ESP prints its boot messages at that speed.`
+  ],
+  done: ["Visual check and short check done", "3V3 measured correctly", "Firmware flashed and every function tested", "Sleep current measured", "ISSUES.md lists every problem"],
+  commit: `git commit -am "Prototype test results"`
+},
+{
+  id: "s17", phase: "Prototype", title: "From prototype to small series", time: "many hours", gate: true,
+  goal: "A plan to make and sell a small series, agreed with your mentor.",
+  why: `<p>A working prototype is a big step. A product also needs a box, instructions, a test for every unit, a price, and rules to follow when you sell electronics. This step collects all of that.</p>`,
+  tasks: [
+    `<p><b>v3:</b> copy <code>meteo-v2</code> to a new folder <code>meteo-v3</code> (keep v2 unchanged: it is what you ordered). Fix the problems from <code>ISSUES.md</code> in v3, and go through steps {{s13}}–{{s16}} again. Repeat until there are no serious issues.</p>`,
+    `<p><b>Field test:</b> put a prototype in its enclosure outside for at least a week. Does water get in? Is there condensation inside? Compare the temperature with a reference thermometer in the shade. Fix what you find in v3.</p>`,
+    `<p><b>Test procedure:</b> a short checklist every unit must pass before you sell it (power, Wi-Fi, sensors, sleep current).</p>`,
+    `<p><b>User manual:</b> how to set up Wi-Fi (Mode jumper and the config page), how to charge, and safety notes for the battery.</p>`,
+    `<p><b>Cost per unit:</b> board + assembly + hand-soldered parts + battery + enclosure + shipping. Then decide a price.</p>`,
+    `<p><b>With your mentor:</b> the rules for selling electronics with Wi-Fi and lithium batteries where you live (conformity marking, battery shipping rules). Don't skip this.</p>`
+  ],
+  hints: [
+    `Search "Stevenson screen" or "radiation shield 3D print" for sensor enclosures.`,
+    `The ESP-12F module has its own radio certification, but the finished product may still need its own declaration. Your mentor can find out what applies.`
+  ],
+  done: ["v3 problems fixed and reviewed", "Test procedure written", "User manual draft written", "Cost per unit and price in my submission file", "Mentor agreed with the selling plan"],
+  commit: null
+}
+];
+
+/* What each step's submission file asks for. NN becomes the step number. */
+const DELIVER = {
+  s0: ["What you want to learn most from this project"],
+  s1: ["Your KiCad version (Help → About KiCad)", "A screenshot of the board in the 3D viewer: <code>img/step-NN-3d.png</code>"],
+  s2: ["Your own words: repository, commit, branch, remote, push, pull request, merge", "What <code>git status</code> showed before and after <code>git rm --cached</code>", "Anything that was hard or confusing"],
+  s3: ["A table: every part and what it does, block by block", "Your answers to questions 1–6, with calculations", "One thing you would change or don't understand"],
+  s4: ["The RESET voltage with R14 = 1 kΩ and with 10 kΩ, with the calculation", "The average current and battery life, with the calculation", "Why R14 is there, in 2–3 sentences", "What you would change to make the battery last longer"],
+  s5: ["The board size (width × height in mm)", "The DRC result: number of errors, warnings and unconnected items", "Track, via and zone in your own words", "A screenshot with one net highlighted: <code>img/step-NN-net.png</code>"],
+  prac: ["The practice project in <code>course/practice/</code>", "The DRC report: in the DRC window click <b>Save...</b> and save it as <code>course/submissions/step-NN-drc.rpt</code>", "A 3D screenshot: <code>img/step-NN-3d.png</code>", "What was hardest, and one thing you learned"],
+  s6: ["Which two nets touch, and at which pad", "Why it would break the station", "A screenshot of the short: <code>img/step-NN-short.png</code>"],
+  s7: ["What you changed in the schematic", "The ERC result before and after (number of errors and warnings)"],
+  s8: ["What you changed on the PCB", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>", "3D screenshots of the top and bottom: <code>img/step-NN-top.png</code>, <code>img/step-NN-bottom.png</code>"],
+  s9: ["Your resistor values and the calculation: ADC voltage at 4.2 V and 4.3 V, and the current", "B+ or VBAT, and why", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
+  s10: ["Your datasheet table for the HT7333 and one alternative", "Your decision and the reason", "If you changed it: the ERC and DRC results"],
+  s11: ["Pros and cons of options A, B and C", "The decision and the reason (discuss it with your mentor in the pull request)", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
+  enc: ["Your requirements list", "A comparison table of 2–3 boxes, with links and prices", "The box you chose, and why", "A photo of the paper test in the sample box: <code>img/step-NN-paper.jpg</code>", "Your sensor placement plan", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
+  con: ["Your connection table, with the chosen connector and the reason for each", "Which connections could be confused, and how you prevented it", "The mating parts list", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
+  s12: ["What you changed in the code, and why", "A screenshot of a successful Verify (compile): <code>img/step-NN-compile.png</code>"],
+  s13: ["The BOM exported as CSV: <code>course/submissions/step-NN-bom.csv</code>", "Which parts the factory solders and which you solder by hand", "The parts cost per board"],
+  s14: ["The production files (the folder the plugin made), committed in the repo", "Screenshots of the JLCPCB placement preview and the price", "Which parts needed a rotation fix"],
+  s15: ["The final checklist: each item, and how you checked it", "3D screenshots of the top and bottom", "The total price"],
+  s16: ["A measurements table: 3V3, sleep current, battery voltage (board vs multimeter)", "The result of each function test", "<code>meteo-v2/ISSUES.md</code> with every problem you found", "Photos of the assembled board"],
+  s17: ["The test procedure for each unit", "The user manual draft", "The cost per unit and the price", "The field test results"]
+};
+
+/* "Common problems" tables. */
+const PCB_TROUBLE = [
+  ["Clearance violation", "A track, via or pad is too close to something on another net. Move the track away or route it another way."],
+  ["Unconnected items", "A ratsnest line is still there: a connection isn't routed, or a track ends next to the pad instead of on it. Route it, or drag the track end onto the pad's centre."],
+  ["Track has unconnected end", "A leftover piece of track. Select it and press Delete."],
+  ["Via is not connected", "A via with a track on only one side (or none). Delete it, or connect both sides."],
+  ["Courtyard overlap", "Two parts are too close for the assembly machine. Move them apart."],
+  ["Board edge clearance", "Copper is too close to the board edge. Move it inward."],
+  ["Items shorting two nets", "Two different nets touch. This is a real fault. Find it and reroute."],
+  ["Silkscreen over pad / clipped", "Text lies on a pad and won't print there. Move the text. (A warning, not an error.)"],
+  ["The zone looks old or has holes", "Press B to refill all zones after you move things."],
+  ["The router stops and won't go further", "The way is blocked. Try another path, drop a via (V) to the other layer, or change the router mode in Route → Interactive Router Settings."]
+];
+const TROUBLE = { prac: PCB_TROUBLE, s8: PCB_TROUBLE, s9: PCB_TROUBLE };
+
+/* "Learn more" links: official documentation only. */
+const KICAD_DOCS = ["KiCad documentation (Getting Started, Schematic Editor, PCB Editor)", "https://docs.kicad.org/"];
+const LEARN = {
+  s1: [KICAD_DOCS],
+  s2: [["Pro Git (free book): chapters 1–3", "https://git-scm.com/book/en/v2"], ["GitHub Docs: pull requests", "https://docs.github.com/en/pull-requests"]],
+  s3: [["ESP8266 Arduino core documentation (boards, boot modes)", "https://arduino-esp8266.readthedocs.io/en/latest/"]],
+  s5: [KICAD_DOCS],
+  prac: [KICAD_DOCS],
+  s8: [KICAD_DOCS],
+  s12: [["ESP8266 Arduino core documentation", "https://arduino-esp8266.readthedocs.io/en/latest/"]],
+  s13: [["JLCPCB parts library", "https://jlcpcb.com/parts"]],
+  s14: [["Fabrication Toolkit plugin (README: fields, rotations)", "https://github.com/bennymeg/Fabrication-Toolkit"]]
+};
+
+/* ---------------------------------------------------------------------------
+   State: the self-check boxes live in this browser. Acceptance lives on GitHub.
+--------------------------------------------------------------------------- */
+const LS_KEY = "meteo-course-progress-v1";
+let state = { done: {} };
+let current = 0;
+
+function loadLocal() {
+  try { const s = JSON.parse(localStorage.getItem(LS_KEY) || "null"); if (s && s.done) state.done = s.done; } catch (e) {}
+}
+function saveLocal() { try { localStorage.setItem(LS_KEY, JSON.stringify({ done: state.done })); } catch (e) {} }
+
+const pad = (i) => String(i).padStart(2, "0");
+const idx = (id) => STEPS.findIndex(x => x.id === id);
+/* {{id}} in course text becomes that step's current number. */
+const ref = (html) => html.replace(/\{\{(\w+)\}\}/g, (m, id) => { const i = idx(id); return i < 0 ? m : String(i); });
+const esc = (t) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+
+/* ---------------------------------------------------------------------------
+   Rendering
+--------------------------------------------------------------------------- */
+const $ = (s, r = document) => r.querySelector(s);
+const checkId = (step, i) => step.id + "-" + i;
+const stepCount = (step) => step.done.filter((_, i) => state.done[checkId(step, i)]).length;
+
+function renderProgress() {
+  const total = STEPS.reduce((n, s) => n + s.done.length, 0);
+  const done = STEPS.reduce((n, s) => n + stepCount(s), 0);
+  $("#overall-bar").style.width = (total ? done / total * 100 : 0) + "%";
+  $("#overall-num").textContent = done + " / " + total + " checks";
+}
+
+function renderTray() {
+  const tray = $("#tray"); tray.innerHTML = "";
+  let phase = null, ol = null;
+  STEPS.forEach((s, i) => {
+    if (s.phase !== phase) {
+      phase = s.phase;
+      const h = document.createElement("div"); h.className = "phase-name"; h.textContent = phase; tray.append(h);
+      ol = document.createElement("ol"); tray.append(ol);
+    }
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = "#step-" + i;
+    const c = stepCount(s);
+    if (c === s.done.length) a.classList.add("full");
+    if (i === current) a.setAttribute("aria-current", "page");
+    a.innerHTML = `<span class="n">${String(i).padStart(2, "0")}</span><span>${s.title}${s.gate ? ' <span class="gate-dot" title="Mentor check">●</span>' : ""}</span><span class="c">${c}/${s.done.length}</span>`;
+    li.append(a); ol.append(li);
+  });
+  const pick = $("#picker"); pick.innerHTML = "";
+  STEPS.forEach((s, i) => {
+    const o = document.createElement("option"); o.value = i;
+    o.textContent = `${String(i).padStart(2, "0")} · ${s.title} (${stepCount(s)}/${s.done.length})`;
+    if (i === current) o.selected = true; pick.append(o);
+  });
+}
+
+function renderStep() {
+  const s = STEPS[current], n = pad(current);
+  const hints = s.hints.map((h, i) => `<details><summary>Hint ${i + 1}</summary><div><p>${ref(h)}</p></div></details>`).join("");
+  const answers = s.answers ? `<details class="answers"><summary>Check your answers</summary><div>${ref(s.answers)}</div></details>` : "";
+  const checks = s.done.map((d, i) => {
+    const id = checkId(s, i);
+    return `<li><label for="${id}"><input type="checkbox" id="${id}" data-check="${id}" ${state.done[id] ? "checked" : ""}><span>${d}</span></label></li>`;
+  }).join("");
+  const trouble = TROUBLE[s.id] ? `<h2>Common problems</h2><div class="tbl"><table><tr><th>You see</th><th>What it means and what to do</th></tr>${TROUBLE[s.id].map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join("")}</table></div>` : "";
+  const learn = LEARN[s.id] ? `<h2>Learn more</h2><ul class="prose">${LEARN[s.id].map(([t, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${t}</a></li>`).join("")}</ul>` : "";
+
+  const file = `course/submissions/step-${n}.md`;
+  const deliver = (DELIVER[s.id] || []).map(d => `<li>${ref(d).replace(/NN/g, n)}</li>`).join("");
+  const firstPr = idx("s2");
+  let submit;
+  if (current < firstPr) {
+    submit = `<p>Fill in <code>${file}</code>:</p><ul class="prose">${deliver}</ul>
+      <p>You send it to your mentor together with step ${pad(firstPr)}, in your first pull request.</p>`;
+  } else {
+    const br = "step-" + n;
+    const title = s.id === "s2" ? `Steps 00–${n}: start` : `Step ${n}: ${s.title}`;
+    const cmds = `# before you change anything: a new branch for this step
+git switch main
+git pull
+git switch -c ${br}
+
+# ... do the tasks and fill in ${file} ...
+
+git status                 # check what will be saved
+git add -A
+git commit -m "${title}"
+git push -u origin ${br}`;
+    submit = `<p>Fill in <code>${file}</code>. Your mentor reads it in the pull request:</p><ul class="prose">${deliver}</ul>
+      <p>Screenshots and photos go into <code>course/submissions/img/</code>.</p>
+      <div class="commit"><pre><code id="submit-cmd">${esc(cmds)}</code></pre><button type="button" id="copy-submit">Copy</button></div>
+      <ol class="prose">
+        <li>On GitHub, click <b>Compare &amp; pull request</b>. Base: <code>main</code>. Title: <b>${esc(title)}</b>.</li>
+        <li>Your mentor reviews it. <b>Approved and merged</b> = the step is accepted. <b>Changes requested</b> = read the comments, fix, then <code>git commit</code> and <code>git push</code> again on the same branch. The pull request updates by itself.</li>
+        <li>After the merge: <code>git switch main</code>, <code>git pull</code>, and start the next step.</li>
+      </ol>`;
+  }
+
+  const body = $("#step-body");
+  body.innerHTML = `
+    <div class="eyebrow">Step ${n} · ${s.phase}</div>
+    <h1>${s.title}</h1>
+    <div class="meta"><span>About ${s.time}</span>${s.gate ? '<span class="badge">Mentor check</span>' : ""}</div>
+    <div class="goal"><b>Goal</b>${s.goal}</div>
+    ${s.gate ? '<div class="gate"><b>Mentor check:</b> this step involves money, safety or a big decision. Discuss it with your mentor before you go on.</div>' : ""}
+    <h2>Why it matters</h2><div class="prose">${ref(s.why)}</div>
+    <h2>Tasks</h2><ol class="tasks prose">${s.tasks.map(t => `<li><div>${ref(t)}</div></li>`).join("")}</ol>
+    <h2>Stuck?</h2><div>${hints}${answers}</div>
+    ${trouble}
+    ${learn}
+    <h2>Accepted when</h2>
+    <p class="small">Your mentor checks these before accepting the step. Tick them for yourself (saved in this browser).</p>
+    <ul class="checks">${checks}</ul>
+    <h2>Submit for review</h2>
+    ${submit}
+    <nav class="pager">
+      ${current > 0 ? `<button type="button" id="prev">← ${pad(current - 1)} · ${STEPS[current - 1].title}</button>` : "<span></span>"}
+      ${current < STEPS.length - 1 ? `<button type="button" class="primary" id="next">${pad(current + 1)} · ${STEPS[current + 1].title} →</button>` : ""}
+    </nav>`;
+
+  body.querySelectorAll("[data-check]").forEach(cb => cb.addEventListener("change", () => {
+    state.done[cb.dataset.check] = cb.checked;
+    saveLocal(); renderTray(); renderProgress();
+  }));
+  const cp = $("#copy-submit");
+  if (cp) cp.addEventListener("click", () => {
+    navigator.clipboard.writeText($("#submit-cmd").textContent).then(() => { cp.textContent = "Copied"; setTimeout(() => cp.textContent = "Copy", 1500); })
+      .catch(() => { const r = document.createRange(); r.selectNodeContents($("#submit-cmd")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); });
+  });
+  const prev = $("#prev"), next = $("#next");
+  if (prev) prev.addEventListener("click", () => go(current - 1));
+  if (next) next.addEventListener("click", () => go(current + 1));
+}
+
+function go(i) { location.hash = "step-" + i; }
+function fromHash() {
+  const m = /^#step-(\d+)$/.exec(location.hash);
+  const i = m ? Math.min(Math.max(parseInt(m[1], 10), 0), STEPS.length - 1) : 0;
+  const changed = i !== current; current = i;
+  renderTray(); renderStep(); renderProgress();
+  if (changed) window.scrollTo({ top: 0 });
+}
+
+/* ---------------------------------------------------------------------------
+   Start
+--------------------------------------------------------------------------- */
+loadLocal();
+window.addEventListener("hashchange", fromHash);
+$("#picker").addEventListener("change", e => go(e.target.value));
+fromHash();
+
+</script>
+</body></html>
