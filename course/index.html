@@ -574,7 +574,7 @@ git branch -d step-02</code></pre>`
     <li><b>Water</b>: the IP rating says how well a box is sealed. <b>IP65</b> means dust-tight and safe against rain from any direction.</li>
     <li><b>Material</b>: plastic, never metal (metal blocks Wi-Fi). Outdoors it must resist sunlight (UV): ABS with UV protection, ASA or polycarbonate.</li>
     <li><b>Mounting</b>: screw bosses inside for the board, and a way to fix the box to a wall or pole.</li>
-    <li><b>Openings</b>: cable glands for the temperature probe and the charging cable (from step {{s11}}), access to the power switch and Mode jumper.</li>
+    <li><b>Openings</b>: for cables that leave the box (the charging cable from step {{s11}}, maybe a temperature probe: you decide that in step {{therm}}), and access to the power switch and Mode jumper.</li>
     <li><b>Air and condensation</b>: the BMP280 measures air pressure, so the box must not be airtight. A small breathable vent plug lets air (and pressure) in, but not water.</li>
     <li><b>Price</b> at 1 piece and at your series quantity.</li>
   </ul>`,
@@ -597,18 +597,54 @@ git branch -d step-02</code></pre>`
 <li>Keep space around each hole: no tracks, copper pour or parts under the screw head (about 6–7 mm across for M3).</li>
 </ul>`,
     `<p>Check the fit on paper. Print the PCB at 1:1 scale (PCB Editor → <b>File → Plot</b> as PDF, scale 1, with the <code>Edge.Cuts</code> layer), cut it out and put it in the sample box. Every hole must be over a boss. Measure the printout with a ruler first: some printers scale the page.</p>`,
-    `<p>Plan where the sensors go: the DS18B20 probe outside the box in the shade, through a cable gland (connector <code>J4</code>); the BMP280 inside, with a vent plug in the box. Write the plan in your submission file. DRC.</p>`
+    `<p>Plan for the pressure sensor: the BMP280 stays inside the box, so the box needs a small breathable vent plug. Leave space for one more cable entry: in step {{therm}} you decide where the thermometer goes. DRC.</p>`
   ],
   hints: [
     `Box datasheets have a drawing with the inside dimensions and the boss positions. Measure twice: a 1 mm error on a hole is enough to stop a screw.`,
     `If moving a hole makes it hit a track or a part, move the track or part, not the hole. The box decides where the holes go.`,
     `Watch out: shops often list the <b>outside</b> size. The inside is several mm smaller, and the bosses take space too.`,
     `Keep the ESP antenna end of the board away from the box walls' screws and any metal, and don't put it right next to the battery.`,
-    `A temperature sensor in the sun can read 10 °C too high. Weather stations keep the thermometer in a white, shaded, ventilated shield. Search for "radiation shield" or "Stevenson screen".`,
     `Changing <code>Edge.Cuts</code>: delete the old outline lines and draw new ones on the Edge.Cuts layer, or edit the existing lines' end points with <kbd>E</kbd>. The outline must be one closed shape. DRC tells you if it isn't.`
   ],
-  done: ["Requirements written in my submission file", "2–3 boxes compared in a table", "My mentor agreed and we bought a sample box", "Board outline fits the box with space on every side", "Mounting holes H1–H4 sit exactly on the box's bosses (paper test done)", "DRC clean", "Sensor placement plan in my submission file"],
+  done: ["Requirements written in my submission file", "2–3 boxes compared in a table", "My mentor agreed and we bought a sample box", "Board outline fits the box with space on every side", "Mounting holes H1–H4 sit exactly on the box's bosses (paper test done)", "DRC clean"],
   commit: `git commit -am "Fit board outline and mounting holes to the enclosure"`
+},
+{
+  id: "therm", phase: "Product", title: "Where does the thermometer go?", time: "2–3 h", gate: true,
+  goal: "You decide where the temperature sensor goes and how it is connected, and you can explain every choice.",
+  why: `<p>Measuring the air temperature correctly is the main job of a weather station. It is harder than it sounds. Inside a closed box, the sun and the electronics warm the air, so the reading can be several degrees too high. Real weather stations measure in the shade, with air moving past the sensor, inside a white shield.</p>
+  <p>Your board already has two places for a DS18B20, both on the same OneWire line:</p>
+  <ul>
+    <li><code>U3</code>: a DS18B20 soldered on the board (TO-92 package).</li>
+    <li><code>J4</code>: a 3-pin connection for a DS18B20 on a cable. Waterproof probes in a metal tube are common.</li>
+  </ul>
+  <p>There is no single right answer in this step. You decide, and you explain why. Your mentor will ask questions in the pull request.</p>`,
+  tasks: [
+    `<p>Find out how weather stations measure air temperature. Search for "radiation shield" and "Stevenson screen". Write down at least <b>three things that make a reading wrong</b>.</p>`,
+    `<p>Decide, and give a reason for each:</p>
+<ol>
+<li><b>Inside or outside?</b> Sensor inside the box, outside the box, or the whole box inside a shield?</li>
+<li><b>If outside: how does the cable leave the box?</b> Options: a <b>cable gland</b> (in Ukrainian: гермоввід), a <b>waterproof connector</b> in the box wall, or a hole sealed with silicone.</li>
+<li><b>Inside the box: how does the cable connect to the board?</b> Soldered, a screw terminal, or a connector? (You choose the exact connector type in step {{con}}.)</li>
+<li><b>What happens to <code>U3</code></b>, the sensor on the board? Keep it, leave it off the board, or use both sensors?</li>
+<li><b>How long is the cable</b>, and does <code>R5</code> (10 kΩ pull-up) still work at that length?</li>
+<li><b>Water:</b> from which side does the cable leave the box, so rain doesn't run in along it?</li>
+</ol>`,
+    `<p>For question 2, make a comparison table with at least two options: price, how well it keeps water out, can the probe be replaced without opening the box, how hard it is to assemble.</p>`,
+    `<p>Recommended experiment: put any thermometer (or the v1 board) in a closed box in the sun for 30 minutes, and another one in the shade outside. Write down both temperatures every 10 minutes.</p>`,
+    `<p>Discuss your decisions with your mentor in the pull request before you change the design.</p>`,
+    `<p>Change the design to match your decisions: the schematic (for example <code>U3</code> or <code>R5</code>), the PCB, and the enclosure plan from step {{enc}}. Make a parts list: probe, gland or connector, cable. ERC, DRC.</p>`
+  ],
+  hints: [
+    `Useful search words: "DS18B20 waterproof probe", "cable gland PG7" or "cable gland M12", "IP67 panel connector", "GX12 connector".`,
+    `A cable gland only seals when the cable is round and its diameter is inside the gland's range. Check both numbers before you buy.`,
+    `A <b>drip loop</b>: let the cable hang a little lower than the point where it enters the box, then come up. Water drips off at the lowest point instead of running inside.`,
+    `Look up the pull-up resistor value the DS18B20 datasheet recommends, and what it says about long cables. Compare it with <code>R5</code>.`,
+    `Two DS18B20s on one OneWire line is allowed: each has its own 64-bit address. But the firmware reads <code>getTempCByIndex(0)</code>, "the first sensor found". Which one is first? If you keep both, the firmware must tell them apart (step {{s12}}).`,
+    `A sensor soldered on the board is cheap and easy to assemble. Ask yourself what it really measures.`
+  ],
+  done: ["Three things that make a temperature reading wrong are in my submission file", "A decision with a reason for each of the 6 questions", "A comparison table for how the cable leaves the box", "My mentor agreed in the pull request", "Schematic and PCB match my decisions, ERC and DRC clean", "Parts list for the thermometer"],
+  commit: null
 },
 {
   id: "con", phase: "Product", title: "Choose the connectors", time: "2–3 h",
@@ -619,7 +655,7 @@ git branch -d step-02</code></pre>`
   <tr><th>Ref</th><th>What</th><th>Now</th></tr>
   <tr><td><code>J2</code></td><td>Pressure sensor (BMP280 module)</td><td>4-pin socket, 2.54 mm</td></tr>
   <tr><td><code>J5</code></td><td>Extra I2C port</td><td>4-pin socket, 2.54 mm</td></tr>
-  <tr><td><code>J4</code></td><td>Temperature probe (DS18B20 on a cable)</td><td>3-pin header, 2.54 mm</td></tr>
+  <tr><td><code>J4</code></td><td>Temperature probe on a cable (if you chose one in step {{therm}})</td><td>3-pin header, 2.54 mm</td></tr>
   <tr><td><code>J3</code></td><td>UART for flashing</td><td>JST PH 3-pin, 2.0 mm</td></tr>
   <tr><td><code>D1</code>, <code>D2</code></td><td>LEDs (off the board, e.g. in the box lid)</td><td>2-pin headers</td></tr>
   <tr><td><code>SW3</code>, <code>SW4</code>, <code>SW5</code></td><td>Mode jumper, Protection jumper, power switch</td><td>2-pin headers</td></tr>
@@ -653,7 +689,7 @@ git branch -d step-02</code></pre>`
   answers: `<p>One possible set, not the only right one:</p>
 <ul>
 <li>Charging input: JST PH 2-pin horizontal SMD (keyed, like v1).</li>
-<li>Temperature probe: JST PH 3-pin, so it can't go into the 2-pin charging socket.</li>
+<li>Temperature probe (if it is on a cable): JST PH 3-pin, so it can't go into the 2-pin charging socket.</li>
 <li>BMP280: JST SH 4-pin (Qwiic) if the module has it, otherwise JST PH 4-pin.</li>
 <li>UART: keep JST PH 3-pin, or a 3-pin header (only you use it).</li>
 <li>LEDs: one 4-pin connector for both LEDs, so it can't be confused with the 2-pin charging socket.</li>
@@ -841,7 +877,8 @@ const DELIVER = {
   s9: ["Your resistor values and the calculation: ADC voltage at 4.2 V and 4.3 V, and the current", "B+ or VBAT, and why", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
   s10: ["Your datasheet table for the HT7333 and one alternative", "Your decision and the reason", "If you changed it: the ERC and DRC results"],
   s11: ["Pros and cons of options A, B and C", "The decision and the reason (discuss it with your mentor in the pull request)", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
-  enc: ["Your requirements list", "A comparison table of 2–3 boxes, with links and prices", "The box you chose, and why", "A photo of the paper test in the sample box: <code>img/step-NN-paper.jpg</code>", "Your sensor placement plan", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
+  enc: ["Your requirements list", "A comparison table of 2–3 boxes, with links and prices", "The box you chose, and why", "A photo of the paper test in the sample box: <code>img/step-NN-paper.jpg</code>", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
+  therm: ["Three things that make an air temperature reading wrong", "Your decisions for questions 1–6, each with a reason", "A comparison table for how the cable leaves the box", "Your experiment results (if you did it)", "The parts list: probe, gland or connector, cable length", "What changed in the schematic and PCB, and the DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
   con: ["Your connection table, with the chosen connector and the reason for each", "Which connections could be confused, and how you prevented it", "The mating parts list", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
   s12: ["What you changed in the code, and why", "A screenshot of a successful Verify (compile): <code>img/step-NN-compile.png</code>"],
   s13: ["The BOM exported as CSV: <code>course/submissions/step-NN-bom.csv</code>", "Which parts the factory solders and which you solder by hand", "The parts cost per board"],

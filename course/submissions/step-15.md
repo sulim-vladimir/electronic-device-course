@@ -1,6 +1,6 @@
-# Step 15: Update the firmware
+# Step 15: Choose the connectors
 
-**Goal:** The firmware matches the new board and compiles without errors.
+**Goal:** Every cable that goes on or off the board has a connector you chose on purpose, and nothing can be plugged in the wrong way.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,11 +11,19 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. What you changed in the code, and why
+### 1. Your connection table, with the chosen connector and the reason for each
 
 _(your answer)_
 
-### 2. A screenshot of a successful Verify (compile): `img/step-15-compile.png`
+### 2. Which connections could be confused, and how you prevented it
+
+_(your answer)_
+
+### 3. The mating parts list
+
+_(your answer)_
+
+### 4. The DRC report: `course/submissions/step-15-drc.rpt`
 
 _(your answer)_
 
@@ -23,10 +31,12 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Arduino IDE with the esp8266 core and libraries is installed
-- [ ] ONE_WIRE_BUS is 2
-- [ ] Battery voltage is read and sent
-- [ ] It compiles without errors
+- [ ] My connection table is in my submission file
+- [ ] Every connection has a chosen connector and a reason
+- [ ] No two connections can be swapped by mistake
+- [ ] Connectors and mating parts are in stock
+- [ ] Schematic and PCB updated, ERC and DRC clean
+- [ ] Mating parts list written
 
 ## Questions for my mentor
 

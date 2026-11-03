@@ -1,6 +1,6 @@
-# Step 18: Final review and order
+# Step 18: Make the factory files and get a quote
 
-**Goal:** The design passes a final check, your mentor agrees, and 5 prototype boards are ordered.
+**Goal:** You have the files the factory needs, and JLCPCB shows a correct preview and a price.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,15 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. The final checklist: each item, and how you checked it
+### 1. The production files (the folder the plugin made), committed in the repo
 
 _(your answer)_
 
-### 2. 3D screenshots of the top and bottom
+### 2. Screenshots of the JLCPCB placement preview and the price
 
 _(your answer)_
 
-### 3. The total price
+### 3. Which parts needed a rotation fix
 
 _(your answer)_
 
@@ -27,10 +27,11 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Every item on the checklist passes
-- [ ] My mentor reviewed and agreed
-- [ ] Tag v2-proto-1 is pushed
-- [ ] Order placed (number in my submission file)
+- [ ] Design rules set and DRC clean
+- [ ] Gerbers checked in the Gerber Viewer
+- [ ] JLCPCB accepted Gerbers, BOM and CPL
+- [ ] Every part placed and rotated correctly in the preview
+- [ ] Price screenshot in my submission file
 
 ## Questions for my mentor
 

@@ -1,6 +1,6 @@
-# Step 17: Make the factory files and get a quote
+# Step 17: Pick real parts for JLCPCB
 
-**Goal:** You have the files the factory needs, and JLCPCB shows a correct preview and a price.
+**Goal:** Every part the factory solders has an exact part number that is in stock.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,15 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. The production files (the folder the plugin made), committed in the repo
+### 1. The BOM exported as CSV: `course/submissions/step-17-bom.csv`
 
 _(your answer)_
 
-### 2. Screenshots of the JLCPCB placement preview and the price
+### 2. Which parts the factory solders and which you solder by hand
 
 _(your answer)_
 
-### 3. Which parts needed a rotation fix
+### 3. The parts cost per board
 
 _(your answer)_
 
@@ -27,11 +27,9 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Design rules set and DRC clean
-- [ ] Gerbers checked in the Gerber Viewer
-- [ ] JLCPCB accepted Gerbers, BOM and CPL
-- [ ] Every part placed and rotated correctly in the preview
-- [ ] Price screenshot in my submission file
+- [ ] Every part is marked factory or hand-solder
+- [ ] Every factory part has an LCSC number that is in stock
+- [ ] Parts cost per board is in my submission file
 
 ## Questions for my mentor
 

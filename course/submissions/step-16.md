@@ -1,6 +1,6 @@
-# Step 16: Pick real parts for JLCPCB
+# Step 16: Update the firmware
 
-**Goal:** Every part the factory solders has an exact part number that is in stock.
+**Goal:** The firmware matches the new board and compiles without errors.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,15 +11,11 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. The BOM exported as CSV: `course/submissions/step-16-bom.csv`
+### 1. What you changed in the code, and why
 
 _(your answer)_
 
-### 2. Which parts the factory solders and which you solder by hand
-
-_(your answer)_
-
-### 3. The parts cost per board
+### 2. A screenshot of a successful Verify (compile): `img/step-16-compile.png`
 
 _(your answer)_
 
@@ -27,9 +23,10 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Every part is marked factory or hand-solder
-- [ ] Every factory part has an LCSC number that is in stock
-- [ ] Parts cost per board is in my submission file
+- [ ] Arduino IDE with the esp8266 core and libraries is installed
+- [ ] ONE_WIRE_BUS is 2
+- [ ] Battery voltage is read and sent
+- [ ] It compiles without errors
 
 ## Questions for my mentor
 

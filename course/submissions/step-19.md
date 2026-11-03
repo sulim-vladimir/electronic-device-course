@@ -1,6 +1,6 @@
-# Step 19: Bring the prototype to life
+# Step 19: Final review and order
 
-**Goal:** Every function of the prototype is tested, and every problem is written down.
+**Goal:** The design passes a final check, your mentor agrees, and 5 prototype boards are ordered.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,19 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. A measurements table: 3V3, sleep current, battery voltage (board vs multimeter)
+### 1. The final checklist: each item, and how you checked it
 
 _(your answer)_
 
-### 2. The result of each function test
+### 2. 3D screenshots of the top and bottom
 
 _(your answer)_
 
-### 3. `meteo-v2/ISSUES.md` with every problem you found
-
-_(your answer)_
-
-### 4. Photos of the assembled board
+### 3. The total price
 
 _(your answer)_
 
@@ -31,11 +27,10 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Visual check and short check done
-- [ ] 3V3 measured correctly
-- [ ] Firmware flashed and every function tested
-- [ ] Sleep current measured
-- [ ] ISSUES.md lists every problem
+- [ ] Every item on the checklist passes
+- [ ] My mentor reviewed and agreed
+- [ ] Tag v2-proto-1 is pushed
+- [ ] Order placed (number in my submission file)
 
 ## Questions for my mentor
 

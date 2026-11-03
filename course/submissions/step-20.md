@@ -1,6 +1,6 @@
-# Step 20: From prototype to small series
+# Step 20: Bring the prototype to life
 
-**Goal:** A plan to make and sell a small series, agreed with your mentor.
+**Goal:** Every function of the prototype is tested, and every problem is written down.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,19 +11,19 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. The test procedure for each unit
+### 1. A measurements table: 3V3, sleep current, battery voltage (board vs multimeter)
 
 _(your answer)_
 
-### 2. The user manual draft
+### 2. The result of each function test
 
 _(your answer)_
 
-### 3. The cost per unit and the price
+### 3. `meteo-v2/ISSUES.md` with every problem you found
 
 _(your answer)_
 
-### 4. The field test results
+### 4. Photos of the assembled board
 
 _(your answer)_
 
@@ -31,11 +31,11 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] v3 problems fixed and reviewed
-- [ ] Test procedure written
-- [ ] User manual draft written
-- [ ] Cost per unit and price in my submission file
-- [ ] Mentor agreed with the selling plan
+- [ ] Visual check and short check done
+- [ ] 3V3 measured correctly
+- [ ] Firmware flashed and every function tested
+- [ ] Sleep current measured
+- [ ] ISSUES.md lists every problem
 
 ## Questions for my mentor
 
