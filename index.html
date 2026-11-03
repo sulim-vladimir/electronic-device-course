@@ -219,7 +219,7 @@ const STEPS = [
     `<p>Відкрий <code>submissions/step-00.md</code> і напиши, чого ти найбільше хочеш навчитися в цьому проєкті. Ти надішлеш це наставнику на кроці {{s2}}.</p>`
   ],
   hints: [
-    `Не можеш знайти папку? Запитай наставника. На кроці {{s2}} ти все одно завантажиш власну копію через git.`
+    `Це та папка, куди ти зробив git clone (README, розділ «Перші кроки»). Не пам'ятаєш, де вона? У VS Code: <b>File → Open Recent</b>. Або запитай наставника.`
   ],
   done: ["Я прочитав, як працює курс", "Я знаю, де лежать pcb і firmware", "Я написав у step-00.md, чого хочу навчитися"]
 },
@@ -263,11 +263,14 @@ step-04  ●── коміт ── коміт       твоя гілка → pu
     `<p>Перевір, що git встановлено: <code>git --version</code>. Якщо ні, встанови з <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git-scm.com</a>. Потім скажи git, хто ти (своє ім'я та пошта):</p>
 <pre><code>git config --global user.name "Твоє Ім'я"
 git config --global user.email "you@example.com"</code></pre>`,
-    `<p>Завантаж (clone) свій репозиторій:</p>
+    `<p>Репозиторій ти вже завантажив (README, розділ «Перші кроки»). Відкрий термінал у його папці (у VS Code: <b>Terminal → New Terminal</b>) і переконайся, що все актуально:</p>
+<pre><code>git switch main
+git pull
+git log --oneline -5</code></pre>
+<p>Якщо папки ще немає, зроби clone зараз:</p>
 <pre><code>git clone https://github.com/sulim-vladimir/electronic-device-course.git
-cd electronic-device-course</code></pre>
-<p>Якщо папка в тебе вже є, зайди в неї і виконай <code>git switch main</code> та <code>git pull</code>.</p>`,
-    `<p>Прийми запрошення від наставника до репозиторію: GitHub надішле лист, або запрошення буде на github.com у сповіщеннях (Notifications). Без цього ти не зможеш надсилати свої гілки (push).</p>`,
+cd electronic-device-course</code></pre>`,
+    `<p>Перевір, що ти прийняв запрошення від наставника до репозиторію (README, «Перші кроки»): на сторінці репозиторію на GitHub тебе має бути видно серед учасників. Без цього ти не зможеш надсилати свої гілки (push).</p>`,
     `<p>Почни цей крок в окремій гілці:</p>
 <pre><code>git switch -c step-02</code></pre>`,
     `<p>KiCad створює файли, яким не місце в git: файли блокування, резервні копії, кеш. Файл <code>pcb/.gitignore</code> каже git, що ігнорувати, але зараз у ньому лише один рядок (<code>.history</code>, папка VS Code). Додай у нього такі рядки:</p>
