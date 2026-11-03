@@ -1,7 +1,7 @@
-// Creates course/submissions/step-NN.md (in Ukrainian) for every step in course/index.html.
+// Creates submissions/step-NN.md (in Ukrainian) for every step in index.html.
 // Existing files are never overwritten (they hold the student's answers).
 //
-//   node course/tools/make-submissions.js
+//   node tools/make-submissions.js
 //
 // Run it again after adding steps to the course.
 
@@ -41,7 +41,7 @@ STEPS.forEach((s, i) => {
 <!--
 Наставник читатиме цей файл у твоєму pull request.
 Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
-Зображення: клади їх у course/submissions/img/ і показуй так:
+Зображення: клади їх у submissions/img/ і показуй так:
 ![3D-перегляд](img/step-${n}-3d.png)
 -->
 

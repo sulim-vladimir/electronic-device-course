@@ -8,7 +8,7 @@
 
 ## Перед тим як просити перевірку
 
-- [ ] Я заповнив `course/submissions/step-NN.md`
-- [ ] Скріншоти і звіти лежать у `course/submissions/`
+- [ ] Я заповнив `submissions/step-NN.md`
+- [ ] Скріншоти і звіти лежать у `submissions/`
 - [ ] Я запустив ERC і DRC (якщо змінював схему чи плату)
 - [ ] Я сам переглянув **Files changed**
