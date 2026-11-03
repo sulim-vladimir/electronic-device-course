@@ -1,37 +1,37 @@
-# Step 23: Learn to solder (while the boards travel)
+# Крок 23: Навчись паяти (поки плати їдуть)
 
-**Goal:** You can make good through-hole solder joints, fix a solder bridge, and replace a small SMD part.
+**Мета:** Ти вмієш робити хороші паяні з'єднання вивідних компонентів, прибирати перемичку з припою і замінювати маленький SMD-компонент.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-23-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-23-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. Photos of your best and worst joints: `img/step-23-good.jpg`, `img/step-23-bad.jpg`
+### 1. Фото найкращих і найгірших з'єднань: `img/step-23-good.jpg`, `img/step-23-bad.jpg`
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. What is wrong with the bad joints, and how you fixed them
+### 2. Що не так із поганими з'єднаннями і як ти їх виправив
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. What you practised on
+### 3. На чому ти тренувався
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] At least 20 practice joints
-- [ ] I removed a solder bridge with braid
-- [ ] I soldered one 0805 part
-- [ ] Photos of good and bad joints, with explanations
+- [ ] Щонайменше 20 тренувальних з'єднань
+- [ ] Я прибрав перемичку з припою обплеткою
+- [ ] Я припаяв один компонент 0805
+- [ ] Фото хороших і поганих з'єднань із поясненнями
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

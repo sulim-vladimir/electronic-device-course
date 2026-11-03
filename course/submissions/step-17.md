@@ -1,43 +1,43 @@
-# Step 17: Choose the connectors
+# Крок 17: Вибери роз'єми
 
-**Goal:** Every cable that goes on or off the board has a connector you chose on purpose, and nothing can be plugged in the wrong way.
+**Мета:** Кожен кабель, що підключається до плати, має роз'єм, вибраний свідомо, і нічого не можна підключити неправильно.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-17-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-17-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. Your connection table, with the chosen connector and the reason for each
+### 1. Таблиця з'єднань: вибраний роз'єм і причина для кожного
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. Which connections could be confused, and how you prevented it
+### 2. Які з'єднання можна було б переплутати і як ти цьому запобіг
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. The mating parts list
+### 3. Список відповідних частин
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 4. The DRC report: `course/submissions/step-17-drc.rpt`
+### 4. Звіт DRC: `course/submissions/step-17-drc.rpt`
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] My connection table is in my submission file
-- [ ] Every connection has a chosen connector and a reason
-- [ ] No two connections can be swapped by mistake
-- [ ] Connectors and mating parts are in stock
-- [ ] Schematic and PCB updated, ERC and DRC clean
-- [ ] Mating parts list written
+- [ ] Таблиця з'єднань є у файлі здачі
+- [ ] Для кожного з'єднання вибрано роз'єм і пояснено чому
+- [ ] Жодні два з'єднання не можна переплутати
+- [ ] Роз'єми і відповідні частини є на складі
+- [ ] Схему і плату оновлено, ERC і DRC чисті
+- [ ] Список відповідних частин записано
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

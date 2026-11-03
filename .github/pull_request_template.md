@@ -1,14 +1,14 @@
-## Step
+## Крок
 
-Step NN: (title from the course)
+Крок NN: (назва з курсу)
 
-## What I did
+## Що я зробив
 
 -
 
-## Before asking for review
+## Перед тим як просити перевірку
 
-- [ ] I filled in `course/submissions/step-NN.md`
-- [ ] Screenshots and reports are in `course/submissions/`
-- [ ] I ran ERC and DRC (if I changed the schematic or PCB)
-- [ ] I looked at **Files changed** myself
+- [ ] Я заповнив `course/submissions/step-NN.md`
+- [ ] Скріншоти і звіти лежать у `course/submissions/`
+- [ ] Я запустив ERC і DRC (якщо змінював схему чи плату)
+- [ ] Я сам переглянув **Files changed**

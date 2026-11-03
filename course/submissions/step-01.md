@@ -1,33 +1,33 @@
-# Step 01: Check your tools
+# Крок 01: Перевір інструменти
 
-**Goal:** Your KiCad is version 10 and the v2 project opens without errors.
+**Мета:** Твій KiCad версії 10, і проєкт v2 відкривається без помилок.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-01-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-01-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. Your KiCad version (Help → About KiCad)
+### 1. Твоя версія KiCad (Help → About KiCad)
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. A screenshot of the board in the 3D viewer: `img/step-01-3d.png`
+### 2. Скріншот плати в 3D-перегляді: `img/step-01-3d.png`
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] My KiCad is version 10 or newer
-- [ ] KiCad is set to English
-- [ ] The v2 project opens without missing-library errors
-- [ ] The projectmeteo folder is open in VS Code
+- [ ] Мій KiCad версії 10 або новішої
+- [ ] KiCad переключено на англійську
+- [ ] Проєкт v2 відкривається без помилок про бібліотеки
+- [ ] Папка electronic-device-course відкрита у VS Code
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

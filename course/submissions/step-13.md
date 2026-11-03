@@ -1,36 +1,36 @@
-# Step 13: Is the regulator strong enough?
+# Крок 13: Чи вистачить сили стабілізатору?
 
-**Goal:** You choose the voltage regulator with real numbers from datasheets.
+**Мета:** Ти вибираєш стабілізатор напруги за реальними числами з даташитів.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-13-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-13-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. Your datasheet table for the HT7333 and one alternative
+### 1. Таблиця з даташитів для HT7333 і однієї альтернативи
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. Your decision and the reason
+### 2. Твоє рішення і причина
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. If you changed it: the ERC and DRC results
+### 3. Якщо замінив: результати ERC і DRC
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] Datasheet table for HT7333 and one alternative
-- [ ] Decision and reason written
-- [ ] If changed: schematic and PCB updated, ERC and DRC clean
+- [ ] Таблиця з даташитів для HT7333 і однієї альтернативи
+- [ ] Рішення і причину записано
+- [ ] Якщо замінено: схему і плату оновлено, ERC і DRC чисті
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

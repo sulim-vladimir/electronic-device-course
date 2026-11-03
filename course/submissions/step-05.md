@@ -1,36 +1,36 @@
-# Step 05: Read your own schematic
+# Крок 05: Прочитай власну схему
 
-**Goal:** You can explain what every part on the board does.
+**Мета:** Ти можеш пояснити, що робить кожен компонент на платі.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-05-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-05-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. A table: every part and what it does, block by block
+### 1. Таблиця: кожен компонент і що він робить, блок за блоком
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. Your answers to questions 1–6, with calculations
+### 2. Відповіді на питання 1–6 з розрахунками
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. One thing you would change or don't understand
+### 3. Одна річ, яку ти змінив би або не розумієш
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] I wrote what every part does
-- [ ] I answered all 6 questions
-- [ ] I wrote down one thing I would change or don't understand
+- [ ] Я написав, що робить кожен компонент
+- [ ] Я відповів на всі 6 питань
+- [ ] Я записав одну річ, яку змінив би або не розумію
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

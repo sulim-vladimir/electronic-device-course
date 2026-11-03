@@ -1,51 +1,51 @@
-# Step 16: Where does the thermometer go?
+# Крок 16: Де буде термометр?
 
-**Goal:** You decide where the temperature sensor goes and how it is connected, and you can explain every choice.
+**Мета:** Ти вирішуєш, де стоятиме датчик температури і як його підключити, і можеш пояснити кожен вибір.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-16-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-16-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. Three things that make an air temperature reading wrong
+### 1. Три речі, які роблять вимірювання температури повітря неправильним
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. Your decisions for questions 1–6, each with a reason
+### 2. Твої рішення для питань 1–6, кожне з поясненням
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. A comparison table for how the cable leaves the box
+### 3. Порівняльна таблиця: як кабель виходить із корпусу
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 4. Your experiment results (if you did it)
+### 4. Результати експерименту (якщо робив)
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 5. The parts list: probe, gland or connector, cable length
+### 5. Список компонентів: щуп, гермоввід або роз'єм, довжина кабелю
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 6. What changed in the schematic and PCB, and the DRC report: `course/submissions/step-16-drc.rpt`
+### 6. Що змінилося на схемі й платі, і звіт DRC: `course/submissions/step-16-drc.rpt`
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] Three things that make a temperature reading wrong are in my submission file
-- [ ] A decision with a reason for each of the 6 questions
-- [ ] A comparison table for how the cable leaves the box
-- [ ] My mentor agreed in the pull request
-- [ ] Schematic and PCB match my decisions, ERC and DRC clean
-- [ ] Parts list for the thermometer
+- [ ] Три речі, що псують вимірювання температури, є у файлі здачі
+- [ ] Рішення з поясненням для кожного з 6 питань
+- [ ] Порівняльна таблиця: як кабель виходить із корпусу
+- [ ] Наставник погодився в pull request
+- [ ] Схема і плата відповідають рішенням, ERC і DRC чисті
+- [ ] Список компонентів для термометра
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

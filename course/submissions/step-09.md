@@ -1,35 +1,35 @@
-# Step 09: Detective work: find the short
+# Крок 09: Детективна робота: знайди замикання
 
-**Goal:** You find a real bug on the board and explain why it would break the station.
+**Мета:** Ти знаходиш справжню помилку на платі й пояснюєш, чому вона зламала б станцію.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-09-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-09-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. Which two nets touch, and at which pad
+### 1. Які два кола торкаються і на якій площадці
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. Why it would break the station
+### 2. Чому це зламало б станцію
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. A screenshot of the short: `img/step-09-short.png`
+### 3. Скріншот замикання: `img/step-09-short.png`
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] I found the short and the two nets
-- [ ] I explained in my submission file why it would break the station
+- [ ] Я знайшов замикання і обидва кола
+- [ ] Я пояснив у файлі здачі, чому воно зламало б станцію
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

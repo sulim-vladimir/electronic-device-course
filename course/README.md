@@ -1,53 +1,54 @@
-# Meteo Station Course
+# Курс «Метеостанція»
 
-A step-by-step course that takes the weather station from the v2 schematic to assembled boards from JLCPCB.
+Покроковий курс: від схеми v2 до зібраних плат із заводу JLCPCB.
 
-- **Open the course:** double-click [`index.html`](index.html) (works offline), or use the online copy: https://claude.ai/artifact/U6qwXX3tTCxCMi7kED1e23
-- **Your answers:** one file per step in [`submissions/`](submissions/), already prepared for you.
-- **Practice board:** your practice KiCad project goes in `practice/` (the practice board step).
+- **Відкрити курс:** двічі клацни [`index.html`](index.html). Працює без інтернету.
+- **Твої відповіді:** по одному файлу на крок у [`submissions/`](submissions/), уже підготовлені.
+- **Тренувальна плата:** твій тренувальний проєкт KiCad буде в `practice/` (крок «Тренувальна плата»).
+- **Довідка в курсі:** «Схема v2: що в ній і чому» і словник English → Українська.
 
-## How a step works
+## Як проходить крок
 
-1. Start from an up-to-date `main` and make a branch for the step:
+1. Почни з актуального `main` і створи гілку для кроку:
    ```
    git switch main
    git pull
-   git switch -c step-04
+   git switch -c step-06
    ```
-2. Do the tasks from the course page.
-3. Fill in `course/submissions/step-04.md`. Screenshots go in `course/submissions/img/`.
-4. Commit and push:
+2. Виконай завдання зі сторінки курсу.
+3. Заповни `course/submissions/step-06.md`. Скріншоти клади в `course/submissions/img/`.
+4. Зроби коміт і push:
    ```
    git status
    git add -A
-   git commit -m "Step 04: How deep sleep works"
-   git push -u origin step-04
+   git commit -m "Крок 06: Як працює глибокий сон"
+   git push -u origin step-06
    ```
-5. On GitHub, open a **pull request** from `step-04` into `main`, titled like the commit.
-6. Your mentor reviews it:
-   - **Approved and merged:** the step is accepted. Run `git switch main` and `git pull`, then start the next step.
-   - **Changes requested:** read the comments, fix, commit and push again on the same branch. The pull request updates by itself.
+5. На GitHub відкрий **pull request** із `step-06` у `main` з такою самою назвою, як коміт.
+6. Наставник перевіряє:
+   - **Approved і merged:** крок прийнято. Виконай `git switch main` і `git pull`, потім починай наступний крок.
+   - **Changes requested:** прочитай коментарі, виправ, зроби коміт і push у ту саму гілку. Pull request оновиться сам.
 
-**One step at a time.** KiCad files are hard to merge, so only start the next step after the last one is merged.
+**По одному кроку.** Файли KiCad погано зливаються, тому наступний крок починай лише після того, як попередній злито.
 
-## For the mentor: how to review a step
+## Для наставника: як перевіряти крок
 
-1. On GitHub, open **Pull requests** and pick "Step NN: ...".
-2. **Files changed** tab:
-   - Read `course/submissions/step-NN.md`. The "Accepted when" list at the bottom is what to check.
-   - Open screenshots and the DRC report (`step-NN-drc.rpt`) if the step has them.
-   - KiCad files show as long text diffs. You don't need to read them line by line. Check the screenshots and DRC report, or open the branch in KiCad yourself:
+1. На GitHub відкрий **Pull requests** і вибери «Крок NN: ...».
+2. Вкладка **Files changed**:
+   - Прочитай `course/submissions/step-NN.md`. Список «Прийнято, коли» внизу — це те, що треба перевірити.
+   - Відкрий скріншоти і звіт DRC (`step-NN-drc.rpt`), якщо крок їх має.
+   - Файли KiCad показуються як довгі текстові зміни. Читати їх рядок за рядком не потрібно: дивись скріншоти і звіт DRC або відкрий гілку в KiCad сам:
      ```
      git fetch
      git switch step-NN
      ```
-3. Click **+** on any line to leave a comment there.
-4. Finish with **Review changes**:
-   - **Approve**, then **Merge pull request** and **Delete branch**: the step is accepted.
-   - **Request changes** with a short list of what to fix: the step goes back for more work.
-5. Steps marked **Mentor check** in the course (product definition, tools and budget, charging, enclosure, thermometer, final review and order, small series) need a real decision from you. Discuss in the pull request before approving.
+3. Натисни **+** біля будь-якого рядка, щоб залишити там коментар.
+4. Заверши через **Review changes**:
+   - **Approve**, потім **Merge pull request** і **Delete branch**: крок прийнято.
+   - **Request changes** з коротким списком, що виправити: крок повертається на доробку.
+5. Кроки з позначкою **Перевірка наставника** (що ти будуєш, інструменти і бюджет, заряджання, корпус, термометр, фінальна перевірка і замовлення, невелика серія) потребують твого справжнього рішення. Обговоріть їх у pull request, перш ніж схвалювати.
 
-## Maintaining the course
+## Як підтримувати курс
 
-- The course is one file: `index.html`. Step references in the text are written as `{{stepId}}`, so step numbers update by themselves when steps are added.
-- After adding steps, run `node course/tools/make-submissions.js`. It creates submission files for new steps and never overwrites existing ones. Steps that move to a new number keep their old file, so rename it if needed.
+- Увесь курс — це один файл `index.html`. Посилання на кроки в тексті записані як `{{stepId}}`, тож номери кроків оновлюються самі, коли додаються нові кроки.
+- Після додавання кроків запусти `node course/tools/make-submissions.js`. Він створює файли відповідей для нових кроків і ніколи не перезаписує наявні. Якщо крок отримав новий номер, його старий файл лишається з попереднім номером — перейменуй його за потреби.

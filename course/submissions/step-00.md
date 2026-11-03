@@ -1,28 +1,28 @@
-# Step 00: How this course works
+# Крок 00: Як працює цей курс
 
-**Goal:** Know how to use this course and where your project lives.
+**Мета:** Знати, як користуватися курсом і де лежить твій проєкт.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-00-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-00-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. What you want to learn most from this project
+### 1. Чого ти найбільше хочеш навчитися в цьому проєкті
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] I read how the course works
-- [ ] I know where meteo-v2/pcb and meteo-v2/firmware are
-- [ ] I wrote what I want to learn in step-00.md
+- [ ] Я прочитав, як працює курс
+- [ ] Я знаю, де лежать pcb і firmware
+- [ ] Я написав у step-00.md, чого хочу навчитися
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

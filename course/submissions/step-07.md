@@ -1,41 +1,41 @@
-# Step 07: First steps in the PCB editor
+# Крок 07: Перші кроки в редакторі плати
 
-**Goal:** You can move around the PCB editor, read what you see, and run the design rules check (DRC).
+**Мета:** Ти вмієш орієнтуватися в редакторі плати, розумієш, що бачиш, і запускаєш перевірку правил проєктування (DRC).
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-07-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-07-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. The board size (width × height in mm)
+### 1. Розмір плати (ширина × висота в мм)
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. The DRC result: number of errors, warnings and unconnected items
+### 2. Результат DRC: кількість помилок, попереджень і незʼєднаних елементів
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. Track, via and zone in your own words
+### 3. Доріжка, перехідний отвір і полігон своїми словами
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 4. A screenshot with one net highlighted: `img/step-07-net.png`
+### 4. Скріншот із підсвіченим колом: `img/step-07-net.png`
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] I can switch layers and highlight a net
-- [ ] I measured the board size
-- [ ] I ran DRC and wrote down the numbers
-- [ ] I can explain track, via and zone
+- [ ] Я вмію перемикати шари й підсвічувати коло
+- [ ] Я виміряв розмір плати
+- [ ] Я запустив DRC і записав числа
+- [ ] Я можу пояснити, що таке доріжка, перехідний отвір і полігон
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

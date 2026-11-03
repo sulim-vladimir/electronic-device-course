@@ -1,36 +1,36 @@
-# Step 12: Measure the battery
+# Крок 12: Вимірюй заряд акумулятора
 
-**Goal:** The ESP can read the battery voltage, so the station can warn when it is low.
+**Мета:** ESP може читати напругу акумулятора, тож станція попередить, коли заряд низький.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-12-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-12-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. Your resistor values and the calculation: ADC voltage at 4.2 V and 4.3 V, and the current
+### 1. Номінали резисторів і розрахунок: напруга на ADC при 4,2 В і 4,3 В, і струм
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. B+ or VBAT, and why
+### 2. B+ чи VBAT, і чому
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. The DRC report: `course/submissions/step-12-drc.rpt`
+### 3. Звіт DRC: `course/submissions/step-12-drc.rpt`
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] My resistor values and calculation are in my submission file
-- [ ] Divider and capacitor are in the schematic
-- [ ] Placed and routed, DRC clean
+- [ ] Номінали резисторів і розрахунок є у файлі здачі
+- [ ] Дільник і конденсатор є на схемі
+- [ ] Розміщено і протрасовано, DRC чистий
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

@@ -1,38 +1,38 @@
-# Step 20: Make the factory files and get a quote
+# Крок 20: Підготуй файли для заводу і отримай ціну
 
-**Goal:** You have the files the factory needs, and JLCPCB shows a correct preview and a price.
+**Мета:** У тебе є файли, потрібні заводу, а JLCPCB показує правильний попередній перегляд і ціну.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-20-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-20-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. The production files (the folder the plugin made), committed in the repo
+### 1. Файли для виробництва (папка, яку зробив плагін) у репозиторії
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. Screenshots of the JLCPCB placement preview and the price
+### 2. Скріншоти попереднього перегляду розміщення на JLCPCB і ціни
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. Which parts needed a rotation fix
+### 3. Яким деталям довелося виправляти поворот
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] Design rules set and DRC clean
-- [ ] Gerbers checked in the Gerber Viewer
-- [ ] JLCPCB accepted Gerbers, BOM and CPL
-- [ ] Every part placed and rotated correctly in the preview
-- [ ] Price screenshot in my submission file
+- [ ] Правила проєктування встановлено, DRC чистий
+- [ ] Gerber-файли перевірено в Gerber Viewer
+- [ ] JLCPCB прийняв Gerber-файли, BOM і CPL
+- [ ] Кожна деталь у перегляді на місці й правильно повернута
+- [ ] Скріншот ціни є у файлі здачі
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

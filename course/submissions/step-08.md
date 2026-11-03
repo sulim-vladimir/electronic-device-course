@@ -1,43 +1,43 @@
-# Step 08: Practice board: a PCB from zero
+# Крок 08: Тренувальна плата: друкована плата з нуля
 
-**Goal:** You make a tiny practice board, from an empty project to a clean DRC, so you know the tools before you touch the real board.
+**Мета:** Ти робиш крихітну тренувальну плату — від порожнього проєкту до чистого DRC, щоб знати інструменти, перш ніж братися за справжню плату.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-08-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-08-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. The practice project in `course/practice/`
+### 1. Тренувальний проєкт у `course/practice/`
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. The DRC report: in the DRC window click **Save...** and save it as `course/submissions/step-08-drc.rpt`
+### 2. Звіт DRC: у вікні DRC натисни **Save...** і збережи як `course/submissions/step-08-drc.rpt`
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. A 3D screenshot: `img/step-08-3d.png`
+### 3. 3D-скріншот: `img/step-08-3d.png`
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 4. What was hardest, and one thing you learned
+### 4. Що було найважче і чого ти навчився
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] The practice project is in course/practice and opens without errors
-- [ ] ERC shows no errors
-- [ ] The outline is drawn and every part is placed inside it
-- [ ] Every connection is routed, with at least one via
-- [ ] A GND zone fills the bottom layer
-- [ ] DRC: 0 errors, 0 unconnected
+- [ ] Тренувальний проєкт лежить у course/practice і відкривається без помилок
+- [ ] ERC без помилок
+- [ ] Контур намальовано, усі компоненти всередині
+- [ ] Усі з'єднання прокладено, є хоча б один перехідний отвір
+- [ ] Полігон GND заповнює нижній шар
+- [ ] DRC: 0 помилок, 0 незʼєднаних
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

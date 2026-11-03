@@ -1,40 +1,40 @@
-# Step 06: How deep sleep works
+# Крок 06: Як працює глибокий сон
 
-**Goal:** You can explain how the board sleeps and wakes up, and how long the battery lasts.
+**Мета:** Ти можеш пояснити, як плата засинає і прокидається, і скільки протримається акумулятор.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-06-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-06-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. The RESET voltage with R14 = 1 kΩ and with 10 kΩ, with the calculation
+### 1. Напруга на RESET при R14 = 1 кОм і 10 кОм, з розрахунком
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. The average current and battery life, with the calculation
+### 2. Середній струм і час роботи від акумулятора, з розрахунком
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. Why R14 is there, in 2–3 sentences
+### 3. Навіщо потрібен R14, у 2–3 реченнях
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 4. What you would change to make the battery last longer
+### 4. Що ти змінив би, щоб акумулятор тримав довше
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] I calculated the RESET voltage for 1 kΩ and 10 kΩ
-- [ ] I calculated the battery life
-- [ ] I can explain why R14 is there in 2–3 sentences
+- [ ] Я обчислив напругу на RESET для 1 кОм і 10 кОм
+- [ ] Я обчислив час роботи від акумулятора
+- [ ] Я можу пояснити, навіщо потрібен R14, у 2–3 реченнях
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

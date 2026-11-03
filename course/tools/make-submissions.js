@@ -1,4 +1,4 @@
-// Creates course/submissions/step-NN.md for every step in course/index.html.
+// Creates course/submissions/step-NN.md (in Ukrainian) for every step in course/index.html.
 // Existing files are never overwritten (they hold the student's answers).
 //
 //   node course/tools/make-submissions.js
@@ -32,31 +32,31 @@ STEPS.forEach((s, i) => {
   const n = pad(i);
   const file = path.join(dir, `step-${n}.md`);
   if (fs.existsSync(file)) return;
-  const deliver = (DELIVER[s.id] || []).map((d, k) => `### ${k + 1}. ${md(d).replace(/NN/g, n)}\n\n_(your answer)_\n`).join("\n");
+  const deliver = (DELIVER[s.id] || []).map((d, k) => `### ${k + 1}. ${md(d).replace(/NN/g, n)}\n\n_(твоя відповідь)_\n`).join("\n");
   const checks = s.done.map((d) => `- [ ] ${md(d)}`).join("\n");
-  const text = `# Step ${n}: ${s.title}
+  const text = `# Крок ${n}: ${s.title}
 
-**Goal:** ${md(s.goal)}
+**Мета:** ${md(s.goal)}
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-${n}-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-${n}-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
 ${deliver}
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
 ${checks}
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_
 `;
   fs.writeFileSync(file, text);
   made++;

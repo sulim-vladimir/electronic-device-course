@@ -1,32 +1,32 @@
-# Step 10: Move OneWire to GPIO2
+# Крок 10: Перенеси OneWire на GPIO2
 
-**Goal:** The temperature sensor is on a safe pin (GPIO2) in the schematic.
+**Мета:** Датчик температури підключено до безпечного виводу (GPIO2) на схемі.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-10-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-10-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. What you changed in the schematic
+### 1. Що ти змінив на схемі
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. The ERC result before and after (number of errors and warnings)
+### 2. Результат ERC до і після (кількість помилок і попереджень)
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] OneWire is on IO2 (pin 17) in the schematic
-- [ ] Pin 12 has a no-connect flag
-- [ ] ERC shows no new errors
+- [ ] OneWire підключено до IO2 (вивід 17) на схемі
+- [ ] На виводі 12 стоїть позначка no-connect
+- [ ] ERC не показує нових помилок
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

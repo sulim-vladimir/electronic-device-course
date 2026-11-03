@@ -1,37 +1,37 @@
-# Step 14: How will the battery charge?
+# Крок 14: Як заряджатиметься акумулятор?
 
-**Goal:** You and your mentor decide how the battery is charged, and the board has what it needs for it.
+**Мета:** Ти разом із наставником вирішуєш, як заряджати акумулятор, і на платі є все потрібне для цього.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-14-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-14-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. Pros and cons of options A, B and C
+### 1. Плюси й мінуси варіантів A, B і C
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. The decision and the reason (discuss it with your mentor in the pull request)
+### 2. Рішення і причина (обговори з наставником у pull request)
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. The DRC report: `course/submissions/step-14-drc.rpt`
+### 3. Звіт DRC: `course/submissions/step-14-drc.rpt`
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] Pros and cons for A, B and C are in my submission file
-- [ ] My choice does not charge the battery below 0 °C
-- [ ] My mentor agreed with the decision
-- [ ] Schematic and PCB updated, ERC and DRC clean
+- [ ] Плюси й мінуси A, B і C є у файлі здачі
+- [ ] Мій варіант не заряджає акумулятор нижче 0 °C
+- [ ] Наставник погодився з рішенням
+- [ ] Схему і плату оновлено, ERC і DRC чисті
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

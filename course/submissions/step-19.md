@@ -1,36 +1,36 @@
-# Step 19: Pick real parts for JLCPCB
+# Крок 19: Підбери реальні компоненти для JLCPCB
 
-**Goal:** Every part the factory solders has an exact part number that is in stock.
+**Мета:** Кожен компонент, який паяє завод, має точний номер деталі, що є на складі.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-19-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-19-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. The BOM exported as CSV: `course/submissions/step-19-bom.csv`
+### 1. BOM, експортований у CSV: `course/submissions/step-19-bom.csv`
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. Which parts the factory solders and which you solder by hand
+### 2. Які компоненти паяє завод, а які ти сам
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. The parts cost per board
+### 3. Вартість компонентів на одну плату
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] Every part is marked factory or hand-solder
-- [ ] Every factory part has an LCSC number that is in stock
-- [ ] Parts cost per board is in my submission file
+- [ ] Кожен компонент позначено «завод» або «паяю сам»
+- [ ] Кожен заводський компонент має номер LCSC, і він є на складі
+- [ ] Вартість компонентів на плату є у файлі здачі
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

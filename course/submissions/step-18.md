@@ -1,40 +1,40 @@
-# Step 18: Update the firmware
+# Крок 18: Онови прошивку
 
-**Goal:** The firmware matches the new board and compiles without errors.
+**Мета:** Прошивка відповідає новій платі і компілюється без помилок.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-18-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-18-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. What you changed in the code, and why
+### 1. Що ти змінив у коді і чому
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. Your OTA update plan
+### 2. Твій план OTA-оновлень
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. A screenshot of a successful Verify (compile): `img/step-18-compile.png`
+### 3. Скріншот успішної компіляції (Verify): `img/step-18-compile.png`
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] Arduino IDE with the esp8266 core and libraries is installed
-- [ ] ONE_WIRE_BUS is 2
-- [ ] Battery voltage is read and sent
-- [ ] Firmware version is printed and sent
-- [ ] The setup network has a password
-- [ ] OTA update plan written
-- [ ] It compiles without errors
+- [ ] Arduino IDE з ядром esp8266 і бібліотеками встановлено
+- [ ] ONE_WIRE_BUS дорівнює 2
+- [ ] Напруга акумулятора вимірюється і надсилається
+- [ ] Версія прошивки виводиться і надсилається
+- [ ] Мережа налаштування має пароль
+- [ ] План OTA-оновлень записано
+- [ ] Компілюється без помилок
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

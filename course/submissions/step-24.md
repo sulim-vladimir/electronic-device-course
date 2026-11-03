@@ -1,42 +1,42 @@
-# Step 24: Bring the prototype to life
+# Крок 24: Оживи прототип
 
-**Goal:** Every function of the prototype is tested, and every problem is written down.
+**Мета:** Кожну функцію прототипу перевірено, а кожну проблему записано.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-24-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-24-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. A measurements table: 3V3, sleep current, battery voltage (board vs multimeter)
+### 1. Таблиця вимірювань: 3V3, струм сну, напруга акумулятора (плата і мультиметр)
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. The result of each function test
+### 2. Результат перевірки кожної функції
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. `meteo-v2/ISSUES.md` with every problem you found
+### 3. `ISSUES.md` з усіма знайденими проблемами
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 4. Photos of the assembled board
+### 4. Фото зібраної плати
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] Visual check and short check done
-- [ ] 3V3 measured correctly
-- [ ] Firmware flashed and every function tested
-- [ ] Sleep current measured
-- [ ] ISSUES.md lists every problem
+- [ ] Огляд і перевірку на замикання зроблено
+- [ ] 3V3 виміряно, значення правильне
+- [ ] Прошивку записано, кожну функцію перевірено
+- [ ] Струм сну виміряно
+- [ ] ISSUES.md містить кожну проблему
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

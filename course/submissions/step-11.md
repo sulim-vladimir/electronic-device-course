@@ -1,37 +1,37 @@
-# Step 11: Your first routing
+# Крок 11: Твоє перше трасування
 
-**Goal:** The PCB matches the schematic again, the short is gone, and DRC shows 0 errors.
+**Мета:** Плата знову відповідає схемі, замикання немає, і DRC показує 0 помилок.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-11-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-11-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. What you changed on the PCB
+### 1. Що ти змінив на платі
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. The DRC report: `course/submissions/step-11-drc.rpt`
+### 2. Звіт DRC: `course/submissions/step-11-drc.rpt`
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. 3D screenshots of the top and bottom: `img/step-11-top.png`, `img/step-11-bottom.png`
+### 3. 3D-скріншоти зверху і знизу: `img/step-11-top.png`, `img/step-11-bottom.png`
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] PCB updated from schematic
-- [ ] OneWire routed to pad 17, old tracks removed
-- [ ] R14 tracks fixed
-- [ ] DRC: 0 errors, 0 unconnected, parity OK
+- [ ] Плату оновлено зі схеми
+- [ ] OneWire прокладено до площадки 17, старі доріжки видалено
+- [ ] Доріжки R14 виправлено
+- [ ] DRC: 0 помилок, 0 незʼєднаних, відповідність схемі OK
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

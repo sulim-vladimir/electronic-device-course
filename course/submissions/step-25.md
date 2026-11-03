@@ -1,42 +1,42 @@
-# Step 25: From prototype to small series
+# Крок 25: Від прототипу до невеликої серії
 
-**Goal:** A plan to make and sell a small series, agreed with your mentor.
+**Мета:** План, як виготовити і продати невелику серію, погоджений із наставником.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-25-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-25-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. The test procedure for each unit
+### 1. Процедура перевірки кожної станції
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. The user manual draft
+### 2. Чернетка інструкції для користувача
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. The cost per unit and the price
+### 3. Собівартість і ціна
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 4. The field test results
+### 4. Результати польового випробування
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] v3 problems fixed and reviewed
-- [ ] Test procedure written
-- [ ] User manual draft written
-- [ ] Cost per unit and price in my submission file
-- [ ] Mentor agreed with the selling plan
+- [ ] Проблеми v3 виправлено і перевірено
+- [ ] Процедуру перевірки написано
+- [ ] Чернетку інструкції написано
+- [ ] Собівартість і ціна є у файлі здачі
+- [ ] Наставник погодився з планом продажу
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

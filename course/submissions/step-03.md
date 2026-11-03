@@ -1,38 +1,38 @@
-# Step 03: What are you building?
+# Крок 03: Що ти будуєш?
 
-**Goal:** A short product description in PRODUCT.md: who buys the station, what they get, and the targets every later decision is checked against.
+**Мета:** Короткий опис продукту в PRODUCT.md: хто купує станцію, що він отримує, і цілі, з якими звірятимуться всі наступні рішення.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-03-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-03-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. A short summary of `PRODUCT.md` (the file itself is in the repo)
+### 1. Короткий зміст `PRODUCT.md` (сам файл лежить у репозиторії)
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. What the 2–3 people you asked said
+### 2. Що сказали 2–3 людини, яких ти опитав
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. Your answers about the server, the Telegram bot and Wi-Fi setup
+### 3. Твої відповіді про сервер, Telegram-бота і налаштування Wi-Fi
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] Buyers described, and 2–3 real people asked
-- [ ] Decision on how the buyer sees the data, discussed with my mentor
-- [ ] Targets with numbers
-- [ ] Out-of-scope list
-- [ ] PRODUCT.md is in the repo
+- [ ] Покупців описано, 2–3 реальних людей опитано
+- [ ] Рішення, де покупець бачить дані, обговорено з наставником
+- [ ] Цілі з числами
+- [ ] Список того, що поза межами проєкту
+- [ ] PRODUCT.md є в репозиторії
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

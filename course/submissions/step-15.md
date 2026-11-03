@@ -1,47 +1,47 @@
-# Step 15: Choose the enclosure
+# Крок 15: Вибери корпус
 
-**Goal:** You have chosen an enclosure, and the board's outline and mounting holes fit it.
+**Мета:** Ти вибрав корпус, і контур плати та монтажні отвори йому відповідають.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-15-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-15-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. Your requirements list
+### 1. Твій список вимог
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. A comparison table of 2–3 boxes, with links and prices
+### 2. Порівняльна таблиця 2–3 корпусів із посиланнями і цінами
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. The box you chose, and why
+### 3. Корпус, який ти вибрав, і чому
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 4. A photo of the paper test in the sample box: `img/step-15-paper.jpg`
+### 4. Фото перевірки на папері в зразку корпусу: `img/step-15-paper.jpg`
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 5. The DRC report: `course/submissions/step-15-drc.rpt`
+### 5. Звіт DRC: `course/submissions/step-15-drc.rpt`
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] Requirements written in my submission file
-- [ ] 2–3 boxes compared in a table
-- [ ] My mentor agreed and we bought a sample box
-- [ ] Board outline fits the box with space on every side
-- [ ] Mounting holes H1–H4 sit exactly on the box's bosses (paper test done)
-- [ ] DRC clean
+- [ ] Вимоги записано у файлі здачі
+- [ ] 2–3 корпуси порівняно в таблиці
+- [ ] Наставник погодився, і ми купили зразок корпусу
+- [ ] Контур плати вміщається в корпус із запасом з кожного боку
+- [ ] Монтажні отвори H1–H4 точно над стійками корпусу (перевірку на папері зроблено)
+- [ ] DRC чистий
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

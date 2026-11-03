@@ -1,38 +1,38 @@
-# Step 02: Git and GitHub: your first pull request
+# Крок 02: Git і GitHub: твій перший pull request
 
-**Goal:** You can do a step on its own branch, push it to GitHub, and open a pull request for your mentor to review.
+**Мета:** Ти вмієш робити крок в окремій гілці, надсилати її на GitHub і відкривати pull request, щоб наставник його перевірив.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-02-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-02-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. Your own words: repository, commit, branch, remote, push, pull request, merge
+### 1. Своїми словами: репозиторій, коміт, гілка, remote, push, pull request, merge
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. What `git status` showed before and after `git rm --cached`
+### 2. Що показав `git status` до і після `git rm --cached`
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. Anything that was hard or confusing
+### 3. Що було складно або незрозуміло
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] meteo-v2/pcb/.gitignore is added and fp-info-cache is removed from git
-- [ ] step-00.md, step-01.md and step-02.md are filled
-- [ ] My mentor is a collaborator on my repo
-- [ ] The pull request from step-02 into main is open
-- [ ] I can explain branch, pull request and merge in my own words
+- [ ] pcb/.gitignore доповнено, fp-info-cache не в git
+- [ ] step-00.md, step-01.md і step-02.md заповнені
+- [ ] Я прийняв запрошення до репозиторію
+- [ ] Pull request із step-02 у main відкрито
+- [ ] Я можу своїми словами пояснити гілку, pull request і merge
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

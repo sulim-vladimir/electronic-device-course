@@ -1,42 +1,42 @@
-# Step 04: Tools, budget and delivery times
+# Крок 04: Інструменти, бюджет і терміни доставки
 
-**Goal:** You know which tools you need and what the prototypes will cost, and you have ordered what takes long to arrive.
+**Мета:** Ти знаєш, які інструменти потрібні і скільки коштуватимуть прототипи, і вже замовив те, що довго їде.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-04-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-04-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. The tools table
+### 1. Таблиця інструментів
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. `BUDGET.md` (in the repo) and the total
+### 2. `BUDGET.md` (у репозиторії) і загальна сума
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. Your timeline
+### 3. Твій графік
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 4. What you ordered, and when it should arrive
+### 4. Що ти замовив і коли воно має приїхати
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] Tools table with what I have and what I need
-- [ ] BUDGET.md is in the repo
-- [ ] Timeline with delivery times
-- [ ] My mentor saw the budget
-- [ ] Missing tools are ordered
+- [ ] Таблиця інструментів: що є і що потрібно
+- [ ] BUDGET.md є в репозиторії
+- [ ] Графік із термінами доставки
+- [ ] Наставник побачив бюджет
+- [ ] Те, чого бракувало, замовлено
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_

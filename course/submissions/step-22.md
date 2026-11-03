@@ -1,37 +1,37 @@
-# Step 22: Final review and order
+# Крок 22: Фінальна перевірка і замовлення
 
-**Goal:** The design passes a final check, your mentor agrees, and 5 prototype boards are ordered.
+**Мета:** Проєкт проходить фінальну перевірку, наставник погоджується, і 5 плат-прототипів замовлено.
 
 <!--
-Your mentor reads this file in your pull request.
-Replace every "(your answer)" with your own words. Full sentences, short is fine.
-Pictures: put them in course/submissions/img/ and show them like this:
-![3D view](img/step-22-3d.png)
+Наставник читатиме цей файл у твоєму pull request.
+Заміни кожне «(твоя відповідь)» своїми словами. Повними реченнями, коротко — нормально.
+Зображення: клади їх у course/submissions/img/ і показуй так:
+![3D-перегляд](img/step-22-3d.png)
 -->
 
-## Deliverables
+## Що здати
 
-### 1. The final checklist: each item, and how you checked it
+### 1. Фінальний список: кожен пункт і як ти його перевірив
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 2. 3D screenshots of the top and bottom
+### 2. 3D-скріншоти зверху і знизу
 
-_(your answer)_
+_(твоя відповідь)_
 
-### 3. The total price
+### 3. Загальна ціна
 
-_(your answer)_
+_(твоя відповідь)_
 
-## Accepted when
+## Прийнято, коли
 
-Tick what is true (put an x between the brackets: [x]).
+Познач, що вже виконано (постав x у дужках: [x]).
 
-- [ ] Every item on the checklist passes
-- [ ] My mentor reviewed and agreed
-- [ ] Tag v2-proto-1 is pushed
-- [ ] Order placed (number in my submission file)
+- [ ] Кожен пункт списку проходить
+- [ ] Наставник переглянув і погодився
+- [ ] Тег v2-proto-1 надіслано на GitHub
+- [ ] Замовлення оформлено (номер у файлі здачі)
 
-## Questions for my mentor
+## Питання до наставника
 
-_(none)_
+_(немає)_
