@@ -1,6 +1,6 @@
-# Step 05: First steps in the PCB editor
+# Step 05: Read your own schematic
 
-**Goal:** You can move around the PCB editor, read what you see, and run the design rules check (DRC).
+**Goal:** You can explain what every part on the board does.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,19 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. The board size (width × height in mm)
+### 1. A table: every part and what it does, block by block
 
 _(your answer)_
 
-### 2. The DRC result: number of errors, warnings and unconnected items
+### 2. Your answers to questions 1–6, with calculations
 
 _(your answer)_
 
-### 3. Track, via and zone in your own words
-
-_(your answer)_
-
-### 4. A screenshot with one net highlighted: `img/step-05-net.png`
+### 3. One thing you would change or don't understand
 
 _(your answer)_
 
@@ -31,10 +27,9 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] I can switch layers and highlight a net
-- [ ] I measured the board size
-- [ ] I ran DRC and wrote down the numbers
-- [ ] I can explain track, via and zone
+- [ ] I wrote what every part does
+- [ ] I answered all 6 questions
+- [ ] I wrote down one thing I would change or don't understand
 
 ## Questions for my mentor
 

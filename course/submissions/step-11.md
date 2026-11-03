@@ -1,6 +1,6 @@
-# Step 11: Is the regulator strong enough?
+# Step 11: Your first routing
 
-**Goal:** You choose the voltage regulator with real numbers from datasheets.
+**Goal:** The PCB matches the schematic again, the short is gone, and DRC shows 0 errors.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,15 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. Your datasheet table for the HT7333 and one alternative
+### 1. What you changed on the PCB
 
 _(your answer)_
 
-### 2. Your decision and the reason
+### 2. The DRC report: `course/submissions/step-11-drc.rpt`
 
 _(your answer)_
 
-### 3. If you changed it: the ERC and DRC results
+### 3. 3D screenshots of the top and bottom: `img/step-11-top.png`, `img/step-11-bottom.png`
 
 _(your answer)_
 
@@ -27,9 +27,10 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Datasheet table for HT7333 and one alternative
-- [ ] Decision and reason written
-- [ ] If changed: schematic and PCB updated, ERC and DRC clean
+- [ ] PCB updated from schematic
+- [ ] OneWire routed to pad 17, old tracks removed
+- [ ] R14 tracks fixed
+- [ ] DRC: 0 errors, 0 unconnected, parity OK
 
 ## Questions for my mentor
 

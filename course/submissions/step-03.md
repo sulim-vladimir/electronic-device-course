@@ -1,6 +1,6 @@
-# Step 03: Read your own schematic
+# Step 03: What are you building?
 
-**Goal:** You can explain what every part on the board does.
+**Goal:** A short product description in PRODUCT.md: who buys the station, what they get, and the targets every later decision is checked against.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,15 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. A table: every part and what it does, block by block
+### 1. A short summary of `PRODUCT.md` (the file itself is in the repo)
 
 _(your answer)_
 
-### 2. Your answers to questions 1–6, with calculations
+### 2. What the 2–3 people you asked said
 
 _(your answer)_
 
-### 3. One thing you would change or don't understand
+### 3. Your answers about the server, the Telegram bot and Wi-Fi setup
 
 _(your answer)_
 
@@ -27,9 +27,11 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] I wrote what every part does
-- [ ] I answered all 6 questions
-- [ ] I wrote down one thing I would change or don't understand
+- [ ] Buyers described, and 2–3 real people asked
+- [ ] Decision on how the buyer sees the data, discussed with my mentor
+- [ ] Targets with numbers
+- [ ] Out-of-scope list
+- [ ] PRODUCT.md is in the repo
 
 ## Questions for my mentor
 

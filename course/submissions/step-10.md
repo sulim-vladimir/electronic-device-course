@@ -1,6 +1,6 @@
-# Step 10: Measure the battery
+# Step 10: Move OneWire to GPIO2
 
-**Goal:** The ESP can read the battery voltage, so the station can warn when it is low.
+**Goal:** The temperature sensor is on a safe pin (GPIO2) in the schematic.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,15 +11,11 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. Your resistor values and the calculation: ADC voltage at 4.2 V and 4.3 V, and the current
+### 1. What you changed in the schematic
 
 _(your answer)_
 
-### 2. B+ or VBAT, and why
-
-_(your answer)_
-
-### 3. The DRC report: `course/submissions/step-10-drc.rpt`
+### 2. The ERC result before and after (number of errors and warnings)
 
 _(your answer)_
 
@@ -27,9 +23,9 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] My resistor values and calculation are in my submission file
-- [ ] Divider and capacitor are in the schematic
-- [ ] Placed and routed, DRC clean
+- [ ] OneWire is on IO2 (pin 17) in the schematic
+- [ ] Pin 12 has a no-connect flag
+- [ ] ERC shows no new errors
 
 ## Questions for my mentor
 

@@ -1,6 +1,6 @@
-# Step 21: From prototype to small series
+# Step 21: Document the project
 
-**Goal:** A plan to make and sell a small series, agreed with your mentor.
+**Goal:** Someone who has never seen the project can understand what it is, find the files, and see what changed in v2.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,19 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. The test procedure for each unit
+### 1. What you wrote in `README.md` and `CHANGELOG.md`
 
 _(your answer)_
 
-### 2. The user manual draft
+### 2. The files in `meteo-v2/docs/`
 
 _(your answer)_
 
-### 3. The cost per unit and the price
-
-_(your answer)_
-
-### 4. The field test results
+### 3. A screenshot of the README on GitHub (after the merge you can add it in the next step)
 
 _(your answer)_
 
@@ -31,11 +27,10 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] v3 problems fixed and reviewed
-- [ ] Test procedure written
-- [ ] User manual draft written
-- [ ] Cost per unit and price in my submission file
-- [ ] Mentor agreed with the selling plan
+- [ ] README.md explains the project, with a picture
+- [ ] Schematic PDF in meteo-v2/docs
+- [ ] 3D pictures in meteo-v2/docs
+- [ ] CHANGELOG.md lists the v2 changes
 
 ## Questions for my mentor
 

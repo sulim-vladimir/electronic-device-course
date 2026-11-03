@@ -1,6 +1,6 @@
-# Step 20: Bring the prototype to life
+# Step 20: Make the factory files and get a quote
 
-**Goal:** Every function of the prototype is tested, and every problem is written down.
+**Goal:** You have the files the factory needs, and JLCPCB shows a correct preview and a price.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,19 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. A measurements table: 3V3, sleep current, battery voltage (board vs multimeter)
+### 1. The production files (the folder the plugin made), committed in the repo
 
 _(your answer)_
 
-### 2. The result of each function test
+### 2. Screenshots of the JLCPCB placement preview and the price
 
 _(your answer)_
 
-### 3. `meteo-v2/ISSUES.md` with every problem you found
-
-_(your answer)_
-
-### 4. Photos of the assembled board
+### 3. Which parts needed a rotation fix
 
 _(your answer)_
 
@@ -31,11 +27,11 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Visual check and short check done
-- [ ] 3V3 measured correctly
-- [ ] Firmware flashed and every function tested
-- [ ] Sleep current measured
-- [ ] ISSUES.md lists every problem
+- [ ] Design rules set and DRC clean
+- [ ] Gerbers checked in the Gerber Viewer
+- [ ] JLCPCB accepted Gerbers, BOM and CPL
+- [ ] Every part placed and rotated correctly in the preview
+- [ ] Price screenshot in my submission file
 
 ## Questions for my mentor
 

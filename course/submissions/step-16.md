@@ -1,6 +1,6 @@
-# Step 16: Update the firmware
+# Step 16: Where does the thermometer go?
 
-**Goal:** The firmware matches the new board and compiles without errors.
+**Goal:** You decide where the temperature sensor goes and how it is connected, and you can explain every choice.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,11 +11,27 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. What you changed in the code, and why
+### 1. Three things that make an air temperature reading wrong
 
 _(your answer)_
 
-### 2. A screenshot of a successful Verify (compile): `img/step-16-compile.png`
+### 2. Your decisions for questions 1–6, each with a reason
+
+_(your answer)_
+
+### 3. A comparison table for how the cable leaves the box
+
+_(your answer)_
+
+### 4. Your experiment results (if you did it)
+
+_(your answer)_
+
+### 5. The parts list: probe, gland or connector, cable length
+
+_(your answer)_
+
+### 6. What changed in the schematic and PCB, and the DRC report: `course/submissions/step-16-drc.rpt`
 
 _(your answer)_
 
@@ -23,10 +39,12 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Arduino IDE with the esp8266 core and libraries is installed
-- [ ] ONE_WIRE_BUS is 2
-- [ ] Battery voltage is read and sent
-- [ ] It compiles without errors
+- [ ] Three things that make a temperature reading wrong are in my submission file
+- [ ] A decision with a reason for each of the 6 questions
+- [ ] A comparison table for how the cable leaves the box
+- [ ] My mentor agreed in the pull request
+- [ ] Schematic and PCB match my decisions, ERC and DRC clean
+- [ ] Parts list for the thermometer
 
 ## Questions for my mentor
 

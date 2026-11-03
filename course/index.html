@@ -86,6 +86,10 @@ pre code { background: none; padding: 0; }
 .tray .gate-dot { color: var(--copper); }
 .tray a[aria-current="page"] .gate-dot { color: inherit; }
 .picker { display: none; }
+.glink { font-size: 0.85rem; white-space: nowrap; }
+.advice { padding: 12px 16px; border-radius: 8px; background: var(--copper-soft); }
+.advice ul { margin: 0; padding-left: 1.2em; }
+.advice li + li { margin-top: 6px; }
 
 article { min-width: 0; max-width: 760px; }
 .eyebrow { font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.9rem; color: var(--mask); }
@@ -160,6 +164,7 @@ button:disabled { opacity: 0.55; cursor: not-allowed; }
       <div class="trace"><i id="overall-bar" style="width:0%"></i></div>
       <span class="overall-num" id="overall-num">0 / 0 checks</span>
     </div>
+    <a class="glink" href="#glossary">Glossary EN → UK</a>
     <div class="sync" id="sync" data-s="local">Your checklist stays in this browser. Your mentor accepts steps on GitHub.</div>
   </div>
 </header>
@@ -192,6 +197,8 @@ const STEPS = [
     <li><b>Check your answers</b>: compare after you have your own answer, not before.</li>
     <li><b>Accepted when</b>: what your mentor checks before accepting the step. Tick the boxes for yourself as you go.</li>
     <li><b>Submit for review</b>: every step ends with a file you fill in, <code>course/submissions/step-NN.md</code>, and a <b>pull request</b> on GitHub. Your mentor reads it and either accepts the step or sends it back with comments. Then you fix it and push again. This is how engineers work in real companies.</li>
+    <li><b>Advice</b>: practical tips, like an engineer would give you.</li>
+    <li><b>Glossary</b>: unknown English word? The glossary (top of the page) has it in Ukrainian.</li>
     <li><b>Still stuck after the hints?</b> Ask your mentor in your Telegram chat. Say which step, what you tried, and add a screenshot.</li>
   </ul>
   <p>Steps marked <span class="badge">Mentor check</span> involve money, safety or a big decision. Discuss them with your mentor in the pull request, or in Telegram, before you go on.</p>
@@ -225,6 +232,7 @@ const STEPS = [
   <p>The project also uses two custom libraries (the ESP-12F module and the battery holder). They live inside the project folder, so KiCad finds them only when you open the project file (<code>.kicad_pro</code>), not the schematic file on its own.</p>`,
   tasks: [
     `<p>In KiCad, open <b>Help → About KiCad</b> and check the version. If it is lower than 10, update it from <a href="https://www.kicad.org/download/" target="_blank" rel="noopener">kicad.org/download</a>.</p>`,
+    `<p>Switch KiCad to English: <b>Preferences → Set Language → English</b>, then restart KiCad. This course, the documentation and most tutorials use the English menu names. If your KiCad is in Ukrainian, the setting is in the same menu: the one just left of Help (Довідка).</p>`,
     `<p>Open <code>meteo-v2/pcb/last-version.kicad_pro</code> with KiCad (double-click it, or File → Open Project).</p>`,
     `<p>Open the <b>Schematic Editor</b> and the <b>PCB Editor</b>. In the PCB Editor, press <kbd>Alt</kbd>+<kbd>3</kbd> for the 3D viewer and look at both sides of the board.</p>`,
     `<p>In VS Code, open the whole <code>projectmeteo</code> folder (<b>File → Open Folder</b>). You will use it for the firmware and for git.</p>`
@@ -234,7 +242,7 @@ const STEPS = [
     `If KiCad says the file was made with a newer version, your KiCad is too old: update it.`,
     `In the 3D viewer, some parts may show without a 3D model. That is normal for now; it does not change the board.`
   ],
-  done: ["My KiCad is version 10 or newer", "The v2 project opens without missing-library errors", "The projectmeteo folder is open in VS Code"],
+  done: ["My KiCad is version 10 or newer", "KiCad is set to English", "The v2 project opens without missing-library errors", "The projectmeteo folder is open in VS Code"],
   commit: null
 },
 {
@@ -286,6 +294,61 @@ git branch -d step-02</code></pre>`
   ],
   answers: `<p><code>git status</code> lists changed files (red = not added yet, green = added). After <code>git rm --cached</code>, the cache file shows as "deleted" in git but stays on your disk, and the <code>.gitignore</code> keeps it out from now on.</p>`,
   done: ["meteo-v2/pcb/.gitignore is added and fp-info-cache is removed from git", "step-00.md, step-01.md and step-02.md are filled", "My mentor is a collaborator on my repo", "The pull request from step-02 into main is open", "I can explain branch, pull request and merge in my own words"],
+  commit: null
+},
+{
+  id: "prod", phase: "Plan", title: "What are you building?", time: "2–3 h", gate: true,
+  goal: "A short product description in PRODUCT.md: who buys the station, what they get, and the targets every later decision is checked against.",
+  why: `<p>Every later decision depends on this step: the box, the charging, the connectors, the price. Engineers call it the <b>requirements</b>. You write them before you design, and you change them when you learn something new.</p>
+  <p>One question is bigger than it looks. Today the station sends its data to your own server (the Django project in <code>other/</code>) and to a Telegram bot whose token is typed into each station. That works for you. Does it work for a buyer?</p>`,
+  tasks: [
+    `<p><b>Who buys it?</b> Describe 1–2 kinds of buyers (for example: a family with a garden, a school class, a beekeeper). What problem does the station solve for them?</p>`,
+    `<p>Ask <b>2–3 real people</b> who could be buyers: would they use it, what would they want to see, what would they pay? Write down what they said.</p>`,
+    `<p><b>What does the buyer get, and where do they see the data?</b> Telegram messages, a website, a phone app? Answer these questions:</p>
+<ul>
+<li>Who runs the server, and who pays for it? What happens to the data when your computer is off?</li>
+<li>Does every buyer create their own Telegram bot and token? (Most people won't manage that.) Or do you run one bot for all stations?</li>
+<li>How does a buyer set up Wi-Fi?</li>
+</ul>`,
+    `<p><b>Targets, with numbers.</b> Price for the buyer, maximum parts cost, battery life between charges, measurement interval, temperature accuracy (for example ±0.5 °C), the outdoor temperature range it must survive (think of a Ukrainian winter and summer), size.</p>`,
+    `<p><b>What it does not do</b> (out of scope). Your station measures temperature and pressure. Would a buyer expect humidity too? Write down what you leave out for now, and why.</p>`,
+    `<p>Write all of it into a new file <code>PRODUCT.md</code> in the repo's main folder. Later steps check their decisions against it.</p>`
+  ],
+  hints: [
+    `"Long battery life" is not a target. "At least 3 months without charging" is: you can measure it.`,
+    `People are polite: they often say they would pay more than they really would. Ask what they would pay, then ask "would you buy it today at that price?"`,
+    `Humidity: the <b>BME280</b> is a close relative of your BMP280 that also measures humidity. Look at its datasheet and price before you decide.`,
+    `A Telegram bot is created with @BotFather, and its token works like a password. Read the Telegram bot tutorial (Learn more) to see what a buyer would have to do.`
+  ],
+  done: ["Buyers described, and 2–3 real people asked", "Decision on how the buyer sees the data, discussed with my mentor", "Targets with numbers", "Out-of-scope list", "PRODUCT.md is in the repo"],
+  commit: null
+},
+{
+  id: "tools", phase: "Plan", title: "Tools, budget and delivery times", time: "1–2 h", gate: true,
+  goal: "You know which tools you need and what the prototypes will cost, and you have ordered what takes long to arrive.",
+  why: `<p>Some later steps need tools you may not have yet. Many things come from China and take <b>2–4 weeks</b>. If you order them now, they arrive by the time you need them. A simple budget shows your mentor what the project will cost before money is spent.</p>`,
+  tasks: [
+    `<p>Make a tools table in your submission file: tool, which step needs it, do you have it, price, where to buy.</p>
+<div class="tbl"><table>
+<tr><th>Tool</th><th>Needed in</th><th>What to look for</th></tr>
+<tr><td>USB-UART adapter</td><td>steps {{s12}}, {{s16}}</td><td>Must work at <b>3.3 V</b> (CP2102 or CH340 with a 3.3 V setting). 5 V can damage the ESP.</td></tr>
+<tr><td>Multimeter</td><td>step {{s16}}</td><td>A µA (microamp) current range, to measure the sleep current.</td></tr>
+<tr><td>Soldering iron</td><td>steps {{solder}}, {{s16}}</td><td>Temperature control. Plus solder (0.5–0.8 mm), flux and desoldering braid.</td></tr>
+<tr><td>Digital caliper</td><td>step {{enc}}</td><td>To measure the box and its screw bosses.</td></tr>
+<tr><td>Magnifier</td><td>step {{s16}}</td><td>A phone camera with zoom also works.</td></tr>
+<tr><td>Lab power supply (optional)</td><td>step {{s16}}</td><td>Adjustable voltage and a current limit. Makes the first power-on safe.</td></tr>
+<tr><td>Crimping tool (maybe)</td><td>step {{con}}</td><td>Only if your connectors need crimped contacts and you don't buy ready-made cables.</td></tr>
+</table></div>`,
+    `<p>Make <code>BUDGET.md</code> in the repo's main folder: missing tools, the prototype order (estimate it now: you get the real price in step {{s14}}), a sample enclosure, parts you solder by hand, shipping.</p>`,
+    `<p>Make a simple timeline: when do you want to finish each phase of the course? Add the delivery times for every order (tools, boards, enclosure).</p>`,
+    `<p>Show the budget to your mentor. Order what is missing and takes long to arrive.</p>`
+  ],
+  hints: [
+    `Cheap multimeters often can't measure small currents well. Check that it has a range like 200 µA or 2000 µA.`,
+    `Some USB-UART adapters have a small switch or jumper for 3.3 V / 5 V. Set it to 3.3 V before you connect it to the board.`,
+    `Buying from a local shop costs more but arrives in days. For things you need soon, that can be worth it.`
+  ],
+  done: ["Tools table with what I have and what I need", "BUDGET.md is in the repo", "Timeline with delivery times", "My mentor saw the budget", "Missing tools are ordered"],
   commit: null
 },
 {
@@ -545,7 +608,8 @@ git branch -d step-02</code></pre>`
   id: "s11", phase: "Design changes", title: "How will the battery charge?", time: "1–2 h", gate: true,
   goal: "You and your mentor decide how the battery is charged, and the board has what it needs for it.",
   why: `<p>v2 has <b>no charging input</b> at the moment: the solar connector was removed together with the INA219. A station that can't charge stops after a few months.</p>
-  <p><b>Safety:</b> a Li-ion battery must be charged by a proper charger chip that stops at 4.2 V. Never connect a solar panel or a USB 5 V supply straight to the battery.</p>`,
+  <p><b>Safety:</b> a Li-ion battery must be charged by a proper charger chip that stops at 4.2 V. Never connect a solar panel or a USB 5 V supply straight to the battery.</p>
+  <p><b>Cold:</b> a Li-ion battery must <b>not be charged below 0 °C</b>. It damages the cell and can make it unsafe. An outdoor station in a Ukrainian winter spends weeks below 0 °C, and a solar charger will try to charge on every sunny frosty day. The cold also reduces how much energy the battery can give, so the voltage drops and the ESP may reset. Check your temperature range in <code>PRODUCT.md</code>.</p>`,
   tasks: [
     `<p>Write pros and cons in your submission file for each option (cost, number of parts, board space, enclosure, what the buyer has to do):</p>
 <ul>
@@ -553,6 +617,7 @@ git branch -d step-02</code></pre>`
 <li><b>B.</b> A USB charger chip on the board (for example TP4056) and a USB connector.</li>
 <li><b>C.</b> A solar charger chip on the board (for example CN3065, made for small solar panels).</li>
 </ul>`,
+    `<p><b>For each option: how does it stop charging below 0 °C?</b> Look in the charger chip's datasheet for a <code>TEMP</code> or <code>NTC</code> pin (a thermistor that tells the chip how warm the battery is). For a ready-made charger board, check whether that pin is used or just connected to GND. And what happens to the station on a −15 °C night?</p>`,
     `<p>Talk with your mentor and decide. Write the decision and the reason in your submission file.</p>`,
     `<p>Add what the decision needs to the schematic and PCB. ERC, DRC.</p>`
   ],
@@ -561,7 +626,7 @@ git branch -d step-02</code></pre>`
     `A charger connected to <code>B+</code> and <code>GND</code> charges the battery through the DW01/FS8205 protection, so the protection still works while charging.`,
     `Option A is the least work on this board. Options B and C make a nicer product but add parts you need to learn.`
   ],
-  done: ["Pros and cons for A, B and C are in my submission file", "My mentor agreed with the decision", "Schematic and PCB updated, ERC and DRC clean"],
+  done: ["Pros and cons for A, B and C are in my submission file", "My choice does not charge the battery below 0 °C", "My mentor agreed with the decision", "Schematic and PCB updated, ERC and DRC clean"],
   commit: `git commit -am "Add battery charging input"`
 },
 {
@@ -579,7 +644,7 @@ git branch -d step-02</code></pre>`
     <li><b>Price</b> at 1 piece and at your series quantity.</li>
   </ul>`,
   tasks: [
-    `<p>Write your requirements in your submission file: inside size (use the board size from step {{s5}} and the tallest part), IP rating, material, openings, budget per unit.</p>`,
+    `<p>Write your requirements in your submission file: inside size (use the board size from step {{s5}} and the tallest part), IP rating, material, openings, budget per unit. Check them against <code>PRODUCT.md</code> from step {{prod}}.</p>`,
     `<p>Check heights in the 3D viewer: which part is tallest, and how tall? You can also export a 3D model of the board (<b>File → Export → STEP</b>) if you want to try it in a 3D design program.</p>`,
     `<p>Find <b>2–3 candidate boxes</b> and compare them in a table: inside dimensions, positions of the mounting bosses, IP rating, material, price, where to buy. Typical choices:</p>
 <ul>
@@ -709,14 +774,18 @@ git branch -d step-02</code></pre>`
     `<p>Open <code>meteo-v2/firmware/projectcpcs_v2/projectcpcs_v2.ino</code>. Choose <b>Tools → Board → esp8266 → Generic ESP8266 Module</b>, Flash Size <b>4MB</b>.</p>`,
     `<p>Change <code>ONE_WIRE_BUS</code> from <code>10</code> to <code>2</code>, and update the comment at the top of the file (the note about Flash Mode and GPIO10 is not needed anymore).</p>`,
     `<p>Add the battery reading: read the ADC with <code>analogRead(A0)</code> (0–1023 for 0–1.0 V), turn it into the battery voltage with your divider values from step {{s9}}, and add it to the data sent to the server and to the Telegram message.</p>`,
+    `<p>Add a <b>firmware version</b>, for example <code>const char* FW_VERSION = "2.0.0";</code>, print it at start-up and send it with the data. When a buyer reports a problem, the first question is "which version?".</p>`,
+    `<p>Protect the setup Wi-Fi network with a password: <code>WiFi.softAP("Meteo-Station-Config", "your-password")</code> (at least 8 characters). Right now anyone nearby can change the station's settings. Plan how the buyer learns the password (a label inside the box?).</p>`,
+    `<p><b>Plan updates:</b> how will you fix a bug in a station that is already on someone's balcony? Read about OTA updates (Learn more) and write in your submission file which way fits a station that sleeps most of the time. You don't need to build it in this step.</p>`,
     `<p>For testing, make the sleep time 30 seconds instead of 10 minutes (remember to change it back later!). Press <b>Verify</b> (✓). Fix errors until it compiles.</p>`
   ],
   hints: [
     `V<sub>bat</sub> = raw ÷ 1023.0 × 1.0 × (R<sub>top</sub> + R<sub>bottom</sub>) ÷ R<sub>bottom</sub>.`,
     `Look at how <code>temp_dallas</code> is added to <code>jsonPayload</code>, and add a <code>"voltage"</code> field the same way. The old v1 server already knew a <code>voltage</code> field.`,
-    `Compiler errors: read the <b>first</b> error. The others are often caused by it.`
+    `Compiler errors: read the <b>first</b> error. The others are often caused by it.`,
+    `A sleeping station is awake only a few seconds. <code>ArduinoOTA</code> waits for your computer to send the update, so it only fits while the station is in setup mode. <code>ESP8266httpUpdate</code> can ask a server "is there a newer version?" on every wake-up.`
   ],
-  done: ["Arduino IDE with the esp8266 core and libraries is installed", "ONE_WIRE_BUS is 2", "Battery voltage is read and sent", "It compiles without errors"],
+  done: ["Arduino IDE with the esp8266 core and libraries is installed", "ONE_WIRE_BUS is 2", "Battery voltage is read and sent", "Firmware version is printed and sent", "The setup network has a password", "OTA update plan written", "It compiles without errors"],
   commit: `git commit -am "Firmware: OneWire on GPIO2, battery voltage"`
 },
 {
@@ -787,6 +856,24 @@ git branch -d step-02</code></pre>`
   commit: `git commit -am "Add v2 production files"`
 },
 {
+  id: "docs", phase: "Manufacturing", title: "Document the project", time: "2 h",
+  goal: "Someone who has never seen the project can understand what it is, find the files, and see what changed in v2.",
+  why: `<p>The first thing a buyer, a factory or a future helper reads is the documentation. It also helps you: in a year you will forget why you made some decisions.</p>`,
+  tasks: [
+    `<p>Write <code>README.md</code> in the repo's main folder: what the station does, a 3D picture of the board, what is in each folder, how to open the project and the firmware, and the current version.</p>`,
+    `<p>Export the schematic as PDF: Schematic Editor → <b>File → Plot</b> → PDF. Save it as <code>meteo-v2/docs/schematic-v2.pdf</code>. People without KiCad can read it.</p>`,
+    `<p>Export 3D pictures of the top and bottom of the board (3D viewer → <b>File → Export Current View as PNG</b>) into <code>meteo-v2/docs/</code> and show them in the README.</p>`,
+    `<p>Write <code>CHANGELOG.md</code>: a short list of what changed from v1 to v2 (deep sleep, OneWire pin, battery reading, charging, and so on). Your merged pull requests are a good list to start from.</p>`
+  ],
+  hints: [
+    `Write the README for a friend who knows nothing about the project. Short sentences, a picture at the top.`,
+    `On GitHub, the README of the main folder is shown on the repository's front page. Check how it looks there after the merge.`,
+    `Markdown: <code># Title</code>, <code>## Section</code>, <code>- list item</code>, <code>![picture](meteo-v2/docs/top.png)</code>.`
+  ],
+  done: ["README.md explains the project, with a picture", "Schematic PDF in meteo-v2/docs", "3D pictures in meteo-v2/docs", "CHANGELOG.md lists the v2 changes"],
+  commit: null
+},
+{
   id: "s15", phase: "Manufacturing", title: "Final review and order", time: "1 h", gate: true,
   goal: "The design passes a final check, your mentor agrees, and 5 prototype boards are ordered.",
   why: `<p>A mistake found now costs nothing. A mistake found after manufacturing costs money and weeks of waiting. Order a small batch of prototypes first: almost nobody gets the first board perfect.</p>`,
@@ -802,6 +889,7 @@ git branch -d step-02</code></pre>`
 <li>All BOM parts are in stock. The placement preview is correct.</li>
 <li>The firmware compiles.</li>
 <li>You know the total price.</li>
+<li>The design meets the targets in <code>PRODUCT.md</code>, or you updated PRODUCT.md and your mentor agreed.</li>
 </ul>`,
     `<p>Show the design and the quote to your mentor. They may also ask Claude to review the files.</p>`,
     `<p>After your mentor merges this step's pull request, mark the exact version you are ordering with a git <b>tag</b>:</p>
@@ -817,6 +905,28 @@ git push --tags</code></pre>`,
   ],
   done: ["Every item on the checklist passes", "My mentor reviewed and agreed", "Tag v2-proto-1 is pushed", "Order placed (number in my submission file)"],
   commit: `git tag v2-proto-1 && git push --tags`
+},
+{
+  id: "solder", phase: "Prototype", title: "Learn to solder (while the boards travel)", time: "3 h",
+  goal: "You can make good through-hole solder joints, fix a solder bridge, and replace a small SMD part.",
+  why: `<p>The factory solders the SMD parts, but you solder the rest by hand: pin headers, connectors, maybe the DS18B20 or the ESP module. Bad solder joints are the most common fault on a prototype. The boards take a while to arrive, so this is the right time to practise.</p>
+  <p><b>Safety:</b> the iron is over 300 °C. Always put it back in its stand. Work with fresh air or a small fan that blows the flux smoke away from your face. Wash your hands after soldering, and never eat at the bench. Wear glasses when you cut component legs. Ask your mentor to watch the first time.</p>`,
+  tasks: [
+    `<p>Get something to practise on: a "learn to solder" practice kit, a piece of perfboard with pin headers, or an old board.</p>`,
+    `<p>Learn what a good joint looks like: shiny, a smooth cone shape, solder flowing onto both the pad and the pin. Search for "good vs bad solder joints" pictures.</p>`,
+    `<p>Make at least <b>20 joints</b>: touch the iron to the pad and the pin together, wait 1–2 seconds, feed solder into the joint (not onto the iron), take the solder away, then the iron.</p>`,
+    `<p>Practise fixing mistakes: make a solder bridge between two pins on purpose, then remove it with flux and desoldering braid.</p>`,
+    `<p>Practise one SMD part: an 0805 resistor with tweezers. Tin one pad, place the part, heat that pad, then solder the other side.</p>`,
+    `<p>Take photos of your best and your worst joints, and explain what is wrong with the bad ones.</p>`
+  ],
+  hints: [
+    `A dull, lumpy joint is a <b>cold joint</b>: not enough heat. Heat it again with a little flux.`,
+    `Keep the tip clean and shiny: wipe it on brass wool or a damp sponge, and put a little fresh solder on it before you put the iron away.`,
+    `Typical tip temperatures: about 320–350 °C for leaded solder, 350–380 °C for lead-free. Hotter is not better: it burns the flux and can damage pads.`,
+    `Flux is what makes solder flow. Most solder wire has flux inside; extra flux helps a lot when fixing mistakes.`
+  ],
+  done: ["At least 20 practice joints", "I removed a solder bridge with braid", "I soldered one 0805 part", "Photos of good and bad joints, with explanations"],
+  commit: null
 },
 {
   id: "s16", phase: "Prototype", title: "Bring the prototype to life", time: "3–4 h",
@@ -851,7 +961,9 @@ git push --tags</code></pre>`,
     `<p><b>Test procedure:</b> a short checklist every unit must pass before you sell it (power, Wi-Fi, sensors, sleep current).</p>`,
     `<p><b>User manual:</b> how to set up Wi-Fi (Mode jumper and the config page), how to charge, and safety notes for the battery.</p>`,
     `<p><b>Cost per unit:</b> board + assembly + hand-soldered parts + battery + enclosure + shipping. Then decide a price.</p>`,
-    `<p><b>With your mentor:</b> the rules for selling electronics with Wi-Fi and lithium batteries where you live (conformity marking, battery shipping rules). Don't skip this.</p>`
+    `<p><b>With your mentor:</b> the rules for selling electronics with Wi-Fi and lithium batteries where you live (conformity marking, battery shipping rules). Don't skip this.</p>`,
+    `<p><b>Selling as a minor, with your parents:</b> who officially sells (usually a parent, or a business registered by an adult), how buyers pay, taxes, a simple warranty (what happens if a station breaks after 6 months), and support (how buyers contact you, and how fast you answer).</p>`,
+    `<p><b>Start small:</b> give or sell the first 3–5 stations to friendly testers who will tell you honestly what is wrong. Fix that before selling to strangers.</p>`
   ],
   hints: [
     `Search "Stevenson screen" or "radiation shield 3D print" for sensor enclosures.`,
@@ -865,6 +977,10 @@ git push --tags</code></pre>`,
 /* What each step's submission file asks for. NN becomes the step number. */
 const DELIVER = {
   s0: ["What you want to learn most from this project"],
+  prod: ["A short summary of <code>PRODUCT.md</code> (the file itself is in the repo)", "What the 2–3 people you asked said", "Your answers about the server, the Telegram bot and Wi-Fi setup"],
+  tools: ["The tools table", "<code>BUDGET.md</code> (in the repo) and the total", "Your timeline", "What you ordered, and when it should arrive"],
+  docs: ["What you wrote in <code>README.md</code> and <code>CHANGELOG.md</code>", "The files in <code>meteo-v2/docs/</code>", "A screenshot of the README on GitHub (after the merge you can add it in the next step)"],
+  solder: ["Photos of your best and worst joints: <code>img/step-NN-good.jpg</code>, <code>img/step-NN-bad.jpg</code>", "What is wrong with the bad joints, and how you fixed them", "What you practised on"],
   s1: ["Your KiCad version (Help → About KiCad)", "A screenshot of the board in the 3D viewer: <code>img/step-NN-3d.png</code>"],
   s2: ["Your own words: repository, commit, branch, remote, push, pull request, merge", "What <code>git status</code> showed before and after <code>git rm --cached</code>", "Anything that was hard or confusing"],
   s3: ["A table: every part and what it does, block by block", "Your answers to questions 1–6, with calculations", "One thing you would change or don't understand"],
@@ -880,13 +996,106 @@ const DELIVER = {
   enc: ["Your requirements list", "A comparison table of 2–3 boxes, with links and prices", "The box you chose, and why", "A photo of the paper test in the sample box: <code>img/step-NN-paper.jpg</code>", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
   therm: ["Three things that make an air temperature reading wrong", "Your decisions for questions 1–6, each with a reason", "A comparison table for how the cable leaves the box", "Your experiment results (if you did it)", "The parts list: probe, gland or connector, cable length", "What changed in the schematic and PCB, and the DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
   con: ["Your connection table, with the chosen connector and the reason for each", "Which connections could be confused, and how you prevented it", "The mating parts list", "The DRC report: <code>course/submissions/step-NN-drc.rpt</code>"],
-  s12: ["What you changed in the code, and why", "A screenshot of a successful Verify (compile): <code>img/step-NN-compile.png</code>"],
+  s12: ["What you changed in the code, and why", "Your OTA update plan", "A screenshot of a successful Verify (compile): <code>img/step-NN-compile.png</code>"],
   s13: ["The BOM exported as CSV: <code>course/submissions/step-NN-bom.csv</code>", "Which parts the factory solders and which you solder by hand", "The parts cost per board"],
   s14: ["The production files (the folder the plugin made), committed in the repo", "Screenshots of the JLCPCB placement preview and the price", "Which parts needed a rotation fix"],
   s15: ["The final checklist: each item, and how you checked it", "3D screenshots of the top and bottom", "The total price"],
   s16: ["A measurements table: 3V3, sleep current, battery voltage (board vs multimeter)", "The result of each function test", "<code>meteo-v2/ISSUES.md</code> with every problem you found", "Photos of the assembled board"],
   s17: ["The test procedure for each unit", "The user manual draft", "The cost per unit and the price", "The field test results"]
 };
+
+/* "Advice" boxes: practical tips, one list per step. */
+const TIPS = {
+  s0: ["Keep a short work log: after every session write three lines: what I did, what's next, what's unclear. Writing your pull requests becomes easy.", "Half an hour every day beats four hours once a week. Your brain keeps working on the problem between sessions.", "Being stuck is normal. Engineers are stuck most of the time; the skill is getting unstuck: read the error, search, try one thing, ask."],
+  s1: ["Learn the shortcuts early: Ctrl+F1 shows them all. Hovering over a toolbar button also shows its shortcut.", "Save often with Ctrl+S. KiCad does not save your changes by itself."],
+  s2: ["Commit often on your branch: small commits are easy to review and easy to undo.", "Always save in KiCad before you commit. Otherwise the commit has the old file.", "Before you push, look at your own changes: git status and git diff --stat. You will catch mistakes before your mentor does."],
+  prod: ["Don't design for everybody. A station that is perfect for one kind of buyer beats one that is OK for everyone.", "Write down what you decided not to do. It protects you from adding features forever."],
+  tools: ["A good soldering iron and a decent multimeter last for years. Saving money there makes everything else harder.", "When something arrives, test it the same day, while you can still return it."],
+  s3: ["Plot the schematic to PDF and mark it with colours: power red, ground black, signals blue. Patterns become visible.", "For every part, ask: what would happen if it were missing? That tells you why it's there."],
+  s4: ["In battery devices, the time awake usually matters more than the sleep current. Look for delays you can remove."],
+  s5: ["Don't be afraid to click around: as long as you don't save, nothing changes. And git can always bring the old file back."],
+  prac: ["Place first, route later: about 80 % of a good board is good placement.", "Route power and ground first, then the signals.", "Use 45° corners and keep tracks away from the middle of other footprints. A tidy board is also a board with fewer mistakes."],
+  s6: ["When DRC shows an error you don't understand, click it and look at the exact spot before you change anything."],
+  s7: ["Before you move a signal to another pin, check the boot pins table again. Some pins have hidden jobs."],
+  s8: ["Make one change, run DRC, then the next change. Many changes at once make errors hard to find.", "Commit before a big change. With git, experimenting is safe."],
+  s9: ["Measure, don't trust: on the prototype, compare the ADC reading with a multimeter and correct the factor in the firmware."],
+  s10: ["Always check a replacement part's pinout in its own datasheet, even if the package looks the same."],
+  s11: ["If you are unsure about anything with the battery, stop and ask. Battery mistakes are the dangerous ones."],
+  enc: ["Measure the real sample box, not the picture in the shop.", "Leave space for your fingers and a screwdriver: someone has to assemble this, maybe 20 times."],
+  therm: ["Do the sun experiment. Numbers convince better than opinions, also your mentor."],
+  con: ["Mark pin 1 and the polarity (+/−) next to every connector on the silkscreen. In a year you will thank yourself."],
+  s12: ["Change one thing, upload, test. Serial.println is your best debugging tool.", "Keep secrets (Wi-Fi passwords, bot tokens) out of the code you commit to GitHub."],
+  s13: ["Fewer different part numbers means cheaper assembly and easier buying. Ten 10 kΩ resistors are better than ten different values."],
+  s14: ["Check every part's rotation in JLCPCB's preview. It is the most common assembly mistake, and the easiest one to prevent."],
+  docs: ["Write the README for someone who has never seen the project. If they understand it, so will a buyer."],
+  s15: ["Do the final review on a different day than your last change. Fresh eyes find more mistakes."],
+  solder: ["Heat the pad and the pin, then bring the solder to the joint, not to the iron tip.", "A good joint takes 2–3 seconds. If it takes longer, the tip is dirty or too cold."],
+  s16: ["Power the first board through a current-limited supply: a short then just limits the current instead of burning parts.", "Test one function at a time, and write down every result, also the good ones."],
+  s17: ["Your first buyers are your best teachers. Ask them what was hard."]
+};
+
+/* Glossary: English term, Ukrainian, short explanation. */
+const GLOSSARY = [
+  ["Schematic", "Принципова схема", "The drawing of how parts are connected electrically."],
+  ["PCB (printed circuit board)", "Друкована плата", "The board with copper tracks that holds the parts."],
+  ["PCBA (PCB assembly)", "Збирання друкованої плати (монтаж)", "The factory solders the parts onto the board for you."],
+  ["Symbol", "Умовне графічне позначення (символ)", "How a part is drawn in the schematic."],
+  ["Footprint", "Посадкове місце (футпринт)", "The copper pads where a part is soldered on the PCB."],
+  ["Pad", "Контактна площадка", "A copper area where one pin of a part is soldered."],
+  ["Track / trace", "Доріжка", "A copper line that connects pads."],
+  ["Via", "Перехідний отвір", "A small plated hole that connects tracks on different layers."],
+  ["Layer", "Шар", "One level of copper (or mask, or silkscreen) on the board."],
+  ["Zone / copper pour", "Полігон (заливка міддю)", "A large copper area, usually GND."],
+  ["Net", "Електричне коло (net)", "All pins and tracks that are connected together."],
+  ["Ratsnest", "Лінії незроблених з'єднань", "Thin lines showing connections that are not routed yet."],
+  ["Clearance", "Зазор", "The minimum distance between copper of different nets."],
+  ["Board outline (Edge.Cuts)", "Контур плати", "The shape the factory cuts the board to."],
+  ["Silkscreen", "Шовкографія (маркування)", "The white text and drawings printed on the board."],
+  ["Solder mask", "Паяльна маска", "The (usually green) coating that covers the copper, except the pads."],
+  ["Courtyard", "Габаритна зона компонента (courtyard)", "The area a part needs around it, so parts don't collide."],
+  ["ERC", "Перевірка електричних правил", "KiCad checks the schematic for mistakes."],
+  ["DRC", "Перевірка правил проєктування", "KiCad checks the PCB for mistakes."],
+  ["Gerber files", "Gerber-файли (файли для виробництва)", "Drawings of each board layer, made for the factory."],
+  ["BOM (bill of materials)", "Перелік компонентів (специфікація)", "The list of all parts on the board."],
+  ["CPL / pick and place", "Файл розміщення компонентів", "Position and rotation of every part, for the assembly machine."],
+  ["SMD", "Компонент поверхневого монтажу", "A part soldered onto the surface of the board."],
+  ["Through-hole (THT)", "Вивідний компонент (монтаж в отвори)", "A part with legs that go through holes in the board."],
+  ["Datasheet", "Технічний опис (даташит)", "The manufacturer's document about a part."],
+  ["Pull-up resistor", "Підтягувальний резистор (до живлення)", "Holds a signal high when nothing drives it."],
+  ["Pull-down resistor", "Стягувальний резистор (до землі)", "Holds a signal low when nothing drives it."],
+  ["Voltage divider", "Дільник напруги", "Two resistors that make a smaller voltage from a bigger one."],
+  ["Regulator (LDO)", "Стабілізатор напруги (LDO)", "Makes a steady voltage, here 3.3 V, from the battery."],
+  ["Dropout voltage", "Мінімальне падіння напруги на стабілізаторі", "How much higher the input must be than the output."],
+  ["Quiescent current", "Струм спокою (власне споживання)", "The current a part uses just by being on."],
+  ["Short circuit", "Коротке замикання", "Two things connected that should not be."],
+  ["Deep sleep", "Глибокий сон", "A mode where the ESP uses almost no power."],
+  ["Firmware", "Прошивка (вбудоване ПЗ)", "The program that runs on the ESP."],
+  ["Flashing", "Прошивання (запис прошивки)", "Writing new firmware into the chip."],
+  ["Boot", "Завантаження (старт)", "What the chip does when it starts."],
+  ["OTA update", "Оновлення «по повітрю» (OTA)", "Updating the firmware over Wi-Fi, without a cable."],
+  ["Connector", "Роз'єм", "A part that lets you plug a cable in and out."],
+  ["Mating connector", "Відповідна частина роз'єму", "The plug on the cable that fits the connector on the board."],
+  ["Crimp contact", "Обтискний контакт", "A metal contact pressed onto a wire with a special tool."],
+  ["Keyed", "З ключем (захист від неправильного вмикання)", "Fits only one way round."],
+  ["Cable gland", "Кабельний гермоввід", "A sealed way for a cable to go through the box wall."],
+  ["Enclosure", "Корпус", "The box the electronics live in."],
+  ["IP rating (IP65)", "Ступінь захисту IP", "How well a box keeps out dust and water."],
+  ["Radiation shield", "Радіаційний захист (захисна будка термометра)", "A shaded, ventilated housing for a thermometer."],
+  ["Requirements", "Вимоги", "What the product must do, written down with numbers."],
+  ["Solder", "Припій", "The metal that melts and joins parts to the board."],
+  ["Flux", "Флюс", "Helps solder flow and stick."],
+  ["Solder joint", "Паяне з'єднання", "The finished solder connection."],
+  ["Cold joint", "Холодна пайка", "A bad, dull joint made with too little heat."],
+  ["Solder bridge", "Перемичка з припою", "Solder that connects two pins by mistake."],
+  ["Multimeter", "Мультиметр", "A tool to measure voltage, current and resistance."],
+  ["Caliper", "Штангенциркуль", "A tool to measure lengths precisely."],
+  ["Repository (repo)", "Репозиторій", "A project folder with its whole history."],
+  ["Commit", "Коміт (збережена версія)", "One saved version of your files."],
+  ["Branch", "Гілка", "A separate line of work."],
+  ["Pull request (PR)", "Запит на злиття (pull request)", "Asking for your branch to be reviewed and added to main."],
+  ["Merge", "Злиття", "Adding a branch's changes into another branch."],
+  ["Review", "Рецензування (перевірка)", "Your mentor reads and comments on your work."]
+];
 
 /* "Common problems" tables. */
 const PCB_TROUBLE = [
@@ -912,7 +1121,8 @@ const LEARN = {
   s5: [KICAD_DOCS],
   prac: [KICAD_DOCS],
   s8: [KICAD_DOCS],
-  s12: [["ESP8266 Arduino core documentation", "https://arduino-esp8266.readthedocs.io/en/latest/"]],
+  s12: [["ESP8266 Arduino core documentation", "https://arduino-esp8266.readthedocs.io/en/latest/"], ["ESP8266 OTA updates (ArduinoOTA, HTTP update)", "https://arduino-esp8266.readthedocs.io/en/latest/ota_updates/readme.html"]],
+  prod: [["Telegram: how bots are made (tutorial)", "https://core.telegram.org/bots/tutorial"]],
   s13: [["JLCPCB parts library", "https://jlcpcb.com/parts"]],
   s14: [["Fabrication Toolkit plugin (README: fields, rotations)", "https://github.com/bennymeg/Fabrication-Toolkit"]]
 };
@@ -963,10 +1173,12 @@ function renderTray() {
     a.href = "#step-" + i;
     const c = stepCount(s);
     if (c === s.done.length) a.classList.add("full");
-    if (i === current) a.setAttribute("aria-current", "page");
+    if (i === current && location.hash !== "#glossary") a.setAttribute("aria-current", "page");
     a.innerHTML = `<span class="n">${String(i).padStart(2, "0")}</span><span>${s.title}${s.gate ? ' <span class="gate-dot" title="Mentor check">●</span>' : ""}</span><span class="c">${c}/${s.done.length}</span>`;
     li.append(a); ol.append(li);
   });
+  const g = document.createElement("div"); g.className = "phase-name"; g.textContent = "Help"; tray.append(g);
+  const gl = document.createElement("ol"); gl.innerHTML = `<li><a href="#glossary"${location.hash === "#glossary" ? ' aria-current="page"' : ""}><span class="n">EN</span><span>Glossary: English → Українська</span><span class="c"></span></a></li>`; tray.append(gl);
   const pick = $("#picker"); pick.innerHTML = "";
   STEPS.forEach((s, i) => {
     const o = document.createElement("option"); o.value = i;
@@ -1026,6 +1238,7 @@ git push -u origin ${br}`;
     ${s.gate ? '<div class="gate"><b>Mentor check:</b> this step involves money, safety or a big decision. Discuss it with your mentor before you go on.</div>' : ""}
     <h2>Why it matters</h2><div class="prose">${ref(s.why)}</div>
     <h2>Tasks</h2><ol class="tasks prose">${s.tasks.map(t => `<li><div>${ref(t)}</div></li>`).join("")}</ol>
+    ${TIPS[s.id] ? `<h2>Advice</h2><div class="advice"><ul>${TIPS[s.id].map(t => `<li>${t}</li>`).join("")}</ul></div>` : ""}
     <h2>Stuck?</h2><div>${hints}${answers}</div>
     ${trouble}
     ${learn}
@@ -1054,7 +1267,21 @@ git push -u origin ${br}`;
 }
 
 function go(i) { location.hash = "step-" + i; }
+
+function renderGlossary() {
+  $("#step-body").innerHTML = `
+    <div class="eyebrow">Glossary · English → Українська</div>
+    <h1>Words you will meet</h1>
+    <p class="prose">KiCad, datasheets, JLCPCB and GitHub all use English. Learn these words once and they will follow you everywhere.</p>
+    <div class="tbl"><table>
+      <tr><th>English</th><th>Українська</th><th>What it means</th></tr>
+      ${GLOSSARY.map(([en, uk, d]) => `<tr><td><b>${en}</b></td><td lang="uk">${uk}</td><td>${d}</td></tr>`).join("")}
+    </table></div>
+    <nav class="pager"><button type="button" class="primary" id="back">← Back to step ${pad(current)}</button></nav>`;
+  $("#back").addEventListener("click", () => go(current));
+}
 function fromHash() {
+  if (location.hash === "#glossary") { renderTray(); renderProgress(); renderGlossary(); window.scrollTo({ top: 0 }); return; }
   const m = /^#step-(\d+)$/.exec(location.hash);
   const i = m ? Math.min(Math.max(parseInt(m[1], 10), 0), STEPS.length - 1) : 0;
   const changed = i !== current; current = i;

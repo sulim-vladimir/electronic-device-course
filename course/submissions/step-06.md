@@ -1,6 +1,6 @@
-# Step 06: Practice board: a PCB from zero
+# Step 06: How deep sleep works
 
-**Goal:** You make a tiny practice board, from an empty project to a clean DRC, so you know the tools before you touch the real board.
+**Goal:** You can explain how the board sleeps and wakes up, and how long the battery lasts.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,19 +11,19 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. The practice project in `course/practice/`
+### 1. The RESET voltage with R14 = 1 kΩ and with 10 kΩ, with the calculation
 
 _(your answer)_
 
-### 2. The DRC report: in the DRC window click **Save...** and save it as `course/submissions/step-06-drc.rpt`
+### 2. The average current and battery life, with the calculation
 
 _(your answer)_
 
-### 3. A 3D screenshot: `img/step-06-3d.png`
+### 3. Why R14 is there, in 2–3 sentences
 
 _(your answer)_
 
-### 4. What was hardest, and one thing you learned
+### 4. What you would change to make the battery last longer
 
 _(your answer)_
 
@@ -31,12 +31,9 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] The practice project is in course/practice and opens without errors
-- [ ] ERC shows no errors
-- [ ] The outline is drawn and every part is placed inside it
-- [ ] Every connection is routed, with at least one via
-- [ ] A GND zone fills the bottom layer
-- [ ] DRC: 0 errors, 0 unconnected
+- [ ] I calculated the RESET voltage for 1 kΩ and 10 kΩ
+- [ ] I calculated the battery life
+- [ ] I can explain why R14 is there in 2–3 sentences
 
 ## Questions for my mentor
 

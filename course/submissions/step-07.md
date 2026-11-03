@@ -1,6 +1,6 @@
-# Step 07: Detective work: find the short
+# Step 07: First steps in the PCB editor
 
-**Goal:** You find a real bug on the board and explain why it would break the station.
+**Goal:** You can move around the PCB editor, read what you see, and run the design rules check (DRC).
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,15 +11,19 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. Which two nets touch, and at which pad
+### 1. The board size (width × height in mm)
 
 _(your answer)_
 
-### 2. Why it would break the station
+### 2. The DRC result: number of errors, warnings and unconnected items
 
 _(your answer)_
 
-### 3. A screenshot of the short: `img/step-07-short.png`
+### 3. Track, via and zone in your own words
+
+_(your answer)_
+
+### 4. A screenshot with one net highlighted: `img/step-07-net.png`
 
 _(your answer)_
 
@@ -27,8 +31,10 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] I found the short and the two nets
-- [ ] I explained in my submission file why it would break the station
+- [ ] I can switch layers and highlight a net
+- [ ] I measured the board size
+- [ ] I ran DRC and wrote down the numbers
+- [ ] I can explain track, via and zone
 
 ## Questions for my mentor
 

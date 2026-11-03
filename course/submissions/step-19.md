@@ -1,6 +1,6 @@
-# Step 19: Final review and order
+# Step 19: Pick real parts for JLCPCB
 
-**Goal:** The design passes a final check, your mentor agrees, and 5 prototype boards are ordered.
+**Goal:** Every part the factory solders has an exact part number that is in stock.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,15 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. The final checklist: each item, and how you checked it
+### 1. The BOM exported as CSV: `course/submissions/step-19-bom.csv`
 
 _(your answer)_
 
-### 2. 3D screenshots of the top and bottom
+### 2. Which parts the factory solders and which you solder by hand
 
 _(your answer)_
 
-### 3. The total price
+### 3. The parts cost per board
 
 _(your answer)_
 
@@ -27,10 +27,9 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Every item on the checklist passes
-- [ ] My mentor reviewed and agreed
-- [ ] Tag v2-proto-1 is pushed
-- [ ] Order placed (number in my submission file)
+- [ ] Every part is marked factory or hand-solder
+- [ ] Every factory part has an LCSC number that is in stock
+- [ ] Parts cost per board is in my submission file
 
 ## Questions for my mentor
 

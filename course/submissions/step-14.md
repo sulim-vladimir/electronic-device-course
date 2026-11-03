@@ -1,6 +1,6 @@
-# Step 14: Where does the thermometer go?
+# Step 14: How will the battery charge?
 
-**Goal:** You decide where the temperature sensor goes and how it is connected, and you can explain every choice.
+**Goal:** You and your mentor decide how the battery is charged, and the board has what it needs for it.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,27 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. Three things that make an air temperature reading wrong
+### 1. Pros and cons of options A, B and C
 
 _(your answer)_
 
-### 2. Your decisions for questions 1–6, each with a reason
+### 2. The decision and the reason (discuss it with your mentor in the pull request)
 
 _(your answer)_
 
-### 3. A comparison table for how the cable leaves the box
-
-_(your answer)_
-
-### 4. Your experiment results (if you did it)
-
-_(your answer)_
-
-### 5. The parts list: probe, gland or connector, cable length
-
-_(your answer)_
-
-### 6. What changed in the schematic and PCB, and the DRC report: `course/submissions/step-14-drc.rpt`
+### 3. The DRC report: `course/submissions/step-14-drc.rpt`
 
 _(your answer)_
 
@@ -39,12 +27,10 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Three things that make a temperature reading wrong are in my submission file
-- [ ] A decision with a reason for each of the 6 questions
-- [ ] A comparison table for how the cable leaves the box
-- [ ] My mentor agreed in the pull request
-- [ ] Schematic and PCB match my decisions, ERC and DRC clean
-- [ ] Parts list for the thermometer
+- [ ] Pros and cons for A, B and C are in my submission file
+- [ ] My choice does not charge the battery below 0 °C
+- [ ] My mentor agreed with the decision
+- [ ] Schematic and PCB updated, ERC and DRC clean
 
 ## Questions for my mentor
 

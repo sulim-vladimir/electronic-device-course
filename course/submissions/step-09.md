@@ -1,6 +1,6 @@
-# Step 09: Your first routing
+# Step 09: Detective work: find the short
 
-**Goal:** The PCB matches the schematic again, the short is gone, and DRC shows 0 errors.
+**Goal:** You find a real bug on the board and explain why it would break the station.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,15 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. What you changed on the PCB
+### 1. Which two nets touch, and at which pad
 
 _(your answer)_
 
-### 2. The DRC report: `course/submissions/step-09-drc.rpt`
+### 2. Why it would break the station
 
 _(your answer)_
 
-### 3. 3D screenshots of the top and bottom: `img/step-09-top.png`, `img/step-09-bottom.png`
+### 3. A screenshot of the short: `img/step-09-short.png`
 
 _(your answer)_
 
@@ -27,10 +27,8 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] PCB updated from schematic
-- [ ] OneWire routed to pad 17, old tracks removed
-- [ ] R14 tracks fixed
-- [ ] DRC: 0 errors, 0 unconnected, parity OK
+- [ ] I found the short and the two nets
+- [ ] I explained in my submission file why it would break the station
 
 ## Questions for my mentor
 

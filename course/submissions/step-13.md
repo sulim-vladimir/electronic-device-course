@@ -1,6 +1,6 @@
-# Step 13: Choose the enclosure
+# Step 13: Is the regulator strong enough?
 
-**Goal:** You have chosen an enclosure, and the board's outline and mounting holes fit it.
+**Goal:** You choose the voltage regulator with real numbers from datasheets.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,27 +11,15 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. Your requirements list
+### 1. Your datasheet table for the HT7333 and one alternative
 
 _(your answer)_
 
-### 2. A comparison table of 2–3 boxes, with links and prices
+### 2. Your decision and the reason
 
 _(your answer)_
 
-### 3. The box you chose, and why
-
-_(your answer)_
-
-### 4. A photo of the paper test in the sample box: `img/step-13-paper.jpg`
-
-_(your answer)_
-
-### 5. Your sensor placement plan
-
-_(your answer)_
-
-### 6. The DRC report: `course/submissions/step-13-drc.rpt`
+### 3. If you changed it: the ERC and DRC results
 
 _(your answer)_
 
@@ -39,13 +27,9 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Requirements written in my submission file
-- [ ] 2–3 boxes compared in a table
-- [ ] My mentor agreed and we bought a sample box
-- [ ] Board outline fits the box with space on every side
-- [ ] Mounting holes H1–H4 sit exactly on the box's bosses (paper test done)
-- [ ] DRC clean
-- [ ] Sensor placement plan in my submission file
+- [ ] Datasheet table for HT7333 and one alternative
+- [ ] Decision and reason written
+- [ ] If changed: schematic and PCB updated, ERC and DRC clean
 
 ## Questions for my mentor
 

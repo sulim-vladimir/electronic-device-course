@@ -4,7 +4,7 @@ A step-by-step course that takes the weather station from the v2 schematic to as
 
 - **Open the course:** double-click [`index.html`](index.html) (works offline), or use the online copy: https://claude.ai/artifact/U6qwXX3tTCxCMi7kED1e23
 - **Your answers:** one file per step in [`submissions/`](submissions/), already prepared for you.
-- **Practice board:** your practice KiCad project goes in `practice/` (step 06).
+- **Practice board:** your practice KiCad project goes in `practice/` (the practice board step).
 
 ## How a step works
 
@@ -45,7 +45,7 @@ A step-by-step course that takes the weather station from the v2 schematic to as
 4. Finish with **Review changes**:
    - **Approve**, then **Merge pull request** and **Delete branch**: the step is accepted.
    - **Request changes** with a short list of what to fix: the step goes back for more work.
-5. Steps marked **Mentor check** in the course (charging, enclosure, thermometer, final review and order, small series) need a real decision from you. Discuss in the pull request before approving.
+5. Steps marked **Mentor check** in the course (product definition, tools and budget, charging, enclosure, thermometer, final review and order, small series) need a real decision from you. Discuss in the pull request before approving.
 
 ## Maintaining the course
 

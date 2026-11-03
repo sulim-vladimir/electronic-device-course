@@ -24,6 +24,7 @@ _(your answer)_
 Tick what is true (put an x between the brackets: [x]).
 
 - [ ] My KiCad is version 10 or newer
+- [ ] KiCad is set to English
 - [ ] The v2 project opens without missing-library errors
 - [ ] The projectmeteo folder is open in VS Code
 

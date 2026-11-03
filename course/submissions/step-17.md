@@ -1,6 +1,6 @@
-# Step 17: Pick real parts for JLCPCB
+# Step 17: Choose the connectors
 
-**Goal:** Every part the factory solders has an exact part number that is in stock.
+**Goal:** Every cable that goes on or off the board has a connector you chose on purpose, and nothing can be plugged in the wrong way.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,15 +11,19 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. The BOM exported as CSV: `course/submissions/step-17-bom.csv`
+### 1. Your connection table, with the chosen connector and the reason for each
 
 _(your answer)_
 
-### 2. Which parts the factory solders and which you solder by hand
+### 2. Which connections could be confused, and how you prevented it
 
 _(your answer)_
 
-### 3. The parts cost per board
+### 3. The mating parts list
+
+_(your answer)_
+
+### 4. The DRC report: `course/submissions/step-17-drc.rpt`
 
 _(your answer)_
 
@@ -27,9 +31,12 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Every part is marked factory or hand-solder
-- [ ] Every factory part has an LCSC number that is in stock
-- [ ] Parts cost per board is in my submission file
+- [ ] My connection table is in my submission file
+- [ ] Every connection has a chosen connector and a reason
+- [ ] No two connections can be swapped by mistake
+- [ ] Connectors and mating parts are in stock
+- [ ] Schematic and PCB updated, ERC and DRC clean
+- [ ] Mating parts list written
 
 ## Questions for my mentor
 

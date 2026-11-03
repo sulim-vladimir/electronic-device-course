@@ -1,6 +1,6 @@
-# Step 12: How will the battery charge?
+# Step 12: Measure the battery
 
-**Goal:** You and your mentor decide how the battery is charged, and the board has what it needs for it.
+**Goal:** The ESP can read the battery voltage, so the station can warn when it is low.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,11 +11,11 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. Pros and cons of options A, B and C
+### 1. Your resistor values and the calculation: ADC voltage at 4.2 V and 4.3 V, and the current
 
 _(your answer)_
 
-### 2. The decision and the reason (discuss it with your mentor in the pull request)
+### 2. B+ or VBAT, and why
 
 _(your answer)_
 
@@ -27,9 +27,9 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] Pros and cons for A, B and C are in my submission file
-- [ ] My mentor agreed with the decision
-- [ ] Schematic and PCB updated, ERC and DRC clean
+- [ ] My resistor values and calculation are in my submission file
+- [ ] Divider and capacitor are in the schematic
+- [ ] Placed and routed, DRC clean
 
 ## Questions for my mentor
 

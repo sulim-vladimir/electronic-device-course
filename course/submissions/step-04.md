@@ -1,6 +1,6 @@
-# Step 04: How deep sleep works
+# Step 04: Tools, budget and delivery times
 
-**Goal:** You can explain how the board sleeps and wakes up, and how long the battery lasts.
+**Goal:** You know which tools you need and what the prototypes will cost, and you have ordered what takes long to arrive.
 
 <!--
 Your mentor reads this file in your pull request.
@@ -11,19 +11,19 @@ Pictures: put them in course/submissions/img/ and show them like this:
 
 ## Deliverables
 
-### 1. The RESET voltage with R14 = 1 kΩ and with 10 kΩ, with the calculation
+### 1. The tools table
 
 _(your answer)_
 
-### 2. The average current and battery life, with the calculation
+### 2. `BUDGET.md` (in the repo) and the total
 
 _(your answer)_
 
-### 3. Why R14 is there, in 2–3 sentences
+### 3. Your timeline
 
 _(your answer)_
 
-### 4. What you would change to make the battery last longer
+### 4. What you ordered, and when it should arrive
 
 _(your answer)_
 
@@ -31,9 +31,11 @@ _(your answer)_
 
 Tick what is true (put an x between the brackets: [x]).
 
-- [ ] I calculated the RESET voltage for 1 kΩ and 10 kΩ
-- [ ] I calculated the battery life
-- [ ] I can explain why R14 is there in 2–3 sentences
+- [ ] Tools table with what I have and what I need
+- [ ] BUDGET.md is in the repo
+- [ ] Timeline with delivery times
+- [ ] My mentor saw the budget
+- [ ] Missing tools are ordered
 
 ## Questions for my mentor
 
